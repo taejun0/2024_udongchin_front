@@ -10,6 +10,10 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <RouterProvider router={router} />
+      {/* 임시 텍스트 추가 */}
+      <div style={{ padding: "20px", textAlign: "center" }}>
+        <h1>Welcome to My PWA App!</h1>
+      </div>
     </ThemeProvider>
   );
 };

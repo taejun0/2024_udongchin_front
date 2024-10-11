@@ -1,9 +1,11 @@
 import * as S from "./styled";
 
-export const MainLayout = () => {
+const MainLayout = () => {
   return (
     <>
     
     </>
   )
 }
+
+export default MainLayout;

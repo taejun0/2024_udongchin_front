@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-export const DefaultLayout = () => {
+const DefaultLayout = () => {
   return (
     <>
       <Wrapper>
@@ -16,3 +16,5 @@ const Wrapper = styled.section`
   background-color: ${({ theme }) => theme.colors.white};
   min-height: 100vh;
 `;
+
+export default DefaultLayout;

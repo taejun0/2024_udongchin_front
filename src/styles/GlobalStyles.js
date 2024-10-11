@@ -24,65 +24,6 @@ i {font-style:normal}
 	min-height: 100vh;
 }
 
-// 애플 SD 산돌고딕 Neo 폰트 설정
-@font-face {
-    font-family: "AppleSDGothicNeoH00";
-    src: url("/fonts/AppleSDGothicNeoH.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "AppleSDGothicNeoB00";
-    src: url("/fonts/AppleSDGothicNeoB.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "AppleSDGothicNeoL00";
-    src: url("/fonts/AppleSDGothicNeoL.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "AppleSDGothicNeoUL00";
-    src: url("/fonts/AppleSDGothicNeoUL.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "AppleSDGothicNeoT0C";
-    src: url("/fonts/AppleSDGothicNeoT.ttf") format("truetype");
-}
-@font-face {
-    font-family: "AppleSDGothicNeoR00";
-    src: url("/fonts/AppleSDGothicNeoR.ttf") format("truetype");
-}
-@font-face {
-    font-family: "AppleSDGothicNeoM00";
-    src: url("/fonts/AppleSDGothicNeoM.ttf") format("truetype");
-}
-@font-face {
-    font-family: "NanumSquareRoundOTF";
-    src: url("/fonts/NanumSquareRoundOTFB.ttf") format("truetype");
-}
-
-
-//나눔 스퀘어 라운드 폰트 설정
-@font-face {
-    font-family: "NanumSquareRoundB";
-    src: url("/fonts/NanumSquareRoundB.ttf") format("truetype");
-}
-@font-face {
-    font-family: "NanumSquareRoundEB";
-    src: url("/fonts/NanumSquareRoundEB.ttf") format("truetype");
-}
-@font-face {
-    font-family: "NanumSquareRoundR";
-    src: url("/fonts/NanumSquareRoundR.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "NanumSquareRoundL";
-    src: url("/fonts/NanumSquareRoundL.ttf") format("truetype");
-}
-
-
 // 초기 html 설정
 html {
 	/* background-color: ${({ theme }) => theme.colors.fall};	 */

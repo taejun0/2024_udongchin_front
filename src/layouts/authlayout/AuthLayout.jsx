@@ -1,9 +1,11 @@
 import * as S from "./styled";
 
-export const AuthLayout = () => {
+const AuthLayout = () => {
   return (
     <>
     
     </>
   )
 }
+
+export default AuthLayout;
