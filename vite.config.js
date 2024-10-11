@@ -5,6 +5,7 @@ import path from 'path';
 import fs from 'fs';
 
 export default defineConfig({
+  base: '/',
   plugins: [
     react(),
     // PWA 플러그인 설정 수정
