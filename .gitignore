@@ -1,0 +1,89 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+.pnp/
+.pnp.js
+.vscode-test/
+
+# Build output
+dist/
+build/
+dist-ssr/
+.out/
+.next/
+.cache/
+.svelte-kit/
+
+# Static files
+public/
+.static/
+
+# Typescript output
+*.tsbuildinfo
+*.d.ts
+
+# IDE directories and files
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Environment variables and secrets
+.env
+*.env
+.env.*  # Exclude all environment files like .env.local, .env.production, etc.
+.secret
+.key
+*.pem
+*.p12
+
+# Lockfiles
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# Parcel, Rollup, and Webpack files
+.cache/
+.parcel-cache/
+.rpt2_cache/
+*.parcel-cache
+.webpack/
+*.cache-loader
+*.babelrc
+
+# Temporary files and directories
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Coverage files
+coverage/
+*.lcov
+*.lcov.*
+
+# Cypress, Playwright, and Jest test outputs
+cypress/screenshots/
+cypress/videos/
+playwright-report/
+test-results/
+.nyc_output/
