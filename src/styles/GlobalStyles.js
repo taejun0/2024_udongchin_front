@@ -46,7 +46,7 @@ body {
 	overflow-x: hidden;
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.default};
-	font-family: "NanumSquareRoundB", "NanumSquareRoundEB","NanumSquareRoundR", "NanumSquareRoundL", sans-serif;
+	font-family: "sans-serif";
 }
 
 `;
