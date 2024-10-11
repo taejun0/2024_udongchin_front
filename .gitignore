@@ -23,8 +23,8 @@ dist-ssr/
 .svelte-kit/
 
 # Static files
-public/
-.static/
+# public/
+# .static/
 
 # Typescript output
 *.tsbuildinfo
