@@ -17,6 +17,12 @@ jobs:
       - name: List all files in workspace (Debug)
         run: ls -R /home/runner/work/
 
+      - name: List Artifacts (Debug)
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
+      
+
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
