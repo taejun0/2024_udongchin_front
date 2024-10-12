@@ -14,11 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify artifacts exist (Debug)
+      - name: Verify artifact availability (Debug)
         run: |
-          echo "Listing artifacts for run ID: ${{ github.event.workflow_run.id }}"
+          echo "Fetching artifact details..."
           curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/artifacts
+
+      - name: List all files in workspace (Debug)
+        run: ls -R /home/runner/work/
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -26,7 +29,7 @@ jobs:
           name: build
           path: ./downloaded-build
 
-      - name: Verify downloaded artifact (Debug)
+      - name: Verify downloaded artifacts (Debug)
         run: ls -R ./downloaded-build
 
       - name: Install Vercel CLI
@@ -34,13 +37,13 @@ jobs:
           npm cache clean --force
           npm install -g vercel@latest
 
-      - name: Verify VERCEL_TOKEN (Debug)
+      - name: Verify VERCEL_TOKEN
         run: |
           if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
-            echo "Error: VERCEL_TOKEN is not set." >&2
+            echo "VERCEL_TOKEN is not set!"
             exit 1
           else
-            echo "VERCEL_TOKEN is set correctly."
+            echo "VERCEL_TOKEN is set."
           fi
 
       - name: Deploy to Vercel
