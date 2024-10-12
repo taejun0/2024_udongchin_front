@@ -1,60 +1,53 @@
-name: CD for React App
+name: CD for React App (Without Artifacts)
 
 on:
-  workflow_run:
-    workflows: ["CI for React App"]
-    types: 
-      - completed
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: 확인: CI 실행 성공 여부
-        run: |
-          echo "Workflow ID: ${{ github.event.workflow_run.id }}"
-          echo "Workflow status: ${{ github.event.workflow_run.conclusion }}"
-          if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
-            echo "CI 실패: 배포 중단"
-            exit 1
-          fi
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-      - name: Fetch artifact details (Debug)
-        run: |
-          curl -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-          https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/artifacts
+      - name: Install dependencies
+        run: npm install
 
-      - name: Download build artifacts with PAT
-        run: |
-          curl -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-          -L https://api.github.com/repos/${{ github.repository }}/actions/artifacts/2048504673/zip -o artifact.zip
+      - name: Build the project
+        run: npm run build
 
-      - name: Verify downloaded artifact
+      - name: Verify dist/ folder (Debug)
         run: |
-          unzip artifact.zip -d ./downloaded-artifacts
-          ls -R ./downloaded-artifacts
+          echo "Listing dist/ folder contents..."
+          ls -R dist/
 
       - name: Install Vercel CLI
         run: |
+          npm cache clean --force
           npm install -g vercel@latest
 
-      - name: Verify VERCEL_TOKEN
+      - name: Verify VERCEL_TOKEN (Debug)
         run: |
-          if [ -z "$VERCEL_TOKEN" ]; then
-            echo "VERCEL_TOKEN이 설정되지 않았습니다. 배포 중단."
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "VERCEL_TOKEN is not set!"
             exit 1
           else
-            echo "VERCEL_TOKEN 확인 완료."
+            echo "VERCEL_TOKEN is properly set."
           fi
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
-        run: |
-          vercel --prod --token $VERCEL_TOKEN --confirm --cwd ./downloaded-artifacts
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel --prod --confirm --cwd ./dist
