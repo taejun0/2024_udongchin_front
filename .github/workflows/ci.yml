@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20'  # 최신 Node 버전 사용
 
       - name: Install dependencies
         run: npm install
@@ -33,5 +33,5 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ github.run_id }}
+          name: build  # 고정된 이름 사용
           path: dist/
