@@ -87,3 +87,4 @@ cypress/videos/
 playwright-report/
 test-results/
 .nyc_output/
+.vercel
