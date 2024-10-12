@@ -2,7 +2,7 @@ name: CD for React App
 
 on:
   workflow_run:
-    workflows: ["CI for React App"]
+    workflows: ["CI for React App"]  # CI 워크플로우 이름과 일치해야 합니다.
     types:
       - completed
 
@@ -14,13 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: List available artifacts (Debug)
+        run: ls -R /home/runner/work/<repository-name>/<repository-name>/
+
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4  # v4 사용
         with:
           name: build
 
       - name: Install Vercel CLI
-        run: npm install -g vercel
+        run: |
+          npm cache clean --force
+          npm install -g vercel@latest
 
       - name: Deploy to Vercel
         env:

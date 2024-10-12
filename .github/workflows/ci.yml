@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'  # Node.js 버전을 20으로 설정
 
       - name: Install dependencies
         run: npm install
@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # v4 사용
         with:
           name: build
           path: dist/
