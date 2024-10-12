@@ -14,7 +14,8 @@ node_modules/
 .vscode-test/
 
 # Build output
-build/
+# build/ 폴더 무시하지만 dist/는 업로드 허용
+!dist/
 dist-ssr/
 .out/
 .next/
@@ -22,6 +23,7 @@ dist-ssr/
 .svelte-kit/
 
 # Static files
+# public/ 폴더는 무시하지 않음
 # public/
 # .static/
 
@@ -86,3 +88,6 @@ cypress/videos/
 playwright-report/
 test-results/
 .nyc_output/
+
+# Vercel 폴더 예외 처리
+!.vercel/
