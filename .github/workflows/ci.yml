@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
@@ -27,12 +24,11 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      # 디버그: dist 폴더 확인
       - name: List dist/ folder contents (Debug)
         run: ls -R dist/
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build  # 업로드할 artifact 이름
-          path: dist/  # dist 폴더를 artifact로 업로드
+          name: build-${{ github.run_id }}  # 고유한 이름 사용
+          path: dist/
