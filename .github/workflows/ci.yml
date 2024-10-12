@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # 최신 Node 버전 사용
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -31,7 +31,7 @@ jobs:
         run: ls -R dist/
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3  # v3 버전 사용
+        uses: actions/upload-artifact@v3
         with:
-          name: build  # 고정된 이름 사용
+          name: build  # 아티팩트 이름: 'build'
           path: dist/
