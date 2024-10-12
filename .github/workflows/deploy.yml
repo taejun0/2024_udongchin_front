@@ -14,22 +14,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 디버깅: 전체 파일 구조 출력
-      - name: List all files (Debug)
+      # 디버그: 작업 경로 내 모든 파일 출력
+      - name: List all files in workspace (Debug)
         run: ls -R /home/runner/work/
 
       # Artifact 다운로드 시도
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build  # artifact 이름이 정확해야 함
+          name: build  # CI에서 업로드된 artifact 이름과 동일해야 함
 
-      # Vercel CLI 설치 및 배포
+      # Vercel CLI 설치
       - name: Install Vercel CLI
         run: |
           npm cache clean --force
           npm install -g vercel@latest
 
+      # Vercel에 배포 실행
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
