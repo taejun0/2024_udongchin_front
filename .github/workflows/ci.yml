@@ -24,8 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+        #     테스트 단계 생략 추가시 test에 대한 scripts 추가
+        #      - name: Run tests
+        #        run: npm test
 
       - name: Build the project
         run: npm run build
