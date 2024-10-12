@@ -14,11 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: CI 성공 여부 확인
+      - name: 확인: CI 실행 성공 여부
         run: |
-          echo "CI 상태 확인 중..."
           echo "Workflow ID: ${{ github.event.workflow_run.id }}"
-          echo "결과: ${{ github.event.workflow_run.conclusion }}"
+          echo "Workflow status: ${{ github.event.workflow_run.conclusion }}"
           if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
             echo "CI 실패: 배포 중단"
             exit 1
@@ -26,32 +25,36 @@ jobs:
 
       - name: Fetch artifact details (Debug)
         run: |
-          curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          curl -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
           https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/artifacts
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: ./downloaded-artifacts
+      - name: Download build artifacts with PAT
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+          -L https://api.github.com/repos/${{ github.repository }}/actions/artifacts/2048504673/zip -o artifact.zip
 
       - name: Verify downloaded artifact
         run: |
-          echo "Downloaded artifact contents:"
+          unzip artifact.zip -d ./downloaded-artifacts
           ls -R ./downloaded-artifacts
 
       - name: Install Vercel CLI
-        run: npm install -g vercel@latest
+        run: |
+          npm install -g vercel@latest
 
       - name: Verify VERCEL_TOKEN
         run: |
-          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
-            echo "ERROR: VERCEL_TOKEN이 설정되지 않았습니다."
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN이 설정되지 않았습니다. 배포 중단."
             exit 1
           else
             echo "VERCEL_TOKEN 확인 완료."
           fi
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
         run: |
-          VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }} vercel --prod --confirm --cwd ./downloaded-artifacts
+          vercel --prod --token $VERCEL_TOKEN --confirm --cwd ./downloaded-artifacts
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
