@@ -14,19 +14,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List available artifacts (Debug)
-        run: ls -R /home/runner/work/<repository-name>/<repository-name>/
+      # 디버깅: 전체 디렉터리 구조 확인
+      - name: List all files in runner's workspace
+        run: ls -R /home/runner/work/
 
+      # 디버깅: 워크스페이스 내 파일 확인
+      - name: List artifacts (Debug)
+        run: ls -R ${{ github.workspace }}
+
+      # Artifact 다운로드
       - name: Download build artifacts
         uses: actions/download-artifact@v4  # v4 사용
         with:
-          name: build
+          name: build  # 업로드된 artifact 이름과 일치해야 함
 
+      # Vercel CLI 설치
       - name: Install Vercel CLI
         run: |
           npm cache clean --force
           npm install -g vercel@latest
 
+      # Vercel에 배포 실행
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
