@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -27,10 +27,10 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      - name: List dist/ folder contents (Debug)
+      - name: Verify dist/ folder (Debug)
         run: ls -R dist/
 
-      - name: Upload build artifacts
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: build

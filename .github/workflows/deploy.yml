@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Verify artifact availability (Debug)
@@ -20,30 +20,37 @@ jobs:
           curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/artifacts
 
-      - name: List all files in workspace (Debug)
+      - name: List files in workspace (Debug)
         run: ls -R /home/runner/work/
 
-      - name: Download build artifacts
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build
           path: ./downloaded-build
 
-      - name: Verify downloaded artifacts (Debug)
-        run: ls -R ./downloaded-build
+      - name: Verify downloaded artifact (Debug)
+        run: |
+          if [ -d "./downloaded-build" ]; then
+            echo "Artifact successfully downloaded!"
+            ls -R ./downloaded-build
+          else
+            echo "Artifact download failed!"
+            exit 1
+          fi
 
       - name: Install Vercel CLI
         run: |
           npm cache clean --force
           npm install -g vercel@latest
 
-      - name: Verify VERCEL_TOKEN
+      - name: Verify VERCEL_TOKEN (Debug)
         run: |
           if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
             echo "VERCEL_TOKEN is not set!"
             exit 1
           else
-            echo "VERCEL_TOKEN is set."
+            echo "VERCEL_TOKEN is properly set."
           fi
 
       - name: Deploy to Vercel
