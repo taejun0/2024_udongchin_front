@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -30,5 +33,5 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ github.run_id }}  # 고유한 이름 사용
+          name: build-${{ github.run_id }}
           path: dist/
