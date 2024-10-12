@@ -31,7 +31,7 @@ jobs:
         run: ls -R dist/
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3  # v3 버전 사용
         with:
           name: build  # 고정된 이름 사용
           path: dist/

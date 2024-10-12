@@ -18,9 +18,9 @@ jobs:
         run: ls -R /home/runner/work/
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3  # v3 버전 사용
         with:
-          name: build  # CI에서 사용한 이름과 동일
+          name: build  # CI와 동일한 이름 사용
 
       - name: Verify downloaded artifact (Debug)
         run: ls -R .
