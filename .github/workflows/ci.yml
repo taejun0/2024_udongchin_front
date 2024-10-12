@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: dist/  # dist 폴더로 수정
+          path: dist/
