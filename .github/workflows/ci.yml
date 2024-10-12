@@ -24,10 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-        #     테스트 단계 생략 추가시 test에 대한 scripts 추가
-        #      - name: Run tests
-        #        run: npm test
-
       - name: Build the project
         run: npm run build
 
@@ -35,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: build/
+          path: dist/  # dist 폴더로 수정
