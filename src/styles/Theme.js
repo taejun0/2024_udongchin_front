@@ -13,6 +13,7 @@ const fontGenerator = (
 });
 export const theme = {
   colors: {
+    default: "#000000",
     white: "#FFFFFF",
   },
 
