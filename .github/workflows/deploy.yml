@@ -1,4 +1,4 @@
-name: CD for React App (Without Artifacts)
+name: CI/CD for React App
 
 on:
   push:
@@ -27,20 +27,18 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      - name: Verify dist/ folder (Debug)
+      - name: Verify build output (Debug)
         run: |
-          echo "Listing dist/ folder contents..."
-          ls -R dist/
+          echo "Build output:"
+          ls -R ./dist
 
       - name: Install Vercel CLI
-        run: |
-          npm cache clean --force
-          npm install -g vercel@latest
+        run: npm install -g vercel@latest
 
-      - name: Verify VERCEL_TOKEN (Debug)
+      - name: Verify VERCEL_TOKEN
         run: |
           if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
-            echo "VERCEL_TOKEN is not set!"
+            echo "Error: VERCEL_TOKEN is not set!"
             exit 1
           else
             echo "VERCEL_TOKEN is properly set."
@@ -50,4 +48,4 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          vercel --prod --confirm --cwd ./dist
+          vercel --prod --yes --token $VERCEL_TOKEN --cwd ./dist
