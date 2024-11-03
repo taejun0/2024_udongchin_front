@@ -1,0 +1,83 @@
+// JoinStyle.js
+const styles = {
+    'signup-container': {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '668px',
+        width: '400px',
+        fontFamily: 'sans-serif',
+        backgroundColor: '#fff',
+    },
+    header: {
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '14px',
+        borderBottom: '1px solid #989898',
+    },
+    'back-button': {
+        fontSize: '20px',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+    },
+    title: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontSize: '14px',
+        fontWeight: '400',
+    },
+    main: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: '400px',
+        padding: '48px',
+        marginTop: '22px',
+    },
+    'form-group': {
+        marginBottom: '30px',
+        width: '100%',
+    },
+    'input-field': {
+        width: '100%',
+        padding: '8px',
+        marginTop: '12px',
+        fontSize: '12px',
+        borderRadius: '5px',
+        border: 'none',
+        backgroundColor: '#ECECEC',
+        outline: 'none',
+    },
+    'input-with-check': {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    'check-button': {
+        width: '43px',
+        height: '16px',
+        marginLeft: '12px',
+        fontSize: '8px',
+        backgroundColor: '#fff',
+        border: '0.8px solid #575757',
+        color: '#575757',
+        borderRadius: '2px',
+        cursor: 'pointer',
+    },
+    'submit-button': {
+        width: '100%',
+        padding: '11px',
+        marginTop: '40px',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        color: '#fff',
+        backgroundColor: '#5B3200',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+    },
+};
+
+export default styles;

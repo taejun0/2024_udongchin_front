@@ -5,4 +5,11 @@ export const ROUTE_PATHS = {
   ABOUT: "/about",
   CONTACT: "/contact",
   NOT_FOUND: "*",
+  LOGIN: "/login",
+  JOIN: "/join",
+  POST_WRITE: "/postwrite",
+  POST_VIEW: "/postview",
+  COMMUNITY: "/community",
+  FULLBOARD: "/fullboard",
+  FREEBOARD:"/freeboard",
 };
