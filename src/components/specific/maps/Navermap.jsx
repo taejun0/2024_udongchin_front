@@ -1,6 +1,6 @@
 import * as S from "./styled";
 import { useEffect, useState } from "react";
-import { NaverDetailModal } from "@components/common/modals/NaverDetailModal";
+import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { useLocation } from "@contexts/LocationContext";
 import nowimage from "/images/nowlocation.svg";
 
