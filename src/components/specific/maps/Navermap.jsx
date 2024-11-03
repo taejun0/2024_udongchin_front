@@ -4,19 +4,22 @@ import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { useLocation } from "@contexts/LocationContext";
 import nowimage from "/images/nowlocation.svg";
 
+
 const backgroundIcons = {
   "Q&A": "/images/marker_qna.svg",
   "Community": "/images/marker_real.svg",
 };
 
 export const Navermap = ({ locations }) => {
+  const NAVER_MAP_KEY = import.meta.env.VITE_NAVER_MAP_KEY;
+  
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [currentPosition, setCurrentPosition] = useState(null);
   const { setLocation, address, setAddress } = useLocation();
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=rkbjpprez5&submodules=geocoder`;
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NAVER_MAP_KEY}&submodules=geocoder`;
     script.async = true;
 
     script.onload = () => {

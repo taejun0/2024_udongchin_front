@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import * as S from "./styled";
 import Nowlocations from "/images/nowlocation.svg"
 
+
 export const MapSelector = ({ onConfirm }) => {
+  const NAVER_MAP_KEY = import.meta.env.VITE_NAVER_MAP_KEY;
+  
   const [map, setMap] = useState(null);
   const [centerCoords, setCenterCoords] = useState(null);
   const [region, setRegion] = useState("없음");
@@ -10,7 +13,7 @@ export const MapSelector = ({ onConfirm }) => {
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID&submodules=geocoder`;
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NAVER_MAP_KEY}&submodules=geocoder`;
     script.async = true;
 
     script.onload = () => {
