@@ -5,6 +5,7 @@ import DefaultLayout from "@layouts/DefaultLayout";
 import { HomePage } from "@pages/homepage/HomePage";
 import { AboutPage } from "@pages/aboutpage/AboutPage";
 import { NotFoundLayout } from "@layouts/NotFoundLayout";
+import { ReportPage } from "@pages/reportpage/ReportPage";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.HOME,
         element: <HomePage />,
+      },
+      {
+        path: ROUTE_PATHS.REPORT,
+        element: <ReportPage />,
       },
       {
         path: ROUTE_PATHS.ABOUT,

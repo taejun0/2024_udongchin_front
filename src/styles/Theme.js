@@ -15,12 +15,27 @@ export const theme = {
   colors: {
     default: "#000000",
     white: "#FFFFFF",
+    black: "#232323",
+    gray: "#ECECEC",
+    darkgray: "#575757",
+    separate: "#989898",
+    yellow: "#E3B05F",
+    lightyellow: "#FFFFE5",
+    darkyellow: "#5B3200",
+    headerColor: "#43CD5E",
   },
 
   fonts: {
-    default: fontGenerator("Pretendard-Ragular", "1rem", "400", "1.5", "normal"),
+    default: fontGenerator("NanumSquareRoundOTFR", "1rem", "400", "1.5", "normal"),
 
-    // Apple SD 산돌고딕 Neo 폰트 설정
-    Pretendard_Bold: fontGenerator("Pretendard-Bold"),
+    // NanumSaureRound 폰트 설정
+    NanumSquareRoundB: fontGenerator("NanumSquareRoundB"),
+    NanumSquareRoundEB: fontGenerator("NanumSquareRoundEB"),
+    NanumSquareRoundL: fontGenerator("NanumSquareRoundL"),
+    NanumSquareRoundR: fontGenerator("NanumSquareRoundR"),
+    NanumSquareRoundOTFB: fontGenerator("NanumSquareRoundOTFB"),
+    NanumSquareRoundOTFEB: fontGenerator("NanumSquareRoundOTFEB"),
+    NanumSquareRoundOTFL: fontGenerator("NanumSquareRoundOTFL"),
+    NanumSquareRoundOTFR: fontGenerator("NanumSquareRoundOTFR"),
   },
 };
