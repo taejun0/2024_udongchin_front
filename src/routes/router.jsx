@@ -12,6 +12,7 @@ import {PostWritePage} from "@pages/community/PostWritePage";
 import {PostViewPage} from "@pages/community/PostViewPage";
 import {FullBoard} from "@pages/community/FullBoard";
 import {FreeBoard} from "@pages/community/FreeBoard";
+import { ReportPage } from "@pages/reportpage/ReportPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.HOME,
         element: <HomePage />,
+      },
+      {
+        path: ROUTE_PATHS.REPORT,
+        element: <ReportPage />,
       },
       {
         path: ROUTE_PATHS.ABOUT,

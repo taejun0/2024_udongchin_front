@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { Header } from "@components/layout/header/Header";
+import { useLocation } from "react-router-dom";
 
 const DefaultLayout = () => {
+  const location = useLocation();
+
+  const HaveHeader = location.pathname === "/";
   return (
     <>
       <Wrapper>
+        {HaveHeader && <Header /> }
         <Outlet />
       </Wrapper>
     </>

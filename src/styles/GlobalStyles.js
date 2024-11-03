@@ -24,6 +24,40 @@ i {font-style:normal}
 	min-height: 100vh;
 }
 
+//나눔 스퀘어 라운드 폰트 설정
+@font-face {
+    font-family: "NanumSquareRoundB";
+    src: url("/fonts/NanumSquareRoundB.ttf") format("truetype");
+}
+@font-face {
+    font-family: "NanumSquareRoundEB";
+    src: url("/fonts/NanumSquareRoundEB.ttf") format("truetype");
+}
+@font-face {
+    font-family: "NanumSquareRoundR";
+    src: url("/fonts/NanumSquareRoundR.ttf") format("truetype");
+}
+@font-face {
+    font-family: "NanumSquareRoundL";
+    src: url("/fonts/NanumSquareRoundL.ttf") format("truetype");
+}
+@font-face {
+    font-family: "NanumSquareRoundOTFB";
+    src: url("/fonts/NanumSquareRoundOTFB.otf") format("opentype");
+}
+@font-face {
+    font-family: "NanumSquareRoundOTFEB";
+    src: url("/fonts/NanumSquareRoundOTFEB.otf") format("opentype");
+}
+@font-face {
+    font-family: "NanumSquareRoundOTFL";
+    src: url("/fonts/NanumSquareRoundOTFL.otf") format("opentype");
+}
+@font-face {
+    font-family: "NanumSquareRoundOTFR";
+    src: url("/fonts/NanumSquareRoundOTFR.otf") format("opentype");
+}
+
 // 초기 html 설정
 html {
 	/* background-color: ${({ theme }) => theme.colors.fall};	 */
@@ -42,7 +76,7 @@ html {
 
 body {
 	width: 100%;
-	max-width: 540px;
+	max-width: 400px;
 	overflow-x: hidden;
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.default};
