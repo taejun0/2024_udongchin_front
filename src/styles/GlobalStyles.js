@@ -76,7 +76,6 @@ html {
 
 body {
 	width: 100%;
-	max-width: 400px;
 	overflow-x: hidden;
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.default};

@@ -4,19 +4,19 @@ import MultiImageUploader from '../imageuploader/MultiImageUploader';
 
 
 export const StepOne = ({ onNext, updateData }) => {
-  const [photos, setPhotos] = useState([]);
+  const [images, setImages] = useState([]);
   const [selectedOption, setSelectedOption] = useState("image");
 
   const handleNext = () => {
     if (selectedOption !== "image") {
-      setPhotos([]);
+      setImages([]);
     }
-    updateData("photos", photos);
+    updateData("images", images);
     onNext();
   };
 
-  const handleImageUpload = (newPhotos) => {
-    setPhotos(newPhotos);
+  const handleImageUpload = (newImages) => {
+    setImages(newPhotos);
   };
 
   return (
@@ -48,7 +48,7 @@ export const StepOne = ({ onNext, updateData }) => {
         </S.Radios>
         {selectedOption === "image" && (
           <MultiImageUploader
-            photos={photos}
+            photos={images}
             onImageUpload={handleImageUpload}
             maxPhotos={10}
           />

@@ -5,12 +5,12 @@ import { MapSelector } from "../maps/MapSelector";
 export const StepTwo = ({ onNext, updateData }) => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [description, setDescription] = useState("");
+  const [location_description, setLocationDescription] = useState("");
   const [showMapSelector, setShowMapSelector] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
 
   const handleNext = () => {
-    updateData("location", { lat: latitude, lng: longitude, description });
+    updateData("location", { latitude: latitude, longitude: longitude, location_description });
     onNext();
   };
 
@@ -49,7 +49,7 @@ export const StepTwo = ({ onNext, updateData }) => {
         {showDescription && (
           <S.Textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setLocationDescription(e.target.value)}
             placeholder="목격 장소를 묘사해주세요."
           />
         )}

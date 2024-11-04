@@ -13,7 +13,7 @@ import sidebar_how from "/images/sidebar_how.svg";
 import sidebar_my from "/images/sidebar_my.svg";
 
 export const HomePage = () => {
-  const { locations, loading, error } = useNavermaps();
+  const {locations, loading, error} = useNavermaps();
   const [QnaModalOpen, setQnaModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isExpand, setExpand] = useState(false);
@@ -68,12 +68,16 @@ export const HomePage = () => {
       </S.Buttons>
 
       <S.SideButtons>
-        <S.SideButton>
+        <S.SideButton
+          onClick={() => navigate("myudchistory")}
+        >
           <img src={sidebar_how} />
           내 우동친
         </S.SideButton>
         
-        <S.SideButton>
+        <S.SideButton
+          onClick={() => navigate("udcmanual")}
+        >
           <img src={sidebar_my} />
           사용 설명서
         </S.SideButton>

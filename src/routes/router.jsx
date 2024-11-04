@@ -6,6 +6,8 @@ import { HomePage } from "@pages/homepage/HomePage";
 import { AboutPage } from "@pages/aboutpage/AboutPage";
 import { NotFoundLayout } from "@layouts/NotFoundLayout";
 import { ReportPage } from "@pages/reportpage/ReportPage";
+import { MyudchistoryPage } from "@pages/myudchistorypage/MyudchistoryPage";
+import { UdcmanualPage } from "@pages/udcmanualpage/UdcmanualPage";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +21,14 @@ export const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.REPORT,
         element: <ReportPage />,
+      },
+      {
+        path: ROUTE_PATHS.MYUDCHISTORY,
+        element: <MyudchistoryPage />,
+      },
+      {
+        path: ROUTE_PATHS.UDCMANUAL,
+        element: <UdcmanualPage />,
       },
       {
         path: ROUTE_PATHS.ABOUT,

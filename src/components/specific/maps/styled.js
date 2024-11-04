@@ -4,7 +4,7 @@ export const MapSize = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 44px);
 `;
 
 export const Nowlocation = styled.div`
