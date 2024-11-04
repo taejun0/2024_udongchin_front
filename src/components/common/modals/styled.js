@@ -22,7 +22,6 @@ export const ModalContent = styled.div`
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
   width: 80%;
   
 `;
@@ -236,9 +235,7 @@ export const ModalContent2 = styled.div`
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
   width: 80%;
-  
 `;
 
 

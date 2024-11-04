@@ -13,6 +13,8 @@ import {PostViewPage} from "@pages/community/PostViewPage";
 import {FullBoard} from "@pages/community/FullBoard";
 import {FreeBoard} from "@pages/community/FreeBoard";
 import { ReportPage } from "@pages/reportpage/ReportPage";
+import { MyudchistoryPage } from "@pages/myudchistorypage/MyudchistoryPage";
+import { UdcmanualPage } from "@pages/udcmanualpage/UdcmanualPage";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ export const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.REPORT,
         element: <ReportPage />,
+      },
+      {
+        path: ROUTE_PATHS.MYUDCHISTORY,
+        element: <MyudchistoryPage />,
+      },
+      {
+        path: ROUTE_PATHS.UDCMANUAL,
+        element: <UdcmanualPage />,
       },
       {
         path: ROUTE_PATHS.ABOUT,

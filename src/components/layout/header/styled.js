@@ -42,3 +42,9 @@ export const Text = styled.div`
   font-weight: 500;
   line-height: normal;
 `;
+
+export const MainWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;

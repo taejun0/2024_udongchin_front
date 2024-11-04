@@ -3,9 +3,11 @@ import { reportService } from "@services/reportService";
 
 export const useReport = () => {
   const [reportData, setReportData] = useState({
-    photos: [],
-    location: { lat: null, lng: null, description: "" },
-    animalInfo: { estimatedAnimal: "", appearance: "" },
+    images: [],
+    location_coords: { latitude: null, longitude: null},
+    locstion_description: "",
+    animal_type: "",
+    animal_description: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
