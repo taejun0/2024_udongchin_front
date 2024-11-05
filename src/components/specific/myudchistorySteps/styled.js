@@ -54,6 +54,6 @@ export const ImageSet = styled.div`
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  line-height: 14px; /* 140% */
+  line-height: 14px;
 `;
 

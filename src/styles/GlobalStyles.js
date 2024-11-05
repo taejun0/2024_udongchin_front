@@ -79,7 +79,7 @@ body {
 	overflow-x: hidden;
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.default};
-	font-family: "sans-serif";
+	font-family: "NanumSquareRoundB", "NanumSquareRoundEB", "NanumSquareRoundR", "NanumSquareRoundL", "NanumSquareRoundOTFB", "NanumSquareRoundOTFEB", "NanumSquareRoundOTFL", "NanumSquareRoundOTFR", "sans-serif";
 }
 
 `;
