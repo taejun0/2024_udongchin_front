@@ -11,12 +11,19 @@ import adding_dots from "/images/adding_dots.svg";
 import adding_chat from "/images/adding_chat.svg";
 import sidebar_how from "/images/sidebar_how.svg";
 import sidebar_my from "/images/sidebar_my.svg";
+import sidebar_mymy from "/images/sidebar_mymy.svg";
+import sidebar_his from "/images/sidebar_his.svg";
 
 export const HomePage = () => {
   const {locations, loading, error} = useNavermaps();
   const [QnaModalOpen, setQnaModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isExpand, setExpand] = useState(false);
+  const [selectmy, setSelectmy] = useState("my");
+
+  const handleselectMY = () => {
+    setSelectmy((prev) => (prev=== "my" ? "mymy" : "my"));
+  };
 
   const navigate = useNavigate();
 
@@ -35,7 +42,6 @@ export const HomePage = () => {
           <img src={adding_dots} style={{width: "44px", height:"44px"}}/>
         </S.Button>
 
-        {/* 기록 추가 버튼 */}
         <S.ExpandableButton 
           $isExpand = {isExpand}
           $delay = {0.1}
@@ -48,7 +54,6 @@ export const HomePage = () => {
           실시간 작성
         </S.ExpandableButton>
 
-        {/* QNA 추가 버튼 */}
         <S.ExpandableButton
           $isExpand = {isExpand}
           $delay = {0.2}
@@ -69,16 +74,23 @@ export const HomePage = () => {
 
       <S.SideButtons>
         <S.SideButton
+          onClick={handleselectMY}
+        >
+          <img src={selectmy === "my" ? sidebar_my : sidebar_mymy} />
+          내 우동친
+        </S.SideButton>
+
+        <S.SideButton
           onClick={() => navigate("myudchistory")}
         >
-          <img src={sidebar_how} />
-          내 우동친
+          <img src={sidebar_his} />
+          내 우동친 기록
         </S.SideButton>
         
         <S.SideButton
           onClick={() => navigate("udcmanual")}
         >
-          <img src={sidebar_my} />
+          <img src={sidebar_how} />
           사용 설명서
         </S.SideButton>
       </S.SideButtons>

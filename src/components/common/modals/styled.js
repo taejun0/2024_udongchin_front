@@ -24,6 +24,7 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   width: 80%;
   
+  box-shadow : ${({ $Urgent }) => $Urgent ? "0px 0px 15px 5px #FFA9AB" : "none"};
 `;
 
 export const ModalSection = styled.div`

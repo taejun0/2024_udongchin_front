@@ -8,6 +8,7 @@ import nowimage from "/images/nowlocation.svg";
 const backgroundIcons = {
   "Q&A": "/images/marker_qna.svg",
   "Community": "/images/marker_real.svg",
+  "Urgent": "images/marker_urgent.svg",
 };
 
 export const Navermap = ({ locations }) => {
@@ -103,7 +104,19 @@ export const Navermap = ({ locations }) => {
             if (Array.isArray(locations)) {
               locations.forEach((location) => {
                 const markerPosition = new naver.maps.LatLng(location.lat, location.lng);
-                const backgroundUrl = backgroundIcons[location.type];
+
+                const getBackgroundType = (locaiton) => {
+                  if (location.type === "Q&A") {
+                    if (location.urgent) {
+                      return "Urgent";
+                    }
+                    return "Q&A";
+                  }
+                  else {
+                    return "Community";
+                  }
+                }
+                const backgroundUrl = backgroundIcons[getBackgroundType(location)];
 
 
                 const marker = new naver.maps.Marker({
@@ -118,6 +131,7 @@ export const Navermap = ({ locations }) => {
                         background-image: url('${backgroundUrl}');
                         background-size: cover;
                         transform: translateY(-31px);
+                        ${backgroundUrl === backgroundIcons["Urgent"] ? "filter: drop-shadow(0px 0px 10px #FF8B8D);" : ""}
                       ">
                         <img src="${location.imageUrl}" alt="marker" style="
                           display: flex;
