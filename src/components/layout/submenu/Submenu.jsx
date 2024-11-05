@@ -16,7 +16,7 @@ export const Submenu = ({onClose}) => {
       <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/login")}>
         로그인
       </S.Box>
-      <S.Box tyle={{cursor: "pointer"}} onClick={() => navigation("/signup")}>
+      <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
         회원가입
       </S.Box>
     </S.Wrapper>

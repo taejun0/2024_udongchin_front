@@ -1,32 +1,44 @@
 import { useState } from "react";
 import * as S from "./styled";
-import Backward from "/images/Backward.svg";
-import HamBar from "/images/HamBar.svg";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Submenu } from "../submenu/Submenu";
 
 export const Header = () => {
   const location = useLocation();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
 
-  const isBackward = location.pathname === "/";
-  const isRoot = location.pathname === "/";
+  // 경로에 따라 이미지와 배경색 설정
+  const getHeaderConfig = () => {
+    switch (location.pathname) {
+      case "/":
+        return { imageSrc: "/images/HamBar.svg", backgroundColor: "{({theme}) => > theme.colors.headerColor" };
+      case "/myudchistory":
+        return { imageSrc: "/images/Backward.svg", backgroundColor: "{({theme}) => > theme.colors.headerColor" };
+      default:
+        return { imageSrc: "/images/Default.svg", backgroundColor: "#ffffff" };
+    }
+  };
 
-  const ToggleModal = () => {
-    setModalOpen((prev) => !prev);
+  const { imageSrc, backgroundColor } = getHeaderConfig();
+
+  const handleImageClick = () => {
+    if (imageSrc === "/images/HamBar.svg") {
+      setModalOpen((prev) => !prev);
+    } else if (imageSrc === "/images/Backward.svg") {
+      navigate(-1);
+    }
   };
 
   return (
-    <S.Wrapper>
-      {isRoot && <S.Image src={HamBar} onClick={ToggleModal}/> }
+    <S.Wrapper style={{ backgroundColor }}>
+      <S.Image src={imageSrc} onClick={handleImageClick} />
       <S.Text>우동친</S.Text>
-      {modalOpen && 
-      <S.MainWrapper>
-        <Submenu onClose={ToggleModal}/>
-      </S.MainWrapper>
-    }
+      {modalOpen && (
+        <S.MainWrapper>
+          <Submenu onClose={() => setModalOpen(false)} />
+        </S.MainWrapper>
+      )}
     </S.Wrapper>
-  )
-}
+  );
+};

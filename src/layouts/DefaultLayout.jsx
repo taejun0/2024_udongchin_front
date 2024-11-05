@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 const DefaultLayout = () => {
   const location = useLocation();
 
-  const HaveHeader = location.pathname === "/";
+  const HaveHeader = location.pathname === "/" || location.pathname === "/myudchistory";
   return (
     <>
       <Wrapper>

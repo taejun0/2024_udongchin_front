@@ -48,7 +48,7 @@ export const StepTwo = ({ onNext, updateData }) => {
         {showMapSelector && <MapSelector onConfirm={handleLocationConfirm} />}
         {showDescription && (
           <S.Textarea
-            value={description}
+            value={location_description}
             onChange={(e) => setLocationDescription(e.target.value)}
             placeholder="목격 장소를 묘사해주세요."
           />

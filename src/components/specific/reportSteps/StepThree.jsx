@@ -6,7 +6,7 @@ export const StepThree = ({ onNext, updateData }) => {
   const [selectedOption, setSelectedOption] = useState("think");
 
   const handleNext = () => {
-    updateData("animalInfo", { estimatedAnimal });
+    updateData("animal_type", { animal_type });
     onNext();
   };
 
