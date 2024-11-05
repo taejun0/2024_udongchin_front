@@ -67,7 +67,7 @@ export const SideButton = styled.div`
   gap: 4px;
   cursor: pointer;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
