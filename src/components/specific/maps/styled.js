@@ -19,7 +19,7 @@ export const Address = styled.div`
   text-align: center;
   align-items: center;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFEB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 18px;
   font-style: normal;
