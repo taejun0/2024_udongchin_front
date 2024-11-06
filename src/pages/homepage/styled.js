@@ -73,3 +73,11 @@ export const SideButton = styled.div`
   font-style: normal;
   font-weight: 700;
 `;
+
+export const RightLowButton = styled.button`
+  cursor: pointer;
+
+  position: absolute;
+  right: 30px;
+  bottom: 40px;
+`;
