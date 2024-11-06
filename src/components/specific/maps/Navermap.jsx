@@ -55,7 +55,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
                   const dongAddress = addressParts.slice(0, 3).join(" ");
                   setCurrentAddress(dongAddress);
                 } else {
-                  console.error("Reverse geocoding failed:", status);
+                  console.error("주소 발행 실패 :", status);
                 }
               }
             );
@@ -67,7 +67,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
               });
             }
 
-            // 현재 위치 마커와 원 생성
             const currentMarker = new naver.maps.Marker({
               position: coord,
               map: mapInstance,
@@ -78,7 +77,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
               },
             });
 
-            // 원 생성 후 ref로 저장
             const userCircle = new naver.maps.Circle({
               map: mapInstance,
               center: coord,
@@ -89,7 +87,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
               fillColor: "radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.01) 0%, rgba(218, 218, 218, 0.05) 100%)",
               fillOpacity: 0.1,
             });
-            circleRef.current = userCircle; // circle 객체를 useRef에 저장
+            circleRef.current = userCircle;
 
             const updateAddressByCenter = () => {
               const center = mapInstance.getCenter();
@@ -105,7 +103,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
 
                     setNowImage(dongAddress === currentAddress ? nowimageChanged : nowimageDefault);
                   } else {
-                    console.error("Reverse geocoding failed:", status);
+                    console.error("주소변환 실패 :", status);
                   }
                 }
               );
@@ -115,12 +113,8 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             naver.maps.Event.addListener(mapInstance, "dragend", updateAddressByCenter);
             naver.maps.Event.addListener(mapInstance, "zoom_changed", updateAddressByCenter);
 
-            naver.maps.Event.addListener(mapInstance, "dragstart", () => {
-              setFollowUser(false);
-            });
-            naver.maps.Event.addListener(mapInstance, "zoom_changed", () => {
-              setFollowUser(false);
-            });
+            naver.maps.Event.addListener(mapInstance, "dragstart", () => {setFollowUser(false);});
+            naver.maps.Event.addListener(mapInstance, "zoom_changed", () => {setFollowUser(false);});
 
             const syncCircleWithMarker = () => {
               if (circleRef.current) {
@@ -171,9 +165,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
                 });
               });
             }
-          },
-          (error) => {
-            console.error("Error getting location:", error);
           }
         );
       }
@@ -202,7 +193,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
 
           setCurrentPosition(coord);
           setLocation(coord);
-          map.setCenter(coord);
+          map.panTo(coord);
 
           // 사용자의 새로운 위치로 원(center)을 업데이트
           if (circleRef.current) {
