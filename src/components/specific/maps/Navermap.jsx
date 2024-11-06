@@ -1,33 +1,37 @@
 import * as S from "./styled";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { useLocation } from "@contexts/LocationContext";
-import nowimage from "/images/nowlocation.svg";
-
+import nowimageDefault from "/images/nowlocation.svg";
+import nowimageChanged from "/images/nowlocation_ch.svg";
 
 const backgroundIcons = {
   "Q&A": "/images/marker_qna.svg",
   "Community": "/images/marker_real.svg",
-  "Urgent": "images/marker_urgent.svg",
+  "Urgent": "/images/marker_urgent.svg",
 };
 
-export const Navermap = ({ locations }) => {
+export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) => {
   const NAVER_MAP_KEY = import.meta.env.VITE_NAVER_MAP_KEY;
-  
+
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [map, setMap] = useState(null);
   const [currentPosition, setCurrentPosition] = useState(null);
   const { setLocation, address, setAddress } = useLocation();
+  const [currentAddress, setCurrentAddress] = useState(null);
+  const [nowimage, setNowImage] = useState(nowimageDefault);
+  
+  const circleRef = useRef(null); // 원을 useRef로 관리
 
+  // 지도 초기화 및 마커 설정
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NAVER_MAP_KEY}&submodules=geocoder`;
-    script.async = true;
-
-    script.onload = () => {
-      const map = new naver.maps.Map("map", {
+    const loadMap = () => {
+      const mapInstance = new naver.maps.Map("map", {
         center: new naver.maps.LatLng(37.5665, 126.9780),
         zoom: 15,
       });
+      setMap(mapInstance);
+      console.log("Map instance created.");
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -38,23 +42,48 @@ export const Navermap = ({ locations }) => {
 
             setCurrentPosition(coord);
             setLocation(coord);
-            map.setCenter(coord);
-            map.setZoom(18);
+            mapInstance.setCenter(coord);
+            mapInstance.setZoom(18);
 
-            // 마커 생성
+            // 현재 위치 주소 설정
+            naver.maps.Service.reverseGeocode(
+              { coords: coord, orders: ["addr"] },
+              (status, response) => {
+                if (status === naver.maps.Service.Status.OK) {
+                  const result = response.v2.address;
+                  const fullAddress = result?.jibunAddress || result?.roadAddress || "주소를 찾을 수 없습니다.";
+                  const addressParts = fullAddress.split(" ");
+                  const dongAddress = addressParts.slice(0, 3).join(" ");
+                  setCurrentAddress(dongAddress);
+                  console.log("Current address set:", dongAddress);
+                } else {
+                  console.error("Reverse geocoding failed:", status);
+                }
+              }
+            );
+
+            if (onMapReady && typeof onMapReady === "function") {
+              onMapReady(() => {
+                mapInstance.setCenter(coord);
+                updateAddressByCenter();
+              });
+            }
+
+            // 현재 위치 마커와 원 생성
             const currentMarker = new naver.maps.Marker({
               position: coord,
-              map: map,
+              map: mapInstance,
               icon: {
                 url: "/images/currentLocationImage.svg",
                 size: new naver.maps.Size(50, 50),
                 anchor: new naver.maps.Point(28, 28),
               },
             });
+            console.log("Current location marker created.");
 
-            // 원 생성
-            const circle = new naver.maps.Circle({
-              map: map,
+            // 원 생성 후 ref로 저장
+            const userCircle = new naver.maps.Circle({
+              map: mapInstance,
               center: coord,
               radius: 100,
               strokeColor: "#radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.01) 0%, rgba(218, 218, 218, 0.05) 100%)",
@@ -63,65 +92,60 @@ export const Navermap = ({ locations }) => {
               fillColor: "radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.01) 0%, rgba(218, 218, 218, 0.05) 100%)",
               fillOpacity: 0.1,
             });
+            circleRef.current = userCircle; // circle 객체를 useRef에 저장
+            console.log("Circle created at:", coord);
 
             const updateAddressByCenter = () => {
-              const center = map.getCenter();
-      
+              const center = mapInstance.getCenter();
+              console.log("Updating address for center:", center);
               naver.maps.Service.reverseGeocode(
-                {
-                  coords: center,
-                  orders: [naver.maps.Service.OrderType.ADDR],
-                },
+                { coords: center, orders: ["addr"] },
                 (status, response) => {
                   if (status === naver.maps.Service.Status.OK) {
                     const result = response.v2.address;
                     const fullAddress = result?.jibunAddress || result?.roadAddress || "주소를 찾을 수 없습니다.";
-      
-                    // '동'까지만 추출하여 주소 설정
                     const addressParts = fullAddress.split(" ");
-                    const dongAddress = addressParts.slice(0, 3).join(" "); // 시, 구, 동까지만 포함
+                    const dongAddress = addressParts.slice(0, 3).join(" ");
                     setAddress(dongAddress);
+
+                    setNowImage(dongAddress === currentAddress ? nowimageChanged : nowimageDefault);
+                    console.log("Address updated to:", dongAddress);
                   } else {
                     console.error("Reverse geocoding failed:", status);
                   }
                 }
               );
             };
+
             updateAddressByCenter();
-            naver.maps.Event.addListener(map, "dragend", updateAddressByCenter);
-            naver.maps.Event.addListener(map, "zoom_changed", updateAddressByCenter);
+            naver.maps.Event.addListener(mapInstance, "dragend", updateAddressByCenter);
+            naver.maps.Event.addListener(mapInstance, "zoom_changed", updateAddressByCenter);
 
+            naver.maps.Event.addListener(mapInstance, "dragstart", () => {
+              setFollowUser(false);
+            });
+            naver.maps.Event.addListener(mapInstance, "zoom_changed", () => {
+              setFollowUser(false);
+            });
 
-            // 확대/축소 및 지도 이동 시 원을 마커 위치로 고정
             const syncCircleWithMarker = () => {
-              const center = currentMarker.getPosition();
-              circle.setCenter(center); // 원의 중심을 마커의 위치로 동기화
+              if (circleRef.current) {
+                circleRef.current.setCenter(currentMarker.getPosition());
+                console.log("Circle position synchronized with marker.");
+              }
             };
+            naver.maps.Event.addListener(mapInstance, "zoom_changed", syncCircleWithMarker);
+            naver.maps.Event.addListener(mapInstance, "dragend", syncCircleWithMarker);
 
-            naver.maps.Event.addListener(map, "zoom_changed", syncCircleWithMarker);
-            naver.maps.Event.addListener(map, "dragend", syncCircleWithMarker);
-
+            // 외부 위치 데이터 마커 추가
             if (Array.isArray(locations)) {
               locations.forEach((location) => {
                 const markerPosition = new naver.maps.LatLng(location.lat, location.lng);
-
-                const getBackgroundType = (locaiton) => {
-                  if (location.type === "Q&A") {
-                    if (location.urgent) {
-                      return "Urgent";
-                    }
-                    return "Q&A";
-                  }
-                  else {
-                    return "Community";
-                  }
-                }
-                const backgroundUrl = backgroundIcons[getBackgroundType(location)];
-
+                const backgroundUrl = backgroundIcons[location.type === "Q&A" ? (location.urgent ? "Urgent" : "Q&A") : "Community"];
 
                 const marker = new naver.maps.Marker({
                   position: markerPosition,
-                  map: map,
+                  map: mapInstance,
                   icon: {
                     content: `
                       <div style="
@@ -145,12 +169,13 @@ export const Navermap = ({ locations }) => {
                       </div>
                     `,
                     size: new naver.maps.Size(40, 40),
-                    anchor: new naver.maps.Point(20, 20), // 다른 마커도 이미지 중심을 맞추기 위해 설정
+                    anchor: new naver.maps.Point(20, 20),
                   },
                 });
 
                 naver.maps.Event.addListener(marker, "click", () => {
                   setSelectedLocation(location);
+                  console.log("Marker clicked for location:", location);
                 });
               });
             }
@@ -159,18 +184,58 @@ export const Navermap = ({ locations }) => {
             console.error("Error getting location:", error);
           }
         );
-      } else {
-        console.error("Geolocation is not supported by this browser.");
       }
     };
 
+    const script = document.createElement("script");
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NAVER_MAP_KEY}&submodules=geocoder`;
+    script.async = true;
+    script.onload = loadMap;
     document.head.appendChild(script);
-  }, [locations]);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, [locations, onMapReady, currentAddress]);
+
+  // 실시간 위치 추적
+  useEffect(() => {
+    let watchId;
+    if (map && followUser && navigator.geolocation) {
+      watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const coord = new naver.maps.LatLng(lat, lng);
+
+          setCurrentPosition(coord);
+          setLocation(coord);
+          map.setCenter(coord);
+
+          // 사용자의 새로운 위치로 원(center)을 업데이트
+          if (circleRef.current) {
+            circleRef.current.setCenter(coord);
+            console.log("Circle position updated to:", coord);
+          }
+        },
+        (error) => {
+          console.error("Error watching location:", error);
+        },
+        { enableHighAccuracy: true }
+      );
+    }
+
+    return () => {
+      if (watchId) {
+        navigator.geolocation.clearWatch(watchId);
+      }
+    };
+  }, [followUser, map]);
 
   return (
     <S.MapSize id="map">
       <S.Nowlocation>
-        <S.Address><img src={nowimage} />{address}</S.Address>
+        <S.Address><S.Image src={nowimage} />{address}</S.Address>
       </S.Nowlocation>
       {selectedLocation && (
         <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />

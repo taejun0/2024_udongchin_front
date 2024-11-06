@@ -13,6 +13,7 @@ import sidebar_how from "/images/sidebar_how.svg";
 import sidebar_my from "/images/sidebar_my.svg";
 import sidebar_mymy from "/images/sidebar_mymy.svg";
 import sidebar_his from "/images/sidebar_his.svg";
+import RightLowHome from "/images/RightLowHome.svg";
 
 export const HomePage = () => {
   const {locations, loading, error} = useNavermaps();
@@ -20,6 +21,11 @@ export const HomePage = () => {
   const [modalType, setModalType] = useState(null);
   const [isExpand, setExpand] = useState(false);
   const [selectmy, setSelectmy] = useState("my");
+  const [followUser, setFollowUser] = useState(false);
+
+  const toglleUser = () => {
+    setFollowUser((prev) => !prev);
+  }
 
   const handleselectMY = () => {
     setSelectmy((prev) => (prev=== "my" ? "mymy" : "my"));
@@ -32,7 +38,11 @@ export const HomePage = () => {
 
   return (
     <div>
-      <Navermap locations={mockLocations} />
+      <Navermap 
+        locations={mockLocations}
+        followUser={followUser}
+        setFollowUser={setFollowUser}
+      />
       <S.Buttons>
         <S.Button
           $isExpand = {isExpand}
@@ -94,6 +104,11 @@ export const HomePage = () => {
           사용 설명서
         </S.SideButton>
       </S.SideButtons>
+      <S.RightLowButton
+        onClick={toglleUser}
+      >
+        <img src={followUser === false ? RightLowHome : sidebar_his} />
+      </S.RightLowButton>
 
       {/* 모달 열림 상태에 따라 표시 */}
       {QnaModalOpen && (

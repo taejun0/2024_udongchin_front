@@ -72,3 +72,7 @@ export const FixButton = styled.button`
 
   cursor: pointer;
 `;
+
+export const Image = styled.img`
+  height: 16px;
+`;
