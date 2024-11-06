@@ -54,7 +54,9 @@ export const StepOne = ({ onNext, updateData }) => {
           />
         )}
       </S.Section1>
-      <S.NextButton onClick={handleNext}>다음</S.NextButton>
+      <S.Section2>
+        <S.NextButton onClick={handleNext}>다음</S.NextButton>
+      </S.Section2>
     </S.Wrapper>
   );
 };

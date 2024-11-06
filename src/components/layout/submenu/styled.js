@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+
+const circleExpand = keyframes`
+  from {
+    clip-path: circle(0% at 0 0);
+  }
+  to {
+    clip-path: circle(150% at 0 0);
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,6 +20,8 @@ export const Wrapper = styled.div`
   z-index: 100;
 
   background-color: ${({theme}) => theme.colors.white};
+
+  animation: ${circleExpand} 0.8s ease-out;
 `;
 
 export const HeaderWrapper = styled.div`
