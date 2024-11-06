@@ -35,7 +35,7 @@ export const Header = () => {
       <S.Image src={imageSrc} onClick={handleImageClick} />
       <S.Text>우동친</S.Text>
       {modalOpen && (
-        <S.MainWrapper>
+        <S.MainWrapper $isOpen={modalOpen}>
           <Submenu onClose={() => setModalOpen(false)} />
         </S.MainWrapper>
       )}

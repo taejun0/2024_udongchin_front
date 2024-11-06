@@ -53,19 +53,85 @@ export const ExpandableButton = styled(Button)`
 export const SideButtons = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
   position: absolute;
   top: 60px;
   right: 10px;
 `;
 
 export const SideButton = styled.div`
+  position: relative;
+  width: 70px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  z-index: 10;
+
+  transition: transform 0.3s ease;
+
+  &:active {
+    transform: scale(1.3); // 클릭 시 살짝 확대
+  }
+
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  color: ${({theme}) => theme.colors.black};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+`;
+
+export const SideButton1 = styled.div`
+  position: absolute;
+  top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 4px;
   cursor: pointer;
+
+  transition: transform 0.3s ease;
+  
+  ${({ $isExpand2 }) =>
+    $isExpand2
+      ? css`
+          transform: translateY(70px); // 내려오는 거리 조정
+        `
+      : css`
+          transform: translateY(0px);
+        `};
+
+  font-family: ${({ theme }) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+`;
+
+export const SideButton2 = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  opacity: 0;
+  
+  ${({ $isExpand2 }) =>
+    $isExpand2
+      ? css`
+          transform: translateY(70px);
+          opacity: 1;
+        `
+      : css`
+          transform: translateY(0px);
+        `};
 
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.black};

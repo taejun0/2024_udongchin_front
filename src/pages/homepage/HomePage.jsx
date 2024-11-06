@@ -20,6 +20,7 @@ export const HomePage = () => {
   const [QnaModalOpen, setQnaModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isExpand, setExpand] = useState(false);
+  const [isExpand2, setExpand2] = useState(false);
   const [selectmy, setSelectmy] = useState("my");
   const [followUser, setFollowUser] = useState(false);
 
@@ -76,6 +77,7 @@ export const HomePage = () => {
         <S.ExpandableButton
           $isExpand = {isExpand}
           $delay = {0.3}
+          onClick={() => navigate("/community")}
         >
           <img src={adding_chat} />
           커뮤니티
@@ -84,25 +86,29 @@ export const HomePage = () => {
 
       <S.SideButtons>
         <S.SideButton
-          onClick={handleselectMY}
+          onClick={() => setExpand2(!isExpand2)}
         >
           <img src={selectmy === "my" ? sidebar_my : sidebar_mymy} />
           내 우동친
         </S.SideButton>
 
-        <S.SideButton
+        <S.SideButton2
           onClick={() => navigate("myudchistory")}
+          $isExpand2 = {isExpand2}
+          $delay = {0.2}
         >
           <img src={sidebar_his} />
           내 우동친 기록
-        </S.SideButton>
+        </S.SideButton2>
         
-        <S.SideButton
+        <S.SideButton1
           onClick={() => navigate("udcmanual")}
+          $isExpand2 = {isExpand2}
+          $delay = {0.2}
         >
           <img src={sidebar_how} />
           사용 설명서
-        </S.SideButton>
+        </S.SideButton1>
       </S.SideButtons>
       <S.RightLowButton
         onClick={toglleUser}

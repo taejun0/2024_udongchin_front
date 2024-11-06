@@ -13,6 +13,14 @@ export const Section1 = styled.div`
   gap: 8px;
 `;
 
+export const Section2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const Line = styled.div`
   width: 100%;
   height: 1px;
@@ -135,7 +143,7 @@ export const NextButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 360px;
+  width: 90%;
   height: 40px;
   border-radius: 5px;
   position: absolute;
