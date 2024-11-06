@@ -31,7 +31,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
         zoom: 15,
       });
       setMap(mapInstance);
-      console.log("Map instance created.");
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -55,7 +54,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
                   const addressParts = fullAddress.split(" ");
                   const dongAddress = addressParts.slice(0, 3).join(" ");
                   setCurrentAddress(dongAddress);
-                  console.log("Current address set:", dongAddress);
                 } else {
                   console.error("Reverse geocoding failed:", status);
                 }
@@ -79,7 +77,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
                 anchor: new naver.maps.Point(28, 28),
               },
             });
-            console.log("Current location marker created.");
 
             // 원 생성 후 ref로 저장
             const userCircle = new naver.maps.Circle({
@@ -93,11 +90,9 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
               fillOpacity: 0.1,
             });
             circleRef.current = userCircle; // circle 객체를 useRef에 저장
-            console.log("Circle created at:", coord);
 
             const updateAddressByCenter = () => {
               const center = mapInstance.getCenter();
-              console.log("Updating address for center:", center);
               naver.maps.Service.reverseGeocode(
                 { coords: center, orders: ["addr"] },
                 (status, response) => {
@@ -109,7 +104,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
                     setAddress(dongAddress);
 
                     setNowImage(dongAddress === currentAddress ? nowimageChanged : nowimageDefault);
-                    console.log("Address updated to:", dongAddress);
                   } else {
                     console.error("Reverse geocoding failed:", status);
                   }
@@ -131,7 +125,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             const syncCircleWithMarker = () => {
               if (circleRef.current) {
                 circleRef.current.setCenter(currentMarker.getPosition());
-                console.log("Circle position synchronized with marker.");
               }
             };
             naver.maps.Event.addListener(mapInstance, "zoom_changed", syncCircleWithMarker);
@@ -175,7 +168,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
 
                 naver.maps.Event.addListener(marker, "click", () => {
                   setSelectedLocation(location);
-                  console.log("Marker clicked for location:", location);
                 });
               });
             }
@@ -215,7 +207,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
           // 사용자의 새로운 위치로 원(center)을 업데이트
           if (circleRef.current) {
             circleRef.current.setCenter(coord);
-            console.log("Circle position updated to:", coord);
           }
         },
         (error) => {
