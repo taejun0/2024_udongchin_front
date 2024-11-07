@@ -63,21 +63,21 @@ export const UserInfo = styled.div`
 `;
 
 export const UserName = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.black};
 
   font-size: 10px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export const UserCreated = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
 
   font-size: 8px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const RowBetween = styled.div`
@@ -102,11 +102,11 @@ export const HeartRaTe = styled.div`
 `;
 
 export const HeartCount = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 8px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const LinePad = styled.div`
@@ -136,11 +136,11 @@ export const ToggleOption = styled.div`
   text-align: center;
 
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.white};
   font-size: 8px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
 `;
 
 export const LINE = styled.div`
@@ -157,11 +157,11 @@ export const TextInput = styled.textarea`
   background-color: ${({theme}) => theme.colors.gray};
   outline: none;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 
   resize: none;
 `;
@@ -188,45 +188,45 @@ export const TextType = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export const InfoTitle = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 16px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export const InfoContent = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 12px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 
 export const SubTextType = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 
 export const SubText = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 8px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
 `;
 
 export const ModalContent2 = styled.div`
@@ -245,21 +245,21 @@ export const TextType2 = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export const SubText2 = styled.div`
   display: flex;
   justify-content: center;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 8px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const Row = styled.div`
@@ -280,28 +280,28 @@ export const Button = styled.div`
   border-radius: 36px;
   background: ${(props) => props.color || "#ddd"};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.white};
   font-size: 10px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
   line-height: normal;
 `;
 
 export const CommentText = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const CommentText2 = styled.div`
   cursor: pointer;
   
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.separate};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;

@@ -24,39 +24,78 @@ i {font-style:normal}
 	min-height: 100vh;
 }
 
-//나눔 스퀘어 라운드 폰트 설정
-@font-face {
-    font-family: "NanumSquareRoundB";
-    src: url("/fonts/NanumSquareRoundB.ttf") format("truetype");
-}
-@font-face {
-    font-family: "NanumSquareRoundEB";
-    src: url("/fonts/NanumSquareRoundEB.ttf") format("truetype");
-}
-@font-face {
-    font-family: "NanumSquareRoundR";
-    src: url("/fonts/NanumSquareRoundR.ttf") format("truetype");
-}
-@font-face {
-    font-family: "NanumSquareRoundL";
-    src: url("/fonts/NanumSquareRoundL.ttf") format("truetype");
-}
-@font-face {
-    font-family: "NanumSquareRoundOTFB";
-    src: url("/fonts/NanumSquareRoundOTFB.otf") format("opentype");
-}
+// 나눔 스퀘어 라운드 폰트 설정
 @font-face {
     font-family: "NanumSquareRoundOTFEB";
     src: url("/fonts/NanumSquareRoundOTFEB.otf") format("opentype");
 }
+
+// 프리텐다드 폰트 설정
+
 @font-face {
-    font-family: "NanumSquareRoundOTFL";
-    src: url("/fonts/NanumSquareRoundOTFL.otf") format("opentype");
+    font-family: "Pretendard-Black";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-Black.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-Black.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
 }
 @font-face {
-    font-family: "NanumSquareRoundOTFR";
-    src: url("/fonts/NanumSquareRoundOTFR.otf") format("opentype");
+    font-family: "Pretendard-Bold";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-Bold.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
 }
+@font-face {
+    font-family: "Pretendard-ExtraBold";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-ExtraBold.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-ExtraBold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-ExtraLight";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-ExtraLight.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-ExtraLight.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Light";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-Light.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Medium";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-Medium.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Regular";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-Regular.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-SemiBold";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-SemiBold.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-SemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Pretendard-Thin";
+    src: url("/images/fonts/pretendardwoff2/Pretendard-Thin.woff2") format("woff2"),
+         url("/images/fonts/pretendardwoff/Pretendard-Thin.woff") format("woff");
+    font-weight: 100;
+    font-style: normal;
+}
+
 
 // 초기 html 설정
 html {
@@ -79,7 +118,7 @@ body {
 	overflow-x: hidden;
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.default};
-	font-family: "NanumSquareRoundB", "NanumSquareRoundEB", "NanumSquareRoundR", "NanumSquareRoundL", "NanumSquareRoundOTFB", "NanumSquareRoundOTFEB", "NanumSquareRoundOTFL", "NanumSquareRoundOTFR", "sans-serif";
+	font-family: "Pretendard-Regular", "NanumSquareRoundOTFEB", "sans-serif";
 }
 
 `;

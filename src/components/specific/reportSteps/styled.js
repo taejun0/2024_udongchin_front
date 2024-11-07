@@ -39,10 +39,10 @@ export const RadioLabel = styled.label`
   cursor: pointer;
   color: ${({ theme }) => (theme.colors.black)};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
   font-size: 12px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 export const RadioInput = styled.input`
@@ -79,6 +79,10 @@ export const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
   font-size: 14px;
+
+  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
+  font-size: 12px;
+  font-weight: 500;
 `;
 
 export const CheckboxInput = styled.input`
@@ -112,11 +116,11 @@ export const Textarea = styled.textarea`
   background-color: ${({theme}) => theme.colors.gray};
   outline: none;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 
   resize: none;
 `;
@@ -130,11 +134,11 @@ export const Textarea280 = styled.textarea`
   outline: none;
   min-height: 280px;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 
   resize: none;
 `;
@@ -149,6 +153,7 @@ export const NextButton = styled.button`
   position: absolute;
   bottom: 30px;
 
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   background-color: ${({theme}) => theme.colors.darkyellow};
   color: ${({theme}) => theme.colors.white};
   font-size: 14px;
@@ -172,22 +177,10 @@ export const ProgressBar = styled.div`
   transition: width 0.3s ease;
 `;
 
-
-
-
-export const MainText1 = styled.div`
-  color: ${({theme}) => theme.colors.black};
-
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 700;
-`;
-
 export const MainText2 = styled.div`
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -195,13 +188,4 @@ export const MainText2 = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-`;
-
-export const SubText1 = styled.div`
-  color: ${({theme}) => theme.colors.darkgray};
-
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 700;
 `;

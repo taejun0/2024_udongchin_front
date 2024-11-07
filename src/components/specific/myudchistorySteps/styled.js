@@ -4,19 +4,19 @@ import styled from "styled-components";
 export const Title = styled.div`
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   font-size: 16px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 export const SubText = styled.div`
   color: ${({theme}) => theme.colors.darkgray};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 
   margin-bottom: 14px;
 `;
@@ -50,10 +50,10 @@ export const ImageSet = styled.div`
 
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 14px;
 `;
 
