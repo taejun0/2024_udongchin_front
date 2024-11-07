@@ -38,11 +38,11 @@ export const Notice = styled.div`
   position: absolute;
   top: 10px;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 export const Location = styled.div`
@@ -55,16 +55,16 @@ export const Location = styled.div`
   background: ${({theme}) => theme.colors.white};
   box-shadow: 0px 0px 3.2px 0px rgba(0, 0, 0, 0.25);
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 export const FixButton = styled.button`
   display: flex;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;

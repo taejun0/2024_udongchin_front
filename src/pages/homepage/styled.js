@@ -43,11 +43,11 @@ export const ExpandableButton = styled(Button)`
   justify-content: center;
   text-align: center;
   width: 60px;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardR["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const SideButtons = styled.div`
@@ -76,11 +76,11 @@ export const SideButton = styled.div`
     transform: scale(1.3); // 클릭 시 살짝 확대
   }
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const SideButton1 = styled.div`
@@ -104,11 +104,11 @@ export const SideButton1 = styled.div`
           transform: translateY(0px);
         `};
 
-  font-family: ${({ theme }) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({ theme }) => theme.fonts.PretendardL["font-family"]};
   color: ${({ theme }) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const SideButton2 = styled.div`
@@ -133,11 +133,11 @@ export const SideButton2 = styled.div`
           transform: translateY(0px);
         `};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const RightLowButton = styled.button`

@@ -27,16 +27,20 @@ export const theme = {
   },
 
   fonts: {
-    default: fontGenerator("NanumSquareRoundOTFR", "1rem", "400", "1.5", "normal"),
+    default: fontGenerator("PretendardR", "1rem", "400", "1.5", "normal"),
 
     // NanumSaureRound 폰트 설정
-    NanumSquareRoundB: fontGenerator("NanumSquareRoundB"),
-    NanumSquareRoundEB: fontGenerator("NanumSquareRoundEB"),
-    NanumSquareRoundL: fontGenerator("NanumSquareRoundL"),
-    NanumSquareRoundR: fontGenerator("NanumSquareRoundR"),
-    NanumSquareRoundOTFB: fontGenerator("NanumSquareRoundOTFB"),
     NanumSquareRoundOTFEB: fontGenerator("NanumSquareRoundOTFEB"),
-    NanumSquareRoundOTFL: fontGenerator("NanumSquareRoundOTFL"),
-    NanumSquareRoundOTFR: fontGenerator("NanumSquareRoundOTFR"),
+
+    // Pretendard 폰트 설정
+    PretendardT: fontGenerator("Pretendard-Thin"),
+    PretendardEL: fontGenerator("Pretendard-ExtraLight"),
+    PretendardL: fontGenerator("Pretendard-Light"),
+    PretendardR: fontGenerator("Pretendard-Regular"),
+    PretendardM: fontGenerator("Pretendard-Medium"),
+    PretendardSB: fontGenerator("Pretendard-SemiBold"),
+    PretendardB: fontGenerator("Pretendard-Bold"),
+    PretendardEB: fontGenerator("Pretendard-ExtraBold"),
+    PretendardBlack: fontGenerator("Pretendard-Black"),
   },
 };

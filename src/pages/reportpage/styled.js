@@ -11,10 +11,10 @@ export const MiniHeader = styled.div`
 
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const Section1 = styled.div`
@@ -27,16 +27,16 @@ export const Section1 = styled.div`
 export const MainText1 = styled.div`
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 export const SubText1 = styled.div`
   color: ${({theme}) => theme.colors.darkgray};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   font-size: 10px;
   font-style: normal;
   font-weight: 700;

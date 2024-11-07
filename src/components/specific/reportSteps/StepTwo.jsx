@@ -22,7 +22,7 @@ export const StepTwo = ({ onNext, updateData }) => {
   return (
     <S.Wrapper>
       <S.Section1>
-        <S.MainText2>2. 목격장소</S.MainText2>
+        <S.MainText2>2. 목격한 장소를 입력해 주세요</S.MainText2>
         <S.ProgressBarWrapper>
           <S.ProgressBar progress={50} />
         </S.ProgressBarWrapper>

@@ -22,7 +22,7 @@ export const StepOne = ({ onNext, updateData }) => {
   return (
     <S.Wrapper>
       <S.Section1>
-        <S.MainText2>1. 목격사진</S.MainText2>
+        <S.MainText2>1. 목격한 동물의 사진을 업로드해 주세요</S.MainText2>
         <S.ProgressBarWrapper>
           <S.ProgressBar progress={25} />
         </S.ProgressBarWrapper>

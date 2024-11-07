@@ -71,7 +71,7 @@ export const Box = styled.div`
   align-items: center;
 
   color: #000;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
