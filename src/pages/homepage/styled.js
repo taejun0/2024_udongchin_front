@@ -141,9 +141,20 @@ export const SideButton2 = styled.div`
 `;
 
 export const RightLowButton = styled.button`
-  cursor: pointer;
 
   position: absolute;
   right: 30px;
   bottom: 40px;
+
+  transition: transform 0.4s ease;
+
+  &:active {
+    transform: scale(1.3); // 클릭 시 살짝 확대
+  }
+
+cursor: pointer;
+`;
+
+export const ImageRightLow = styled.img`
+  width: 44px;
 `;

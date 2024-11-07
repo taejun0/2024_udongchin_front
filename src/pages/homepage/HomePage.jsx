@@ -14,6 +14,7 @@ import sidebar_my from "/images/sidebar_my.svg";
 import sidebar_mymy from "/images/sidebar_mymy.svg";
 import sidebar_his from "/images/sidebar_his.svg";
 import RightLowHome from "/images/RightLowHome.svg";
+import RightLowHome_ch from "/images/RightLowHome_ch.svg";
 
 export const HomePage = () => {
   const {locations, loading, error} = useNavermaps();
@@ -86,7 +87,11 @@ export const HomePage = () => {
 
       <S.SideButtons>
         <S.SideButton
-          onClick={() => setExpand2(!isExpand2)}
+          onClick={() => {
+            setExpand2(!isExpand2);
+            handleselectMY(selectmy);
+          }
+          }
         >
           <img src={selectmy === "my" ? sidebar_my : sidebar_mymy} />
           내 우동친
@@ -113,7 +118,7 @@ export const HomePage = () => {
       <S.RightLowButton
         onClick={toglleUser}
       >
-        <img src={followUser === false ? RightLowHome : sidebar_his} />
+        <S.ImageRightLow src={followUser === false ? RightLowHome : RightLowHome_ch}/>
       </S.RightLowButton>
 
       {/* 모달 열림 상태에 따라 표시 */}

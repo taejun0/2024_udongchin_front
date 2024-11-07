@@ -9,6 +9,16 @@ const circleExpand = keyframes`
   }
 `;
 
+const circleDeExpand = keyframes`
+  from {
+    clip-path: circle(150% at 0 0);
+  }
+  to {
+    clip-path: circle(0% at 0 0);
+  }
+`;
+
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
