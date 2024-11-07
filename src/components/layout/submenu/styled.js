@@ -59,8 +59,8 @@ export const LeftImage = styled.img`
 export const RightImage = styled.img`
   position: absolute;
   cursor: pointer;
-  right: 16px;
-  width: 16px;
+  right: 12px;
+  width: 12px;
   height: 16px;
 `;
 
