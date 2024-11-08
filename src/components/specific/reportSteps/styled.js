@@ -39,10 +39,10 @@ export const RadioLabel = styled.label`
   cursor: pointer;
   color: ${({ theme }) => (theme.colors.black)};
 
-  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
   font-size: 12px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 export const RadioInput = styled.input`
@@ -80,9 +80,9 @@ export const CheckboxLabel = styled.label`
   align-items: center;
   font-size: 14px;
 
-  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 export const CheckboxInput = styled.input`
@@ -116,11 +116,11 @@ export const Textarea = styled.textarea`
   background-color: ${({theme}) => theme.colors.gray};
   outline: none;
 
-  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
 
   resize: none;
 `;
@@ -134,11 +134,11 @@ export const Textarea280 = styled.textarea`
   outline: none;
   min-height: 280px;
 
-  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
 
   resize: none;
 `;
@@ -153,12 +153,12 @@ export const NextButton = styled.button`
   position: absolute;
   bottom: 30px;
 
-  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   background-color: ${({theme}) => theme.colors.darkyellow};
   color: ${({theme}) => theme.colors.white};
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
 `;
 
 export const ProgressBarWrapper = styled.div`
@@ -180,10 +180,10 @@ export const ProgressBar = styled.div`
 export const MainText2 = styled.div`
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
 
   display: flex;
   flex-direction: column;
