@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import * as S from "./styled";
 
 export const StepThree = ({ onNext, updateData }) => {
-  const [estimatedAnimal, setEstimatedAnimal] = useState("");
+  const [animal_type, setAnimal_type] = useState("");
   const [selectedOption, setSelectedOption] = useState("think");
 
   const handleNext = () => {
-    updateData("animalInfo", { estimatedAnimal });
+    updateData("animal_type", { animal_type });
     onNext();
   };
 
@@ -39,8 +39,8 @@ export const StepThree = ({ onNext, updateData }) => {
         </S.Radios>
         {selectedOption === "think" && (
           <S.Textarea
-            value={estimatedAnimal}
-            onChange={(e) => setEstimatedAnimal(e.target.value)}
+            value={animal_type}
+            onChange={(e) => setAnimal_type(e.target.value)}
             placeholder="추정되는 동물을 적어주세요. (공백 포함 20글자 이내)"
           />
         )}

@@ -11,6 +11,7 @@ export const mockLocations = [
     lng: 126.9780,
     likesCount: 45,
     createdAt: "2024-10-29T12:34:56",
+    urgent: false,
   },
   {
     id: 2,
@@ -47,5 +48,19 @@ export const mockLocations = [
     lng: 126.9900,
     likesCount: 30,
     createdAt: "2024-10-30T15:00:00",
+    urgent: false,
+  },
+  {
+    id: 5,
+    nickname: "긴급",
+    title: "긴급급",
+    content: "아주 긴급급",
+    type: "Q&A",
+    imageUrl: "/images/currentLocationImage.svg",
+    lat: 37.5600,
+    lng: 126.9911,
+    likesCount: 34,
+    createdAt: "2024-10-30T15:00:00",
+    urgent: true,
   },
 ];

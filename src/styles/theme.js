@@ -23,19 +23,21 @@ export const theme = {
     lightyellow: "#FFFFE5",
     darkyellow: "#5B3200",
     headerColor: "#43CD5E",
+    lightgray: "#EFEFEF",
   },
 
   fonts: {
-    default: fontGenerator("NanumSquareRoundOTFR", "1rem", "400", "1.5", "normal"),
+    default: fontGenerator("NanumSquareRoundR", "1rem", "400", "1.5", "normal"),
 
     // NanumSaureRound 폰트 설정
+    NanumSquareRoundR: fontGenerator("NanumSquareRoundR"),
+    NanumSquareRoundL: fontGenerator("NanumSquareRoundL"),
     NanumSquareRoundB: fontGenerator("NanumSquareRoundB"),
     NanumSquareRoundEB: fontGenerator("NanumSquareRoundEB"),
-    NanumSquareRoundL: fontGenerator("NanumSquareRoundL"),
-    NanumSquareRoundR: fontGenerator("NanumSquareRoundR"),
+    NanumSquareRoundOTFR: fontGenerator("NanumSquareRoundOTFR"),
+    NanumSquareRoundOTFL: fontGenerator("NanumSquareRoundOTFL"),
     NanumSquareRoundOTFB: fontGenerator("NanumSquareRoundOTFB"),
     NanumSquareRoundOTFEB: fontGenerator("NanumSquareRoundOTFEB"),
-    NanumSquareRoundOTFL: fontGenerator("NanumSquareRoundOTFL"),
-    NanumSquareRoundOTFR: fontGenerator("NanumSquareRoundOTFR"),
+
   },
 };

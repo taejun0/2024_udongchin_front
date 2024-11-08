@@ -13,6 +13,14 @@ export const Section1 = styled.div`
   gap: 8px;
 `;
 
+export const Section2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const Line = styled.div`
   width: 100%;
   height: 1px;
@@ -71,6 +79,10 @@ export const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
   font-size: 14px;
+
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-size: 12px;
+  font-weight: 700;
 `;
 
 export const CheckboxInput = styled.input`
@@ -104,7 +116,7 @@ export const Textarea = styled.textarea`
   background-color: ${({theme}) => theme.colors.gray};
   outline: none;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
@@ -122,7 +134,7 @@ export const Textarea280 = styled.textarea`
   outline: none;
   min-height: 280px;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
@@ -135,17 +147,18 @@ export const NextButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 360px;
+  width: 90%;
   height: 40px;
   border-radius: 5px;
   position: absolute;
   bottom: 30px;
 
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   background-color: ${({theme}) => theme.colors.darkyellow};
   color: ${({theme}) => theme.colors.white};
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
 `;
 
 export const ProgressBarWrapper = styled.div`
@@ -164,36 +177,15 @@ export const ProgressBar = styled.div`
   transition: width 0.3s ease;
 `;
 
-
-
-
-export const MainText1 = styled.div`
-  color: ${({theme}) => theme.colors.black};
-
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 700;
-`;
-
 export const MainText2 = styled.div`
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   font-size: 14px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
 
   display: flex;
   flex-direction: column;
   gap: 4px;
-`;
-
-export const SubText1 = styled.div`
-  color: ${({theme}) => theme.colors.darkgray};
-
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 700;
 `;

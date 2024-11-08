@@ -22,9 +22,9 @@ export const ModalContent = styled.div`
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
   width: 80%;
   
+  box-shadow : ${({ $Urgent }) => $Urgent ? "0px 0px 15px 5px #FFA9AB" : "none"};
 `;
 
 export const ModalSection = styled.div`
@@ -63,22 +63,20 @@ export const UserInfo = styled.div`
 `;
 
 export const UserName = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  color: ${({theme}) => theme.colors.black};
-
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 800;
-`;
+   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+   color: ${({theme}) => theme.colors.black};
+   font-size: 10px;
+   font-style: normal;
+   font-weight: 800;
+ `;
 
 export const UserCreated = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  color: ${({theme}) => theme.colors.darkgray};
-
-  font-size: 8px;
-  font-style: normal;
-  font-weight: 700;
-`;
+   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+   color: ${({theme}) => theme.colors.darkgray};
+   font-size: 8px;
+   font-style: normal;
+   font-weight: 700;
+ `;
 
 export const RowBetween = styled.div`
   display: flex;
@@ -102,12 +100,12 @@ export const HeartRaTe = styled.div`
 `;
 
 export const HeartCount = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  color: ${({theme}) => theme.colors.black};
-  font-size: 8px;
-  font-style: normal;
-  font-weight: 700;
-`;
+   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+   color: ${({theme}) => theme.colors.black};
+   font-size: 8px;
+   font-style: normal;
+   font-weight: 700;
+ `;
 
 export const LinePad = styled.div`
   display: flex;
@@ -136,7 +134,7 @@ export const ToggleOption = styled.div`
   text-align: center;
 
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.white};
   font-size: 8px;
   font-style: normal;
@@ -157,7 +155,7 @@ export const TextInput = styled.textarea`
   background-color: ${({theme}) => theme.colors.gray};
   outline: none;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 10px;
   font-style: normal;
@@ -195,7 +193,7 @@ export const TextType = styled.div`
 `;
 
 export const InfoTitle = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 16px;
   font-style: normal;
@@ -212,7 +210,7 @@ export const InfoContent = styled.div`
 
 
 export const SubTextType = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 10px;
   font-style: normal;
@@ -221,7 +219,7 @@ export const SubTextType = styled.div`
 
 
 export const SubText = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 8px;
   font-style: normal;
@@ -235,9 +233,7 @@ export const ModalContent2 = styled.div`
   background: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px;
   width: 80%;
-  
 `;
 
 
@@ -246,7 +242,7 @@ export const TextType2 = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;

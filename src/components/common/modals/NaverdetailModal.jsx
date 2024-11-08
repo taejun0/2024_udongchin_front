@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import X from "/images/Vector.svg";
 import Warning from "/images/warning.svg";
+import Warning_now from "/images/warning_now.svg";
 import Heart from "/images/Heart.svg";
 import FilledHeart from "/images/FilledHeart.svg";
 import rightArrow from "/images/rightArrow.svg";
@@ -24,8 +25,8 @@ export const NaverDetailModal = ({ location, onClose }) => {
   };
 
   return (
-    <S.ModalOverlay>
-      <S.ModalContent>
+    <S.ModalOverlay >
+      <S.ModalContent $Urgent = {location.urgent}>
         <S.InformationHeader>
           <S.User>
             <img src={location.imageUrl} style={{width: "34px", height: "34px", borderRadius: "50%"}} />
@@ -35,7 +36,7 @@ export const NaverDetailModal = ({ location, onClose }) => {
             </S.UserInfo>
           </S.User>
           <S.Buttons>
-            {location.type === "Q&A" ? <button onClick={() => setModalOpen(true)}><img src={Warning} style={{width: "14px", height: "14px", cursor: "pointer"}} /></button> : null}
+          {location.type === "Q&A" ? (location.urgent === false ? (<button onClick={() => setModalOpen(true)}><img src={Warning} style={{ width: "14px", height: "14px", cursor: "pointer" }} /></button>) : (<img src={Warning_now} style={{ width: "50px"}}/>)) : null}
             <button onClick={onClose}><img src={X} style={{width: "12px", height: "12px", cursor: "pointer", transform:"translateY(3px)"}} /></button>
           </S.Buttons>
         </S.InformationHeader>
@@ -45,7 +46,7 @@ export const NaverDetailModal = ({ location, onClose }) => {
             <S.InfoTitle>{location.title}</S.InfoTitle>
             <S.HeartRaTe>
               <img
-                src={isLiked ? Warning : Heart}
+                src={isLiked ? FilledHeart : Heart}
                 onClick={toggleLike}
                 style={{width: "16px", height: "16px", cursor: "pointer"}} />
               <S.HeartCount>{location.likesCount}개</S.HeartCount>

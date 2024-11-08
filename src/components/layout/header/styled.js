@@ -35,10 +35,16 @@ export const Image = styled.img`
 export const Text = styled.div`
   position: absolute;
   right: 16px;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   color: ${({theme}) => theme.colors.white};
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+`;
+
+export const MainWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
 `;

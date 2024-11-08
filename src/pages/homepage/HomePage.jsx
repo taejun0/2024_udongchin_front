@@ -11,12 +11,27 @@ import adding_dots from "/images/adding_dots.svg";
 import adding_chat from "/images/adding_chat.svg";
 import sidebar_how from "/images/sidebar_how.svg";
 import sidebar_my from "/images/sidebar_my.svg";
+import sidebar_mymy from "/images/sidebar_mymy.svg";
+import sidebar_his from "/images/sidebar_his.svg";
+import RightLowHome from "/images/RightLowHome.svg";
+import RightLowHome_ch from "/images/RightLowHome_ch.svg";
 
 export const HomePage = () => {
-  const { locations, loading, error } = useNavermaps();
+  const {locations, loading, error} = useNavermaps();
   const [QnaModalOpen, setQnaModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isExpand, setExpand] = useState(false);
+  const [isExpand2, setExpand2] = useState(false);
+  const [selectmy, setSelectmy] = useState("my");
+  const [followUser, setFollowUser] = useState(false);
+
+  const toglleUser = () => {
+    setFollowUser((prev) => !prev);
+  }
+
+  const handleselectMY = () => {
+    setSelectmy((prev) => (prev=== "my" ? "mymy" : "my"));
+  };
 
   const navigate = useNavigate();
 
@@ -25,7 +40,11 @@ export const HomePage = () => {
 
   return (
     <div>
-      <Navermap locations={mockLocations} />
+      <Navermap 
+        locations={mockLocations}
+        followUser={followUser}
+        setFollowUser={setFollowUser}
+      />
       <S.Buttons>
         <S.Button
           $isExpand = {isExpand}
@@ -35,7 +54,6 @@ export const HomePage = () => {
           <img src={adding_dots} style={{width: "44px", height:"44px"}}/>
         </S.Button>
 
-        {/* 기록 추가 버튼 */}
         <S.ExpandableButton 
           $isExpand = {isExpand}
           $delay = {0.1}
@@ -48,7 +66,6 @@ export const HomePage = () => {
           실시간 작성
         </S.ExpandableButton>
 
-        {/* QNA 추가 버튼 */}
         <S.ExpandableButton
           $isExpand = {isExpand}
           $delay = {0.2}
@@ -61,6 +78,7 @@ export const HomePage = () => {
         <S.ExpandableButton
           $isExpand = {isExpand}
           $delay = {0.3}
+          onClick={() => navigate("/community")}
         >
           <img src={adding_chat} />
           커뮤니티
@@ -68,16 +86,40 @@ export const HomePage = () => {
       </S.Buttons>
 
       <S.SideButtons>
-        <S.SideButton>
-          <img src={sidebar_how} />
+        <S.SideButton
+          onClick={() => {
+            setExpand2(!isExpand2);
+            handleselectMY(selectmy);
+          }
+          }
+        >
+          <img src={selectmy === "my" ? sidebar_my : sidebar_mymy} />
           내 우동친
         </S.SideButton>
+
+        <S.SideButton2
+          onClick={() => navigate("myudchistory")}
+          $isExpand2 = {isExpand2}
+          $delay = {0.2}
+        >
+          <img src={sidebar_his} />
+          내 우동친 기록
+        </S.SideButton2>
         
-        <S.SideButton>
-          <img src={sidebar_my} />
+        <S.SideButton1
+          onClick={() => navigate("udcmanual")}
+          $isExpand2 = {isExpand2}
+          $delay = {0.2}
+        >
+          <img src={sidebar_how} />
           사용 설명서
-        </S.SideButton>
+        </S.SideButton1>
       </S.SideButtons>
+      <S.RightLowButton
+        onClick={toglleUser}
+      >
+        <S.ImageRightLow src={followUser === false ? RightLowHome : RightLowHome_ch}/>
+      </S.RightLowButton>
 
       {/* 모달 열림 상태에 따라 표시 */}
       {QnaModalOpen && (

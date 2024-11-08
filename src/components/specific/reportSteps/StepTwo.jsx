@@ -5,12 +5,12 @@ import { MapSelector } from "../maps/MapSelector";
 export const StepTwo = ({ onNext, updateData }) => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [description, setDescription] = useState("");
+  const [location_description, setLocationDescription] = useState("");
   const [showMapSelector, setShowMapSelector] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
 
   const handleNext = () => {
-    updateData("location", { lat: latitude, lng: longitude, description });
+    updateData("location", { latitude: latitude, longitude: longitude, location_description });
     onNext();
   };
 
@@ -22,7 +22,7 @@ export const StepTwo = ({ onNext, updateData }) => {
   return (
     <S.Wrapper>
       <S.Section1>
-        <S.MainText2>2. 목격장소</S.MainText2>
+        <S.MainText2>2. 목격한 장소를 입력해 주세요</S.MainText2>
         <S.ProgressBarWrapper>
           <S.ProgressBar progress={50} />
         </S.ProgressBarWrapper>
@@ -48,8 +48,8 @@ export const StepTwo = ({ onNext, updateData }) => {
         {showMapSelector && <MapSelector onConfirm={handleLocationConfirm} />}
         {showDescription && (
           <S.Textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={location_description}
+            onChange={(e) => setLocationDescription(e.target.value)}
             placeholder="목격 장소를 묘사해주세요."
           />
         )}

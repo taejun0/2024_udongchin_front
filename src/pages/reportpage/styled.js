@@ -11,7 +11,7 @@ export const MiniHeader = styled.div`
 
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -25,9 +25,11 @@ export const Section1 = styled.div`
 `;
 
 export const MainText1 = styled.div`
+  display: flex;
+  gap: 5px;
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
@@ -36,7 +38,7 @@ export const MainText1 = styled.div`
 export const SubText1 = styled.div`
   color: ${({theme}) => theme.colors.darkgray};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   font-size: 10px;
   font-style: normal;
   font-weight: 700;

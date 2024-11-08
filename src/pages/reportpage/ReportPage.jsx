@@ -35,11 +35,11 @@ export const ReportPage = () => {
           <img src={backward} onClick={handlePrevStep} style={{ cursor: "pointer" }} />
         )}
         우리 동네 친구들 제보
-        <img src={X} onClick={() => navigate(-1)} style={{cursor: "pointer"}}/>
+        <img src={X} onClick={() => navigate(-1)} style={{width: "12px", height: "12px", cursor: "pointer"}}/>
       </S.MiniHeader>
       <S.Section1>
         {address ? (
-          <S.MainText1><img src={nowlocation} /> {address}</S.MainText1>
+          <S.MainText1><img src={nowlocation} style={{width: "9px"}}/> {address}</S.MainText1>
         ): (
           <>안뜸</>
         )}

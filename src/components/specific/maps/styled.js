@@ -4,7 +4,7 @@ export const MapSize = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 44px);
 `;
 
 export const Nowlocation = styled.div`
@@ -19,7 +19,7 @@ export const Address = styled.div`
   text-align: center;
   align-items: center;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFEB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 18px;
   font-style: normal;
@@ -64,11 +64,15 @@ export const Location = styled.div`
 
 export const FixButton = styled.button`
   display: flex;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;
   font-weight: 800;
 
   cursor: pointer;
+`;
+
+export const Image = styled.img`
+  height: 16px;
 `;
