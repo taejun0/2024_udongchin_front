@@ -6,7 +6,7 @@ import CommentList from "../../components/common/list/CommentList";
 import TextInput from "../../components/common/inputs/TextInput";
 import Button from "../../components/common/buttons/MoveButton";
 import ReportModal from "../../components/common/modals/ReportModal";
-import Header from "../../components/layout/header/Header";
+import backward from "/images/Backward.svg"
 
 function PostViewPage(props) {
     const navigate = useNavigate();
@@ -41,14 +41,18 @@ function PostViewPage(props) {
 
     return (
         <Container>
-            {/* Header Section */}
-            <Header/>
+            <Header>
+                <BackButton onClick={() => navigate(-1)}>
+                    <img src={backward} style={{ cursor: "pointer"}}/>
+                </BackButton>
+                <Title>우동친</Title>
+            </Header>
             <Nav>
-                <BackButton onClick={() => navigate("/postview")}>자유게시판</BackButton>
+                <BoardButton onClick={() => navigate("/postview")}>자유게시판</BoardButton>
             </Nav>
             <Main>
                 <TitleText>
-                    <Title>제목</Title>
+                    <TextTitle>제목</TextTitle>
                     <SubTitle>
                         <DateText>2024-10-25</DateText>
                         <ButtonGroup>
@@ -89,12 +93,35 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     width: 100%;
-    max-width: 400px;
     margin: 0 auto;
     font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     background-color: #fff;
+`;
+
+const Header = styled.header`
+    width: 100%;
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4caf50;
+    color: #fff;
+`;
+
+const Title = styled.h1`
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 26px;
+`;
+
+const BackButton = styled.button`
+    font-size: 18px;
+    background: none;
+    border: none;
+    margin-left: 20px;
+    cursor: pointer;
+    color: #000000;
 `;
 
 
@@ -106,7 +133,7 @@ const Nav = styled.div`
     margin-top:10px;
 `;
 
-const BackButton = styled.button`
+const BoardButton = styled.button`
     font-size: 14px;
     font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     background: none;
@@ -130,7 +157,7 @@ const TitleText = styled.div`
     margin-bottom: 16px;
 `;
 
-const Title = styled.h1`
+const TextTitle = styled.h1`
     font-size: 18px;
     font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     font-size: 18px;

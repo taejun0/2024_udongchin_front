@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TextInput from "../../components/common/inputs/TextInput";
+import X from "/images/Vector.svg";
 import Button from "../../components/common/buttons/PostButton";
 import ImageUploaderWithCrop from "@components/specific/imageuploader/ImageUploader";
 
 
 const Wrapper = styled.div`
-    width: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +23,7 @@ const Container = styled.div`
 
 const Header = styled.div`
     display: flex;
-    width: 400px;
+    width: 100%;
     height: 44px;
     flex-shrink: 0;
     border-bottom: 1px solid var(--Yellow, #E3B05F);
@@ -72,6 +73,15 @@ const Heading = styled.h2`
     line-height: normal;
 `;
 
+
+const RightImage = styled.img`
+    position: absolute;
+    cursor: pointer;
+    right: 12px;
+    width: 12px;
+    height: 16px;
+`;
+
 function PostWritePage(props) {
     const navigate = useNavigate();
 
@@ -90,14 +100,21 @@ function PostWritePage(props) {
 
     return (
         <Wrapper>
-            <Header>글쓰기</Header>
+            <Header>
+                글쓰기
+                <RightImage
+                onClick={() => navigate(-1)} // 이전 화면으로 이동
+                src={X}
+                alt="Close"
+                />
+            </Header>
             <Container>
                 <Location>서울시 중구 신당동</Location>
                 <Title>
                     <Heading>제목</Heading>
                     <TextInput
                         height={38}
-                        placeholder="공백 포함 25글자 이내로 작성"
+                        placeholder="제목을 작성해주세요(공백 포함 30자 제한)"
                         value={title}
                         onChange={(event) => {
                             setTitle(event.target.value);

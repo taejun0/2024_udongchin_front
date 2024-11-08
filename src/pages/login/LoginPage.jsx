@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import * as S from "./styled";
 import { onSubmitHandler } from "../../services/login";
+import backward from "/images/Backward.svg"
 
 function LoginPage() {
   const [memberId, setMemberId] = useState("");
@@ -30,7 +31,9 @@ function LoginPage() {
   return (
     <S.Container>
       <S.Header>
-        <S.BackButton>←</S.BackButton>
+        <S.BackButton onClick={() => navigate(-1)}>
+                    <img src={backward} style={{ cursor: "pointer"}}/>
+        </S.BackButton>
         <S.Title>로그인</S.Title>
       </S.Header>
       <S.Main>
