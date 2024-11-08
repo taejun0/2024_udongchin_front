@@ -12,6 +12,6 @@ export const ROUTE_PATHS = {
   POST_WRITE: "/postwrite",
   POST_VIEW: "/postview",
   COMMUNITY: "/community",
-  FULLBOARD: "/fullboard",
+  PRBOARD: "/prboard",
   FREEBOARD:"/freeboard",
 };

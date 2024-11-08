@@ -4,14 +4,11 @@ import CommentListItem from "./CommentListItem";
 
 const Wrapper = styled.div`
     display: flex;
+    width: 100%;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    & > * {
-        :not(:last-child) {
-            margin-bottom: 16px;
-        }
-    }
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 14px;
 `;
 
 //commentList라는 이름의 함수 컴포넌트를 만들고 이 컴포넌트의 프롭스로는 comments라는 배열이 들어온다.

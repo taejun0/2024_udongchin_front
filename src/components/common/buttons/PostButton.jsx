@@ -5,7 +5,7 @@ const StyledButton = styled.button`
     padding: 8px 16px;
     font-size: 14px;
     border-width: 1px;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -16,11 +16,12 @@ const StyledButton = styled.button`
       `
       height: ${props.height}px;
     `}
-    background-color: ${(props) => props.backgroundColor || "transparent"};
+    background-color: ${(props) => props.$backgroundColor || "transparent"};
     color: ${(props) => props.color || "black"};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
 `;
 
-// PostButton 컴포넌트에서 backgroundColor와 color를 props로 받아
+// PostButton 컴포넌트에서 $backgroundColor와 color를 props로 받아
 // StyledButton의 스타일에 적용하도록 설정했습니다.
 function PostButton(props) {
   const { height, title, onClick, backgroundColor, color } = props;
@@ -29,7 +30,7 @@ function PostButton(props) {
     <StyledButton
       height={height}
       onClick={onClick}
-      backgroundColor={backgroundColor}
+      $backgroundColor={backgroundColor} 
       color={color}
     >
       {title || "button"}

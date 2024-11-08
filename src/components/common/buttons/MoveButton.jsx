@@ -7,6 +7,7 @@ const StyledButton = styled.button`
     border-width: 1px;
     border-radius: 8px;
     cursor: pointer;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
 `;
 
 function MoveButton(props) {

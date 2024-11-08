@@ -18,6 +18,7 @@ const StyledTextarea = styled.textarea`
         height: ${props.height}px;
     `}
     font-size: 12px;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     resize: none;
 `;
 
