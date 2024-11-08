@@ -39,7 +39,7 @@ export const ReportPage = () => {
       </S.MiniHeader>
       <S.Section1>
         {address ? (
-          <S.MainText1><img src={nowlocation} /> {address}</S.MainText1>
+          <S.MainText1><img src={nowlocation} style={{width: "9px"}}/> {address}</S.MainText1>
         ): (
           <>안뜸</>
         )}

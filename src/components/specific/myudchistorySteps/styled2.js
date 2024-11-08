@@ -12,10 +12,10 @@ export const Title = styled.div`
   align-items: center;
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.PretendardB["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
 `;
 
 export const CustomImage = styled.img`
@@ -50,10 +50,10 @@ export const CustomImage2 = styled.img`
 export const Text = styled.div`
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.PretendardM["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
   font-size: 12px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 export const LINE = styled.div`
@@ -76,10 +76,10 @@ export const FilterItem2 = styled.div`
 
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   font-size: 10px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
 `;
 
 export const CustomImage3 = styled.img`
@@ -92,10 +92,10 @@ export const Location = styled.div`
   gap: 3px;
   color: ${({theme}) => theme.colors.darkgray};
 
-  font-family: ${({theme}) => theme.fonts.PretendardL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   font-size: 10px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
 `;
 
 export const Images = styled.div`
