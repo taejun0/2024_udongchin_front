@@ -4,6 +4,7 @@ import * as S from './styled';
 import { useNavigate } from 'react-router-dom';
 import Button from "../../components/common/buttons/PostButton";
 import axios from 'axios';
+import backward from "/images/Backward.svg"
 
 const JoinPage = () => {
     const [nickname, setNickname] = useState('');
@@ -36,7 +37,9 @@ const JoinPage = () => {
     return (
         <S.SignupContainer>
             <S.Header>
-                <S.BackButton onClick={() => navigate(-1)}>←</S.BackButton>
+                <S.BackButton onClick={() => navigate(-1)}>
+                    <img src={backward} style={{ cursor: "pointer"}}/>
+                </S.BackButton>
                 <S.Title>회원가입</S.Title>
             </S.Header>
             <S.Main>
@@ -45,7 +48,7 @@ const JoinPage = () => {
                     <S.InputField
                         type="text"
                         id="nickname"
-                        placeholder="춤추는 개구리"
+                        placeholder="ex) 춤추는 개구리"
                         value={nickname}
                         onChange={(e) => setNickname(e.target.value)}
                     />

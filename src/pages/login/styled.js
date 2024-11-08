@@ -7,8 +7,8 @@
     flex-direction: column;
     align-items: center;
     height: 668px;
-    width: 400px;
-    font-family: sans-serif;
+    width: 100%;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     background-color: #fff;
     `;
 
@@ -32,6 +32,7 @@
     margin-left: auto;
     margin-right: auto;
     font-size: 14px;
+    font-style: normal;
     font-weight: 400;
     `;
 
@@ -40,7 +41,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 400px;
     padding: 48px;
     `;
 
@@ -54,7 +54,8 @@
     width: 100%;
     margin-bottom: 22px;
     font-size: 14px;
-    font-weight: bold;
+    font-style: normal;
+    font-weight: 400;
     color: #232323;
     `;
 
@@ -62,7 +63,10 @@
     width: 100%;
     padding: 8px;
     margin-top: 12px;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
     border-radius: 5px;
     border: none;
     background-color: #ececec;
@@ -74,9 +78,11 @@
     padding: 11px;
     margin-top: 30px;
     font-size: 14px;
-    font-weight: bold;
+    font-style: normal;
+    font-weight: 400;
     color: #fff;
     background-color: #5b3200;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -87,10 +93,12 @@
     padding: 11px;
     margin-top: 15px;
     font-size: 14px;
-    font-weight: bold;
+    font-style: normal;
+    font-weight: 400;
     color: #232323;
     background-color: #ffffe5;
     border: 1.5px solid #e3b05f;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     border-radius: 5px;
     cursor: pointer;
     `;
@@ -104,8 +112,8 @@ export const SignupContainer = styled.div`
     flex-direction: column;
     align-items: center;
     height: 668px;
-    width: 400px;
-    font-family: sans-serif;
+    width: 100%;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     background-color: #fff;
 `;
 
@@ -119,7 +127,10 @@ export const InputField = styled.input`
     padding: 8px;
     margin-top: 12px;
     font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
     border-radius: 5px;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     border: none;
     background-color: #ececec;
     outline: none;
@@ -147,7 +158,8 @@ export const SubmitButton = styled.button`
     padding: 11px;
     margin-top: 40px;
     font-size: 14px;
-    font-weight: bold;
+    font-style: normal;
+    font-weight: 700;
     color: #fff;
     background-color: #5b3200;
     border: none;

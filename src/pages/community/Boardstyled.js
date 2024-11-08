@@ -4,9 +4,8 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    width: 400px;
-    font-family: sans-serif;
+    width: 100%;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     background-color: #fff;
 `;
 
@@ -37,7 +36,6 @@ export const BackButton = styled.button`
 
 export const Subtitle = styled.h3`
     color: var(--black, #232323);
-    font-family: Pretendard;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -53,7 +51,6 @@ export const Location = styled.div`
 
 export const LocationText = styled.h3`
     color: var(--dark-gray, #575757);
-    font-family: Pretendard;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -71,8 +68,6 @@ export const Nav = styled.div`
 
 export const subNav = styled.div`
     color: var(--GRAY, #989898);
-    /* 10 light */
-    font-family: Pretendard;
     font-size: 10px;
     font-style: normal;
     font-weight: 500;

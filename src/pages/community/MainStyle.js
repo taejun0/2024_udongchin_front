@@ -5,8 +5,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    width: 400px;
+    width: 100%;
     font-family: sans-serif;
     background-color: #fff;
 `;
@@ -59,7 +58,6 @@ export const MainContent = styled.main`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 400px;
     font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
 `;
 
@@ -155,6 +153,7 @@ export const HelpText = styled.p`
     color: var(--black, #232323);
     font-size: 12px;
     font-style: normal;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     font-weight: 500;
     line-height: 18px; /* 150% */
 `;
