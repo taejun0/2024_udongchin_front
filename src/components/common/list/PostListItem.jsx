@@ -9,34 +9,37 @@ const Wrapper = styled.div`
     cursor: pointer;
     background: #F4F4F4;
     border-radius: 2px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
 `;
 
 const ContentWrapper = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: 10px 12px;
     align-items: flex-start;
     justify-content: center;
-    margin-left: 10px;
 `;
 
 const TitleText = styled.p`
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 600;
     color: #000000;
-    margin: 0;
+    margin-top: 5px;
 `;
 
 const ContentText = styled.p`
     font-size: 10px;
     color: #000000;
-    margin: 4px 0 8px;
+    margin: 6px 0 3px;
 `;
 
 const InfoText = styled.div`
     font-size: 8px;
     color: #575757;
+    display: flex;
+    gap: 5px;
 `;
 
 const Thumbnail = styled.div`
@@ -55,7 +58,9 @@ function PostListItem(props) {
                 <TitleText>{post.title}</TitleText>
                 <ContentText>{post.content}</ContentText>
                 <InfoText>
-                    {post.date} 좋아요 {post.likes}개 댓글 {post.comments}개
+                    <span>{post.date}</span> 
+                    <span>좋아요 {post.likes}개</span> 
+                    <span>댓글 {post.comments}개</span>
                 </InfoText>
             </ContentWrapper>
             <Thumbnail />

@@ -18,3 +18,6 @@ export const Header = () => {
     </S.Wrapper>
   )
 }
+
+
+export default Header;

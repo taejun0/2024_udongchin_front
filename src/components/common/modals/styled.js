@@ -187,7 +187,6 @@ export const TextType = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
@@ -304,6 +303,110 @@ export const CommentText2 = styled.div`
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
   color: ${({theme}) => theme.colors.separate};
   font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+`;
+
+
+
+
+
+export const RadioLabel = styled.label`
+display: flex;
+align-items: center;
+font-size: 8px;
+color: #575757;
+cursor: pointer;
+gap: 5px;
+font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+`;
+
+export const RadioButton = styled.input`
+appearance: none;
+display: flex;
+width: 9px;
+height: 9px;
+padding: 2px;
+align-items: center;
+gap: 10px;
+border: 1px solid #E3B05F;
+background-color: #FFFF;
+font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+border-radius: 50%;
+position: relative;
+cursor: pointer;
+
+&:checked {
+    background-color: #FFF;
+}
+
+&:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background-color: #E3B05F;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+`;
+
+export const OtherReasonInput = styled.input`
+display: flex;
+width: 204px;
+height: 34px;
+padding: 5px 6px;
+border: 1px solid #d1a355;
+font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+border-radius: 3px;
+font-style: normal;
+font-weight: 700;
+line-height: 12px; 
+font-size: 8px;
+color: ${({theme}) => theme.colors.darkgray};
+outline: none;
+`;
+
+export const RModalSection = styled.div`
+  display: flex;
+  height: 89px;
+  padding: 7px 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  align-self: stretch;
+  border-radius: 5px;
+  border: 1px solid var(--gray, #ECECEC);
+  background: var(--gray, #ECECEC);
+  `;
+
+  export const RModalSection2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  item-align: flex-start;
+  gap: 16px;
+`;
+
+  export const RTextType = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  color: ${({theme}) => theme.colors.black};
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 800;
+`;
+
+
+export const RSubText = styled.div`
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  color: ${({theme}) => theme.colors.darkgray};
+  text-align: center;
+  font-size: 8px;
   font-style: normal;
   font-weight: 700;
 `;
