@@ -82,7 +82,7 @@
     font-weight: 400;
     color: #fff;
     background-color: #5b3200;
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -98,7 +98,7 @@
     color: #232323;
     background-color: #ffffe5;
     border: 1.5px solid #e3b05f;
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
     border-radius: 5px;
     cursor: pointer;
     `;
@@ -167,3 +167,9 @@ export const SubmitButton = styled.button`
     cursor: pointer;
 `;
 
+
+export const ErrorMessage = styled.p`
+  color: var(--RED2, #FF8B8D);
+  font-size: 10px;
+  margin-top: 5px;
+`;

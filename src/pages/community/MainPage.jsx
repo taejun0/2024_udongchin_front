@@ -115,10 +115,10 @@ function MainPage() {
                 <S.HelpContainer>
                     <S.HelpSection>도움이 필요한 동물을 발견하셨나요?</S.HelpSection>
                     <S.Center>
-                        <S.ArrowButton2 onClick={() => navigate("/fullboard")}>
+                    <S.ArrowButton2 onClick={() => window.location.href = "https://www.ansan.go.kr/eco/common/cntnts/selectContents.do?cntnts_id=C0001026"}>
                         <S.HelpText>가까운 야생동물 보호센터 신고하기</S.HelpText>
-                        <img src={frontward} style={{ cursor: "pointer", padding: "0"}}/>
-                        </S.ArrowButton2>
+                        <img src={frontward} style={{ cursor: "pointer", padding: "0" }} />
+                    </S.ArrowButton2>
                         <S.Description2>우리 동네 친구들을 도와주세요</S.Description2>
                     </S.Center>
                 </S.HelpContainer>
