@@ -28,32 +28,32 @@ export const Submenu = ({onClose}) => {
       {isLoggedIn ? (
         // 로그인 후 화면
         <>
-          <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/login")}>
+        <S.ProfileSection>
+          <S.ImgSection>
+            <S.ProfileImage src="/path/to/profile-image.jpg" alt="프로필 이미지" />
+          </S.ImgSection>
+          <S.InfoSection>
+            <S.Myprofile>내 프로필</S.Myprofile>
+            <S.UserName>춤추는 토끼</S.UserName>
+            <S.UserId>아이디 odc123</S.UserId>
+          </S.InfoSection>
+        </S.ProfileSection>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
+        내 우동친 기록
+        </S.Box>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
+          로그아웃
+        </S.Box>
+        </>
+      ) : (
+        // 로그인 전 화면
+        <>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/login")}>
         로그인
         </S.Box>
         <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
           회원가입
         </S.Box>
-        </>
-      ) : (
-        // 로그인 전 화면
-          <>
-          <S.ProfileSection>
-            <S.ImgSection>
-              <S.ProfileImage src="/path/to/profile-image.jpg" alt="프로필 이미지" />
-            </S.ImgSection>
-            <S.InfoSection>
-              <S.Myprofile>내 프로필</S.Myprofile>
-              <S.UserName>춤추는 토끼</S.UserName>
-              <S.UserId>아이디 odc123</S.UserId>
-            </S.InfoSection>
-          </S.ProfileSection>
-          <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
-          내 우동친 기록
-          </S.Box>
-          <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
-            로그아웃
-          </S.Box>
         </>
       )}
     </S.Wrapper>
