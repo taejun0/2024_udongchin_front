@@ -344,9 +344,7 @@ export const RadioInput = styled.input`
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
-
-
+`;
 
 export const RadioLabel = styled.label`
 display: flex;
