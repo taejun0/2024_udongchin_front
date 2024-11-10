@@ -421,7 +421,7 @@ export const RModalSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  item-align: flex-start;
+  align-items: flex-start;
   gap: 16px;
 `;
 

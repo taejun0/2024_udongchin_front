@@ -9,6 +9,8 @@ export const MapSize = styled.div`
 
 export const Nowlocation = styled.div`
   position: absolute;
+  flex-direction: column;
+  display: flex;
   top: 20px;
   z-index: 10;
 `;
