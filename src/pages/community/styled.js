@@ -5,7 +5,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 400px;
+    width: 100%;
     font-family: sans-serif;
     background-color: #fff;
 `;
@@ -33,7 +33,6 @@ export const Main = styled.main`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 400px;
 `;
 
 export const TitleText = styled.div`

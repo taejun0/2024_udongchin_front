@@ -10,7 +10,7 @@ import { NotFoundLayout } from "@layouts/NotFoundLayout";
 import {MainPage} from "@pages/community/MainPage";
 import {PostWritePage} from "@pages/community/PostWritePage";
 import {PostViewPage} from "@pages/community/PostViewPage";
-import {FullBoard} from "@pages/community/FullBoard";
+import {PrBoard} from "@pages/community/PrBoard";
 import {FreeBoard} from "@pages/community/FreeBoard";
 import { ReportPage } from "@pages/reportpage/ReportPage";
 import { MyudchistoryPage } from "@pages/myudchistorypage/MyudchistoryPage";
@@ -58,8 +58,8 @@ export const router = createBrowserRouter([
         element: <PostWritePage />
       },
       {
-        path: ROUTE_PATHS.FULLBOARD,
-        element: <FullBoard />
+        path: ROUTE_PATHS.PRBOARD,
+        element: <PrBoard />
       },
       {
         path: ROUTE_PATHS.FREEBOARD,

@@ -7,7 +7,7 @@ import write from "/images/adding_write.svg"
 import now from "/images/write_location.svg"
 import arrowIcon from "/images/arrow.svg"
 
-function FreeBoard() {
+function PrBoard() {
     const navigate = useNavigate();
     const [activeSort, setActiveSort] = useState("최신순"); // 초기 정렬 상태
 
@@ -26,7 +26,7 @@ function FreeBoard() {
             </S.Header>
             {/* Location Section */}
             <S.Nav>
-                <S.Subtitle>자유게시판</S.Subtitle>
+                <S.Subtitle>홍보게시판</S.Subtitle>
                 <S.Location>
                     <img src={now} style={{ cursor: "pointer", padding: "0"}}/>
                     <S.LocationText>위치</S.LocationText>
@@ -75,4 +75,4 @@ function FreeBoard() {
     );
 }
 
-export {FreeBoard};
+export {PrBoard};
