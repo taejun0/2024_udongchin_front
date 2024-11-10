@@ -13,9 +13,24 @@ export const QnaMarkerModal = ({ type, onClose }) => {
   const [photo, setPhoto] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [selectedType, setSelectedType] = useState("기록");
+  const [dongAddress, setDongAddress] = useState("");
 
   const isSubmitEnabled = title && content && uploadedImage && selectedType && !loading; // 모든 필드가 채워진 경우
 
+  const fetchDongAddress = async (lat, lng) => {
+    try {
+      const result = await naver.maps.Service.reverseGeocode({
+        coords: new naver.maps.LatLng(lat, lng),
+        orders: "addr",
+      });
+      const fullAddress = result?.v2?.address?.jibunAddress || "주소를 찾을 수 없습니다.";
+      const addressParts = fullAddress.split(" ");
+      return addressParts.slice(0, 3).join(" ");
+    } catch (err) {
+      console.error("Failed to fetch address:", err);
+      return "";
+    }
+  };
 
   const handlePost = async () => {
     if (!location) {
@@ -23,13 +38,21 @@ export const QnaMarkerModal = ({ type, onClose }) => {
       return;
     }
 
+    const lat = location.lat();
+    const lng = location.lng();
+
+    const calcAddress = await fetchDongAddress(lat, lng);
+
     const markerData = {
       title,
       content,
       photo,
-      lat: location.lat(),
-      lng: location.lng(),
       type: selectedType,
+      locations: [
+        lat,
+        lng,
+        calcAddress,
+      ]
     };
 
     await submitMarkerData(markerData); // 데이터 제출
@@ -71,21 +94,33 @@ export const QnaMarkerModal = ({ type, onClose }) => {
           />
         </S.ModalSection2>
         <S.ModalSection3>
-          <S.SubTextType>실시간 우동친 유형 선택</S.SubTextType>
-          <S.ToggleButton>
-            <S.ToggleOption
-              $isSelected={selectedType === "기록"}
+        <S.Radios>
+            <S.RadioLabel
               onClick={() => setSelectedType("기록")}
+              $isSelected={selectedType === "기록"} // 선택 여부에 따라 스타일 적용
             >
+              <S.RadioInput
+                type="radio"
+                value="기록"
+                checked={selectedType === "기록"}
+                readOnly
+              />
               실시간 기록
-            </S.ToggleOption>
-            <S.ToggleOption
-              $isSelected={selectedType === "Q&A"}
+            </S.RadioLabel>
+            <S.RadioLabel
               onClick={() => setSelectedType("Q&A")}
+              $isSelected={selectedType === "Q&A"}
             >
+              <S.RadioInput
+                type="radio"
+                value="Q&A"
+                checked={selectedType === "Q&A"}
+                readOnly
+              />
               실시간 Q&A
-            </S.ToggleOption>
-          </S.ToggleButton>
+            </S.RadioLabel>
+          </S.Radios>
+          <S.SubTextType>실시간 우동친 유형 선택</S.SubTextType>
           <S.SubText>실시간 기록으로 진행 시 해당 기록은 우리 동네 사람들에게만 공유됩니다.<br />실시간 Q&A로 진행 시 해당 기록은 모든 동네 사람들에게 공유되며,<br />커뮤니티 댓글을 통해 빠르게 답변받을 수 있습니다.</S.SubText>
         </S.ModalSection3>
 

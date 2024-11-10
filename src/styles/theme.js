@@ -20,6 +20,7 @@ export const theme = {
     darkgray: "#575757",
     separate: "#989898",
     yellow: "#E3B05F",
+    yellow_btn: "#E1AC57",
     lightyellow: "#FFFFE5",
     darkyellow: "#5B3200",
     headerColor: "#43CD5E",

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as S from "./styled";
 import { Navermap } from "@components/specific/maps/Navermap";
 import useNavermaps from "@hooks/useNavermaps";
+import { useAuthContext } from "@contexts/AuthContext";
 import { mockLocations } from "@constants/mockLocations";
 import { QnaMarkerModal } from "@components/common/modals/QnaMarkerModal";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ import RightLowHome from "/images/RightLowHome.svg";
 import RightLowHome_ch from "/images/RightLowHome_ch.svg";
 
 export const HomePage = () => {
+  const { nickname } = useAuthContext();
   const {locations, loading, error} = useNavermaps();
   const [QnaModalOpen, setQnaModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -33,6 +35,8 @@ export const HomePage = () => {
     setSelectmy((prev) => (prev=== "my" ? "mymy" : "my"));
   };
 
+  const LocationFiltering = isExpand2 ? locations.filter((location) => location.nickname === nickname) : locations;
+
   const navigate = useNavigate();
 
   if (loading) return <p>Loading...</p>;
@@ -41,7 +45,7 @@ export const HomePage = () => {
   return (
     <div>
       <Navermap 
-        locations={mockLocations}
+        locations={mockLocations} // LocationFiltering 넣기
         followUser={followUser}
         setFollowUser={setFollowUser}
       />

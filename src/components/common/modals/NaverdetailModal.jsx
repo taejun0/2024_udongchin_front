@@ -36,7 +36,7 @@ export const NaverDetailModal = ({ location, onClose }) => {
             </S.UserInfo>
           </S.User>
           <S.Buttons>
-          {location.type === "Q&A" ? (location.urgent === false ? (<button onClick={() => setModalOpen(true)}><img src={Warning} style={{ width: "14px", height: "14px", cursor: "pointer" }} /></button>) : (<img src={Warning_now} style={{ width: "50px"}}/>)) : null}
+          {location.mode === "실시간 Q&A" ? (location.urgent === false ? (<button onClick={() => setModalOpen(true)}><img src={Warning} style={{ width: "14px", height: "14px", cursor: "pointer" }} /></button>) : (<img src={Warning_now} style={{ width: "50px"}}/>)) : null}
             <button onClick={onClose}><img src={X} style={{width: "12px", height: "12px", cursor: "pointer", transform:"translateY(3px)"}} /></button>
           </S.Buttons>
         </S.InformationHeader>

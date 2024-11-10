@@ -8,7 +8,7 @@ import styles from "./PostWriteStyle";
 
 const Wrapper = styled.div`
     width: 400px;
-    height: 668px
+    height: 668px;
     display: flex;
     flex-direction: column;
     align-items: center;

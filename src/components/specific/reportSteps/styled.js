@@ -30,7 +30,8 @@ export const Line = styled.div`
 export const Radios = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
+  gap: 24px;
 `;
 
 export const RadioLabel = styled.label`
@@ -152,6 +153,7 @@ export const NextButton = styled.button`
   border-radius: 5px;
   position: absolute;
   bottom: 30px;
+  cursor: pointer;
 
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   background-color: ${({theme}) => theme.colors.darkyellow};
