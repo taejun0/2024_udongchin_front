@@ -303,9 +303,48 @@ export const CommentText2 = styled.div`
   font-weight: 700;
 `;
 
+export const Radios = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+`;
 
+export const RadioLabel2 = styled.label`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: ${({ theme }) => (theme.colors.black)};
 
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 700;
+`;
 
+export const RadioInput = styled.input`
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid ${({ theme }) => theme.colors.yellow};
+  border-radius: 50%;
+  margin-right: 4px;
+  position: relative;
+  cursor: pointer;
+
+  &:checked::before {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    background-color: ${({ theme }) => theme.colors.yellow};
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
 
 export const RadioLabel = styled.label`
 display: flex;

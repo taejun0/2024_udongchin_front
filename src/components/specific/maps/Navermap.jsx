@@ -2,12 +2,14 @@ import * as S from "./styled";
 import { useEffect, useState, useRef } from "react";
 import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { useLocation } from "@contexts/LocationContext";
+
 import nowimageDefault from "/images/nowlocation.svg";
 import nowimageChanged from "/images/nowlocation_ch.svg";
 
+
 const backgroundIcons = {
-  "Q&A": "/images/marker_qna.svg",
-  "Community": "/images/marker_real.svg",
+  "실시간 Q&A": "/images/marker_qna.svg",
+  "실시간 기록": "/images/marker_real.svg",
   "Urgent": "/images/marker_urgent.svg",
 };
 
@@ -46,7 +48,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
 
             // 현재 위치 주소 설정
             naver.maps.Service.reverseGeocode(
-              { coords: coord, orders: ["addr"] },
+              { coords: coord, orders: "addr" },
               (status, response) => {
                 if (status === naver.maps.Service.Status.OK) {
                   const result = response.v2.address;
@@ -92,7 +94,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             const updateAddressByCenter = () => {
               const center = mapInstance.getCenter();
               naver.maps.Service.reverseGeocode(
-                { coords: center, orders: ["addr"] },
+                { coords: center, orders: "addr" },
                 (status, response) => {
                   if (status === naver.maps.Service.Status.OK) {
                     const result = response.v2.address;
@@ -127,42 +129,46 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             // 외부 위치 데이터 마커 추가
             if (Array.isArray(locations)) {
               locations.forEach((location) => {
-                const markerPosition = new naver.maps.LatLng(location.lat, location.lng);
-                const backgroundUrl = backgroundIcons[location.type === "Q&A" ? (location.urgent ? "Urgent" : "Q&A") : "Community"];
+                const [lat, lng, dongAddress] = location.locations;
+                const markerPosition = new naver.maps.LatLng(parseFloat(lat), parseFloat(lng));
+                const backgroundUrl = backgroundIcons[location.mode === "실시간 Q&A" ? (location.urgent ? "Urgent" : "실시간 Q&A") : "실시간 기록"];
 
-                const marker = new naver.maps.Marker({
-                  position: markerPosition,
-                  map: mapInstance,
-                  icon: {
-                    content: `
-                      <div style="
-                        position: relative; 
-                        width: 40px; 
-                        height: 50px; 
-                        background-image: url('${backgroundUrl}');
-                        background-size: cover;
-                        transform: translateY(-31px);
-                        ${backgroundUrl === backgroundIcons["Urgent"] ? "filter: drop-shadow(0px 0px 10px #FF8B8D);" : ""}
-                      ">
-                        <img src="${location.imageUrl}" alt="marker" style="
-                          display: flex;
-                          position: absolute;
-                          left: 6px;
-                          top: 6px;
-                          width: 28px; 
-                          height: 28px; 
-                          border-radius: 50%;
-                        " />
-                      </div>
-                    `,
-                    size: new naver.maps.Size(40, 40),
-                    anchor: new naver.maps.Point(20, 20),
-                  },
-                });
+                const displaying = location.mode === "실시간 Q&A" || (location.mode === "실시간 기록" && dongAddress === currentAddress)
 
-                naver.maps.Event.addListener(marker, "click", () => {
-                  setSelectedLocation(location);
-                });
+                if (displaying) {
+                  const marker = new naver.maps.Marker({
+                    position: markerPosition,
+                    map: mapInstance,
+                    icon: {
+                      content: `
+                        <div style="
+                          position: relative; 
+                          width: 40px; 
+                          height: 50px; 
+                          background-image: url('${backgroundUrl}');
+                          background-size: cover;
+                          transform: translateY(-31px);
+                          ${backgroundUrl === backgroundIcons["Urgent"] ? "filter: drop-shadow(0px 0px 10px #FF8B8D);" : ""}
+                        ">
+                          <img src="${location.imageUrl}" alt="marker" style="
+                            display: flex;
+                            position: absolute;
+                            left: 6px;
+                            top: 6px;
+                            width: 28px; 
+                            height: 28px; 
+                            border-radius: 50%;
+                          " />
+                        </div>
+                      `,
+                      size: new naver.maps.Size(40, 40),
+                      anchor: new naver.maps.Point(20, 20),
+                    },
+                  });
+                  naver.maps.Event.addListener(marker, "click", () => {
+                    setSelectedLocation(location);
+                  });
+                }
               });
             }
           }
@@ -195,7 +201,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
           setLocation(coord);
           map.panTo(coord);
 
-          // 사용자의 새로운 위치로 원(center)을 업데이트
           if (circleRef.current) {
             circleRef.current.setCenter(coord);
           }

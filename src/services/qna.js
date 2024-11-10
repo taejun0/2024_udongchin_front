@@ -5,9 +5,8 @@ export const QnaMarkerData = async (markerData) => {
   formData.append("title", markerData.title);
   formData.append("content", markerData.content);
   formData.append("photo", markerData.photo);
-  formData.append("lat", markerData.lat);
-  formData.append("lng", markerData.lng);
   formData.append("type", markerData.type);
+  formData.append("locations", JSON.stringify(markerData.locations));
 
   try {
     const response = await instance.post("/api/post/qa", formData, {

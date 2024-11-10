@@ -96,7 +96,7 @@ export const MapSelector = ({ onConfirm }) => {
       <div id="map" style={{ width: "100%", height: "320px", marginBottom: "10px" }} />
       <S.Notice>동물을 목격했던 장소를 핀으로 고정해주세요.</S.Notice>
       <S.Location>고정 위치: {region}</S.Location>
-      <S.FixButton onClick={handleFixLocation}>여기로 고정하기</S.FixButton>
+      <S.FixButton onClick={handleFixLocation}>목격 위치 고정</S.FixButton>
     </S.Wrapper>
   );
 };
