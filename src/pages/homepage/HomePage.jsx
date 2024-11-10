@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import * as S from "./styled";
 import { Navermap } from "@components/specific/maps/Navermap";
 import useNavermaps from "@hooks/useNavermaps";
@@ -16,6 +16,7 @@ import sidebar_mymy from "/images/sidebar_mymy.svg";
 import sidebar_his from "/images/sidebar_his.svg";
 import RightLowHome from "/images/RightLowHome.svg";
 import RightLowHome_ch from "/images/RightLowHome_ch.svg";
+import { MapSelector } from "@components/specific/maps/MapSelector";
 
 export const HomePage = () => {
   const { nickname } = useAuthContext();
@@ -26,6 +27,13 @@ export const HomePage = () => {
   const [isExpand2, setExpand2] = useState(false);
   const [selectmy, setSelectmy] = useState("my");
   const [followUser, setFollowUser] = useState(false);
+  const [viewtype, setViewtype] = useState("전체");
+  const [mapRef, setMapRef] = useState(null);
+  const [currentPosition, setCurrentPosition] = useState(null);
+
+  const toggleVeiwtype = (type) => {
+    setViewtype(type);
+  }
 
   const toglleUser = () => {
     setFollowUser((prev) => !prev);
@@ -39,57 +47,106 @@ export const HomePage = () => {
 
   const navigate = useNavigate();
 
+  const handleExpand = useCallback(() => {
+    if (!isExpand && mapRef && currentPosition) {
+      mapRef.panTo(currentPosition); // 현재 위치로 지도 이동
+    }
+    setExpand((prev) => !prev);
+  }, [isExpand, mapRef, currentPosition]);
+
+  const onMapReady = useCallback((mapInstance, userPosition) => {
+    setMapRef(mapInstance);
+    setCurrentPosition(userPosition);
+  }, []);
+  
+  
+
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
+    <div style={{position: "relative"}}>
+      <S.SelectBox>
+        <S.SelectL
+          onClick={() => toggleVeiwtype("전체")}
+          $Selected = {viewtype === "전체"}
+        >전체</S.SelectL>
+        <S.SelectR 
+          onClick={() => toggleVeiwtype("내작성")}
+          $Selected = {viewtype === "내작성"}
+        >내작성</S.SelectR>
+      </S.SelectBox>
       <Navermap 
         locations={mockLocations} // LocationFiltering 넣기
         followUser={followUser}
         setFollowUser={setFollowUser}
+        onMapReady={onMapReady}
+        viewtype={viewtype}
       />
-      <S.Buttons>
-        <S.Button
-          $isExpand = {isExpand}
-          onClick={() => setExpand(!isExpand)}
-          style={{zIndex:5}}
-        >
-          <img src={adding_dots} style={{width: "44px", height:"44px"}}/>
-        </S.Button>
+      {viewtype === "전체" && 
+        <S.Buttons>
+          <S.Button
+            $isExpand = {isExpand}
+            onClick={handleExpand}
+            style={{zIndex:5, width: "60px", height:"60px"}}
+          >
+            <img src={adding_dots} style={{width: "44px", height:"44px"}}/>
+          </S.Button>
 
-        <S.ExpandableButton 
-          $isExpand = {isExpand}
-          $delay = {0.1}
-          onClick={() => {
-            setModalType("기록");
-            setQnaModalOpen(true);
-          }} 
-        >
-          <img src={adding_pencil} />
-          실시간 작성
-        </S.ExpandableButton>
+          <S.ExpandableButton 
+            $isExpand = {isExpand}
+            $delay = {0.1}
+            onClick={() => {
+              setModalType("기록");
+              setQnaModalOpen(true);
+            }} 
+          >
+            <img src={adding_pencil} />
+            실시간 작성
+          </S.ExpandableButton>
 
-        <S.ExpandableButton
-          $isExpand = {isExpand}
-          $delay = {0.2}
-          onClick={()=> navigate("/report")}
-        >
-          <img src={adding_exclamation} />
-          우동친 제보
-        </S.ExpandableButton>
+          <S.ExpandableButton
+            $isExpand = {isExpand}
+            $delay = {0.2}
+            onClick={() => navigate("/community")}
+          >
+            <img src={adding_chat} />
+            커뮤니티
+          </S.ExpandableButton>
 
-        <S.ExpandableButton
-          $isExpand = {isExpand}
-          $delay = {0.3}
-          onClick={() => navigate("/community")}
-        >
-          <img src={adding_chat} />
-          커뮤니티
-        </S.ExpandableButton>
-      </S.Buttons>
+          <S.ExpandableButton2
+            $isExpand = {isExpand}
+            $delay = {0.2}
+            onClick={()=> navigate("/report")}
+          >
+            <img src={adding_exclamation} />
+            동물 제보
+          </S.ExpandableButton2>
+        </S.Buttons>
+      }
+      {viewtype === "내작성" && 
+        <S.Buttons>
+          <S.Button
+            onClick={() => {
+              setModalType("기록");
+              setQnaModalOpen(true);
+            }} 
+          >
+            <img src={adding_pencil} style={{width: "44px", height:"44px"}}/>
+            실시간 작성
+          </S.Button>
+          <S.Button
+            onClick={() => navigate("myudchistory")}
+          >
+            <img src={sidebar_his} style={{width: "44px", height:"44px"}}/>
+            내 활동기록
+          </S.Button>
+        </S.Buttons>
+      }
 
-      <S.SideButtons>
+
+      {/* <S.SideButtons>
         <S.SideButton
           onClick={() => {
             setExpand2(!isExpand2);
@@ -118,17 +175,16 @@ export const HomePage = () => {
           <img src={sidebar_how} />
           사용 설명서
         </S.SideButton1>
-      </S.SideButtons>
+      </S.SideButtons> */}
       <S.RightLowButton
         onClick={toglleUser}
       >
         <S.ImageRightLow src={followUser === false ? RightLowHome : RightLowHome_ch}/>
       </S.RightLowButton>
 
-      {/* 모달 열림 상태에 따라 표시 */}
       {QnaModalOpen && (
         <QnaMarkerModal 
-          type={modalType} // 모달에 유형 전달
+          type={modalType}
           onClose={() => setQnaModalOpen(false)} 
         />
       )}

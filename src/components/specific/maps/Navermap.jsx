@@ -3,6 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { useLocation } from "@contexts/LocationContext";
 
+import Toast1 from "@components/common/Toasts/Toast1";
+import Toast2 from "@components/common/Toasts/Toast2";
+
 import nowimageDefault from "/images/nowlocation.svg";
 import nowimageChanged from "/images/nowlocation_ch.svg";
 
@@ -10,10 +13,11 @@ import nowimageChanged from "/images/nowlocation_ch.svg";
 const backgroundIcons = {
   "실시간 Q&A": "/images/marker_qna.svg",
   "실시간 기록": "/images/marker_real.svg",
+  "생태 지도": "/images/marker_real.svg",
   "Urgent": "/images/marker_urgent.svg",
 };
 
-export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) => {
+export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, viewtype }) => {
   const NAVER_MAP_KEY = import.meta.env.VITE_NAVER_MAP_KEY;
 
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -24,6 +28,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
   const [nowimage, setNowImage] = useState(nowimageDefault);
   
   const circleRef = useRef(null); // 원을 useRef로 관리
+  const currentMarkerRef = useRef(null);
 
   // 지도 초기화 및 마커 설정
   useEffect(() => {
@@ -33,6 +38,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
         zoom: 15,
       });
       setMap(mapInstance);
+      
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -63,12 +69,9 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             );
 
             if (onMapReady && typeof onMapReady === "function") {
-              onMapReady(() => {
-                mapInstance.setCenter(coord);
-                updateAddressByCenter();
-              });
+              onMapReady(mapInstance, coord);  // coord는 현재 위치로 설정된 LatLng 객체입니다.
             }
-
+            
             const currentMarker = new naver.maps.Marker({
               position: coord,
               map: mapInstance,
@@ -78,6 +81,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
                 anchor: new naver.maps.Point(28, 28),
               },
             });
+            currentMarkerRef.current = currentMarker;
 
             const userCircle = new naver.maps.Circle({
               map: mapInstance,
@@ -201,6 +205,10 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
           setLocation(coord);
           map.panTo(coord);
 
+          if (currentMarkerRef.current) {
+            currentMarkerRef.current.setPosition(coord);
+          }
+
           if (circleRef.current) {
             circleRef.current.setCenter(coord);
           }
@@ -221,9 +229,24 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
 
   return (
     <S.MapSize id="map">
-      <S.Nowlocation>
-        <S.Address><S.Image src={nowimage} />{address}</S.Address>
-      </S.Nowlocation>
+      { viewtype === "전체" ? (
+         address === currentAddress ? (
+          <S.Nowlocation>
+            <S.Address><S.Image src={nowimage} />{address}</S.Address>
+            <Toast1 />
+          </S.Nowlocation>
+        ) : (
+          <S.Nowlocation>
+            <S.Address><S.Image src={nowimageDefault} />{address}</S.Address>
+            <Toast2 />
+          </S.Nowlocation>
+        )
+      ) : (
+        <S.Nowlocation>
+            <S.Address><S.Image src={nowimageDefault} />내 우동친 지도</S.Address>
+          </S.Nowlocation>
+      )}
+      
       {selectedLocation && (
         <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
       )}

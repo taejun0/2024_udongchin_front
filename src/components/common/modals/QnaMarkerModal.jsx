@@ -95,7 +95,7 @@ export const QnaMarkerModal = ({ type, onClose }) => {
         </S.ModalSection2>
         <S.ModalSection3>
         <S.Radios>
-            <S.RadioLabel
+            <S.RadioLabel2
               onClick={() => setSelectedType("기록")}
               $isSelected={selectedType === "기록"} // 선택 여부에 따라 스타일 적용
             >
@@ -106,8 +106,8 @@ export const QnaMarkerModal = ({ type, onClose }) => {
                 readOnly
               />
               실시간 기록
-            </S.RadioLabel>
-            <S.RadioLabel
+            </S.RadioLabel2>
+            <S.RadioLabel2
               onClick={() => setSelectedType("Q&A")}
               $isSelected={selectedType === "Q&A"}
             >
@@ -118,7 +118,7 @@ export const QnaMarkerModal = ({ type, onClose }) => {
                 readOnly
               />
               실시간 Q&A
-            </S.RadioLabel>
+            </S.RadioLabel2>
           </S.Radios>
           <S.SubTextType>실시간 우동친 유형 선택</S.SubTextType>
           <S.SubText>실시간 기록으로 진행 시 해당 기록은 우리 동네 사람들에게만 공유됩니다.<br />실시간 Q&A로 진행 시 해당 기록은 모든 동네 사람들에게 공유되며,<br />커뮤니티 댓글을 통해 빠르게 답변받을 수 있습니다.</S.SubText>
