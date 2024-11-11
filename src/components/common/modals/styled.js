@@ -23,6 +23,8 @@ export const ModalContent = styled.div`
   padding: 20px;
   border-radius: 10px;
   width: 80%;
+
+  position: relative;
   
   box-shadow : ${({ $Urgent }) => $Urgent ? "0px 0px 15px 5px #FFA9AB" : "none"};
 `;
@@ -49,6 +51,15 @@ export const InformationHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+export const InformationHeader2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+  gap: 5px;
 `;
 
 export const User = styled.div`
@@ -444,4 +455,110 @@ export const RSubText = styled.div`
   font-size: 8px;
   font-style: normal;
   font-weight: 700;
+`;
+
+export const Name = styled.div`
+  color: ${({theme}) => theme.colors.black};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFEB["font-family"]};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+`;
+
+export const NameDetail = styled.div`
+  color: ${({theme}) => theme.colors.darkgray};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const InformationBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 40px;
+  gap: 8px;
+  border-radius: 2px;
+  background-color: ${({theme}) => theme.colors.lightgray};
+`;
+
+export const InformationBoxHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 20px;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+`;
+
+export const InformationItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  padding: 3px 7px;
+  top: -20px;
+  left: 0;
+  border-radius: 2px;
+  background: ${({theme}) => theme.colors.yellow_btn};
+
+  color: ${({theme}) => theme.colors.white};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+`;
+
+export const InformationItem2 = styled.div`
+  display: flex;
+
+  color: ${({theme}) => theme.colors.darkgray};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+
+  gap: 6px;
+`;
+
+export const Infos = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  gap: 8px;
+`;
+
+export const Infocontents = styled.div`
+  color: ${({theme}) => theme.colors.black};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  
+  min-width: 40px;
+`;
+
+export const VertiLINE = styled.div`
+  width: 2px;
+  height: 7px;
+  background: ${({theme}) => theme.colors.Dyellow};
+`;
+
+export const BottomImageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const BottomImage = styled.img`
+  position: absolute;
+  display: flex;
+  bottom: 0px;
+  width: calc(113.5%);
+  transform: translateY(40%);
 `;

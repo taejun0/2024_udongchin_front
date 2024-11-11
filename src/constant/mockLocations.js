@@ -16,7 +16,7 @@ export const mockLocations = [
     locations: [
       "37.5665",
       "126.9780",
-      "경기도 의정부시 신곡동"
+      "서울특별시 중구 장충동2가"
     ],
   },
   {
@@ -35,7 +35,7 @@ export const mockLocations = [
     locations: [
       "37.5700",
       "126.9765",
-      "경기도 의정부시 신곡동"
+      "서울특별시 중구 장충동2가"
     ],
   },
   {
@@ -54,7 +54,7 @@ export const mockLocations = [
     locations: [
       "37.5640",
       "126.9820",
-      "경기도 의정부시 신곡동"
+      "서울특별시 중구 장충동2가"
     ],
   },
   {
@@ -73,7 +73,7 @@ export const mockLocations = [
     locations: [
       "37.5610",
       "126.9900",
-      "경기도 의정부시 신곡동"
+      "서울특별시 중구 장충동2가"
     ],
   },
   {
@@ -92,7 +92,7 @@ export const mockLocations = [
     locations: [
       "37.5600",
       "126.9911",
-      "경기도 의정부시 신곡동"
+      "서울특별시 중구 장충동2가"
     ],
   },
   {
@@ -111,7 +111,7 @@ export const mockLocations = [
     locations: [
       "37.5590",
       "126.9920",
-      "경기도 의정부시 신곡동"
+      "서울특별시 중구 장충동2가"
     ],
   },
 ];

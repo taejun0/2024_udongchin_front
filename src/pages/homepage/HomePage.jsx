@@ -10,18 +10,18 @@ import adding_pencil from "/images/adding_pencil.svg";
 import adding_exclamation from "/images/adding_exclamation.svg";
 import adding_dots from "/images/adding_dots.svg";
 import adding_chat from "/images/adding_chat.svg";
-import sidebar_how from "/images/sidebar_how.svg";
-import sidebar_my from "/images/sidebar_my.svg";
-import sidebar_mymy from "/images/sidebar_mymy.svg";
 import sidebar_his from "/images/sidebar_his.svg";
 import RightLowHome from "/images/RightLowHome.svg";
 import RightLowHome_ch from "/images/RightLowHome_ch.svg";
 import { MapSelector } from "@components/specific/maps/MapSelector";
+import { WarningLoginModal } from "@components/common/modals/WarningLoginModal";
+import { MapModal } from "@components/common/modals/MapModal";
 
 export const HomePage = () => {
   const { nickname } = useAuthContext();
   const {locations, loading, error} = useNavermaps();
   const [QnaModalOpen, setQnaModalOpen] = useState(false);
+  const [LoginModalOpen, setLoginModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isExpand, setExpand] = useState(false);
   const [isExpand2, setExpand2] = useState(false);
@@ -30,6 +30,8 @@ export const HomePage = () => {
   const [viewtype, setViewtype] = useState("전체");
   const [mapRef, setMapRef] = useState(null);
   const [currentPosition, setCurrentPosition] = useState(null);
+
+  const navigate = useNavigate();
 
   const toggleVeiwtype = (type) => {
     setViewtype(type);
@@ -45,7 +47,13 @@ export const HomePage = () => {
 
   const LocationFiltering = isExpand2 ? locations.filter((location) => location.nickname === nickname) : locations;
 
-  const navigate = useNavigate();
+  const handleRestrictedAction = () => {
+    if (!nickname) {
+      setLoginModalOpen(true);
+      return false;
+    }
+    return true;
+  };
 
   const handleExpand = useCallback(() => {
     if (!isExpand && mapRef && currentPosition) {
@@ -58,8 +66,6 @@ export const HomePage = () => {
     setMapRef(mapInstance);
     setCurrentPosition(userPosition);
   }, []);
-  
-  
 
 
   if (loading) return <p>Loading...</p>;
@@ -73,7 +79,11 @@ export const HomePage = () => {
           $Selected = {viewtype === "전체"}
         >전체</S.SelectL>
         <S.SelectR 
-          onClick={() => toggleVeiwtype("내작성")}
+          onClick={() => {
+            if (handleRestrictedAction()) {
+              toggleVeiwtype("내작성");
+            }
+          }}
           $Selected = {viewtype === "내작성"}
         >내작성</S.SelectR>
       </S.SelectBox>
@@ -187,6 +197,9 @@ export const HomePage = () => {
           type={modalType}
           onClose={() => setQnaModalOpen(false)} 
         />
+      )}
+      {LoginModalOpen && (
+        <WarningLoginModal onClose={() => setLoginModalOpen(false)}/>
       )}
     </div>
   );
