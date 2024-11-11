@@ -1,7 +1,10 @@
 import * as S from "./styled";
 import { useEffect, useState, useRef } from "react";
-import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { useLocation } from "@contexts/LocationContext";
+
+import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
+import { MapModal } from "@components/common/modals/MapModal";
+import { WarningLoginModal } from "@components/common/modals/WarningLoginModal";
 
 import Toast1 from "@components/common/Toasts/Toast1";
 import Toast2 from "@components/common/Toasts/Toast2";
@@ -13,7 +16,7 @@ import nowimageChanged from "/images/nowlocation_ch.svg";
 const backgroundIcons = {
   "실시간 Q&A": "/images/marker_qna.svg",
   "실시간 기록": "/images/marker_real.svg",
-  "생태 지도": "/images/marker_real.svg",
+  "생태 지도": "/images/marker_sengtae.svg",
   "Urgent": "/images/marker_urgent.svg",
 };
 
@@ -243,13 +246,14 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
         )
       ) : (
         <S.Nowlocation>
-            <S.Address><S.Image src={nowimageDefault} />내 우동친 지도</S.Address>
-          </S.Nowlocation>
+          <S.Address><S.Image src={nowimageDefault} />내 우동친 지도</S.Address>
+        </S.Nowlocation>
       )}
       
       {selectedLocation && (
         <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
       )}
     </S.MapSize>
+    
   );
 };

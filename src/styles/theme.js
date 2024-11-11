@@ -25,6 +25,7 @@ export const theme = {
     darkyellow: "#5B3200",
     headerColor: "#43CD5E",
     lightgray: "#EFEFEF",
+    Dyellow: "#A76C0E",
   },
 
   fonts: {
