@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { urgentService } from "@services/ugentService";
 
-export const useUrgent = (postID) => {
+export const useUrgent = (id) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -10,7 +10,7 @@ export const useUrgent = (postID) => {
     setError(false);
 
     try { 
-      await urgentService(postID);
+      await urgentService(id);
     } catch (err) {
       setError(err);
     } finally {

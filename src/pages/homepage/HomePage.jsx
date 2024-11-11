@@ -73,20 +73,22 @@ export const HomePage = () => {
 
   return (
     <div style={{position: "relative"}}>
-      <S.SelectBox>
-        <S.SelectL
-          onClick={() => toggleVeiwtype("전체")}
-          $Selected = {viewtype === "전체"}
-        >전체</S.SelectL>
-        <S.SelectR 
-          onClick={() => {
-            if (handleRestrictedAction()) {
-              toggleVeiwtype("내작성");
-            }
-          }}
-          $Selected = {viewtype === "내작성"}
-        >내작성</S.SelectR>
-      </S.SelectBox>
+      {!LoginModalOpen && (
+        <S.SelectBox>
+          <S.SelectL
+            onClick={() => toggleVeiwtype("전체")}
+            $Selected = {viewtype === "전체"}
+          >전체</S.SelectL>
+          <S.SelectR 
+            onClick={() => {
+              if (handleRestrictedAction()) {
+                toggleVeiwtype("내작성");
+              }
+            }}
+            $Selected = {viewtype === "내작성"}
+          >내작성</S.SelectR>
+        </S.SelectBox>
+      )}
       <Navermap 
         locations={mockLocations} // LocationFiltering 넣기
         followUser={followUser}

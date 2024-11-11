@@ -71,7 +71,7 @@ export const QnaMarkerModal = ({ type, onClose }) => {
         <S.ModalSection>
           <S.TextType>{type === "기록" ? "실시간 우동친 작성" : "우동친 제보"}<img src={Vector} onClick={onClose} style={{width: "12px", height: "12px", cursor:"pointer"}}/></S.TextType>
           <S.LINE></S.LINE>
-          <S.SubText>실시간 우동친 작성 시 해당 기록은 7일동안 지도에 공유되며,<br />동네 커뮤니티에 자동으로 글이 업로드됩니다.</S.SubText>
+          <S.SubText>해당 기록은 [작성 당시의 현재 위치] 기준으로 7일동안 지도에 공유되며,<br />동네 커뮤니티에 자동으로 글이 업로드됩니다.</S.SubText>
         </S.ModalSection>
         <S.ModalSection2>
           <S.SubTextType>사진 업로드</S.SubTextType>

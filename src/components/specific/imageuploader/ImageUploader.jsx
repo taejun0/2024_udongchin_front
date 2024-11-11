@@ -15,13 +15,19 @@ const ImageUploadButton = styled.label`
   justify-content: center;
   align-items: center;
   width: ${({ $isUploaded }) => ($isUploaded ? '100px' : '100%')};
-  height: ${({ $isUploaded }) => ($isUploaded ? '100px' : '37px')};
+  height: ${({ $isUploaded }) => ($isUploaded ? '100px' : '27px')};
   background-color: #FFFFE5;
   border: 1px solid #E3B05F;
   border-radius: 5px;
   overflow: hidden;
   cursor: pointer;
   position: relative;
+
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFEB["font-family"]};
+  color: ${({theme}) => theme.colors.black};
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 800;
 `;
 
 const HiddenInput = styled.input`

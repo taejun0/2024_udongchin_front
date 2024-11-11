@@ -33,7 +33,11 @@ export const Header = () => {
   return (
     <S.Wrapper style={{ backgroundColor }}>
       <S.Image src={imageSrc} onClick={handleImageClick} />
-      <S.Text>우동친</S.Text>
+      {location.pathname === "/" ? (
+        <S.Text style={{cursor: "pointer"}} onClick={() => navigate("/login")}>로그인</S.Text>
+      ) : (
+        <S.Text>우동친</S.Text>
+      )}
       {modalOpen && (
         <S.MainWrapper $isOpen={modalOpen}>
           <Submenu onClose={() => setModalOpen(false)} />
