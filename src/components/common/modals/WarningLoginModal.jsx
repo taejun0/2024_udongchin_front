@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export const WarningLoginModal = ({ onClose }) => {
   const navigate = useNavigate();
   return (
-    <S.ModalOverlay style={{zIndex: 1000}}>
+    <S.ModalOverlay2 style={{zIndex: 1000}}>
       <S.ModalContent2>
         <S.TextType2>로그인 시 사용 가능한 기능입니다.</S.TextType2>
         <S.SubText2>
@@ -17,6 +17,6 @@ export const WarningLoginModal = ({ onClose }) => {
           <S.Button color="#989898" onClick={onClose}>취소</S.Button>
         </S.Row>
       </S.ModalContent2>
-    </S.ModalOverlay>
+    </S.ModalOverlay2>
   )
 }

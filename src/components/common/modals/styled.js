@@ -15,6 +15,20 @@ export const ModalOverlay = styled.div`
   z-index: 20;
 `;
 
+export const ModalOverlay2 = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 44px);
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 20;
+`;
+
 export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -230,7 +244,7 @@ export const SubTextType = styled.div`
 
 
 export const SubText = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 8px;
   font-style: normal;
