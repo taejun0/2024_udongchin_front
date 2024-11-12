@@ -8,7 +8,7 @@ import Frontward from "/images/Frontward.svg";
 import Backward from "/images/Backward.svg";
 import mapmodal_bottom from "/images/mapmodal_bottom.svg";
 
-export const MapModal = (onClose) => {
+export const MapModal = ({ location, onClose }) => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const navigate = useNavigate();
@@ -27,10 +27,10 @@ export const MapModal = (onClose) => {
           </S.Buttons>
         </S.InformationHeader>
         <S.InformationHeader2>
-          <S.Name>다람쥐</S.Name>
-          <S.NameDetail>뭐시기</S.NameDetail>
+          <S.Name>{location.title}</S.Name>
+          <S.NameDetail>{location.subtitle}</S.NameDetail>
         </S.InformationHeader2>
-        <img src={X} style={{width: "100%", height: "100%"}} />
+        <img src={location.imageUrl} style={{width: "100%", height: "100%"}} />
         {currentStep === 1 && (
           <S.InformationBox>
             <S.InformationBoxHeader>
@@ -40,17 +40,17 @@ export const MapModal = (onClose) => {
             <S.Infos>
               <S.Infocontents>활동 시간</S.Infocontents>
               <S.VertiLINE />
-              <S.Infocontents>주로 낮</S.Infocontents>
+              <S.Infocontents>{location.time}</S.Infocontents>
             </S.Infos>
             <S.Infos>
               <S.Infocontents>먹이</S.Infocontents>
               <S.VertiLINE />
-              <S.Infocontents>도토리</S.Infocontents>
+              <S.Infocontents>{location.eat}</S.Infocontents>
             </S.Infos>
             <S.Infos>
               <S.Infocontents>서식지</S.Infocontents>
               <S.VertiLINE />
-              <S.Infocontents>산림</S.Infocontents>
+              <S.Infocontents>{location.live}</S.Infocontents>
             </S.Infos>
           </S.InformationBox>
         )}
@@ -64,7 +64,7 @@ export const MapModal = (onClose) => {
               <S.Infocontents>공생방법</S.Infocontents>
               <S.VertiLINE />
             </S.Infos>
-            <S.Infocontents>다람쥐를 위해 길가의 열매를 함부로 줍지 말아주세요 !</S.Infocontents>
+            <S.Infocontents>{location.with}</S.Infocontents>
           </S.InformationBox>
         )}
         <S.BottomImageWrap><S.BottomImage src={mapmodal_bottom} /></S.BottomImageWrap>

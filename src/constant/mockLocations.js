@@ -1,4 +1,5 @@
-// mockLocations.js
+import { getRandomCoordinateForDong } from "@utils/coordinateUtils";
+
 export const mockLocations = [
   {
     id: 1,
@@ -16,7 +17,7 @@ export const mockLocations = [
     locations: [
       "37.5665",
       "126.9780",
-      "서울특별시 중구 장충동2가"
+      "서울특별시 중구 필동3가"
     ],
   },
   {
@@ -35,7 +36,7 @@ export const mockLocations = [
     locations: [
       "37.5700",
       "126.9765",
-      "서울특별시 중구 장충동2가"
+      "서울특별시 중구 필동3가"
     ],
   },
   {
@@ -54,7 +55,7 @@ export const mockLocations = [
     locations: [
       "37.5640",
       "126.9820",
-      "서울특별시 중구 장충동2가"
+      "서울특별시 중구 필동3가"
     ],
   },
   {
@@ -73,7 +74,7 @@ export const mockLocations = [
     locations: [
       "37.5610",
       "126.9900",
-      "서울특별시 중구 장충동2가"
+      "서울특별시 중구 필동3가"
     ],
   },
   {
@@ -92,7 +93,7 @@ export const mockLocations = [
     locations: [
       "37.5600",
       "126.9911",
-      "서울특별시 중구 장충동2가"
+      "서울특별시 중구 필동3가"
     ],
   },
   {
@@ -111,8 +112,51 @@ export const mockLocations = [
     locations: [
       "37.5590",
       "126.9920",
-      "서울특별시 중구 장충동2가"
+      "서울특별시 중구 필동3가"
     ],
+  },
+  {
+    imageUrl: "/images/Sengtae/squrrel.png",
+    title: "다람쥐",
+    subtitle:"포유강 / 설치목 / 다람쥐속",
+    mode: "생태 지도",
+    time: "주로 낮, 아침, 저녁",
+    eat: "도토리, 견과류, 씨앗, 열매, 작은 곤충 등",
+    live: "산림 지역, 공원, 녹지 공간 등 나무가 많은 곳",
+    with: "다람쥐를 위해 길가의 열매를 함부로 줍지 말아주세요!",
+    locations: getRandomCoordinateForDong("서울특별시 중구 필동3가") || ["37.5605", "126.9911", "서울특별시 중구 필동3가"],
+  },
+  {
+    imageUrl: "/images/Sengtae/squrrel.png",
+    title: "다람쥐",
+    subtitle:"포유강 / 설치목 / 다람쥐속",
+    mode: "생태 지도",
+    time: "주로 낮, 아침, 저녁",
+    eat: "도토리, 견과류, 씨앗, 열매, 작은 곤충 등",
+    live: "산림 지역, 공원, 녹지 공간 등 나무가 많은 곳",
+    with: "다람쥐를 위해 길가의 열매를 함부로 줍지 말아주세요!",
+    locations: getRandomCoordinateForDong("서울특별시 중구 필동3가") || ["37.5605", "126.9911", "서울특별시 중구 필동3가"],
   },
 ];
 
+export const mockLocation = [
+  {
+    id: 1,
+    nickname: "이름1",
+    title: "Q&A 게시물 제목",
+    content: "Q&A 게시물 내용",
+    type: "실시간",
+    imageUrl: "/images/adding_dots.svg",
+    likesCount: 45,
+    commentCount: 5,
+    urgent: false,
+    mode: "실시간 Q&A",
+    createdAt: "2024-10-29T12:34:56",
+    comments: [],
+    locations: [
+      "37.5665",
+      "126.9780",
+      "서울특별시 중구 필동3가"
+    ],
+  },
+]
