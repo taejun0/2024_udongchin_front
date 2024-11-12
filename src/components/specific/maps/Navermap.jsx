@@ -12,6 +12,8 @@ import Toast2 from "@components/common/Toasts/Toast2";
 import nowimageDefault from "/images/nowlocation.svg";
 import nowimageChanged from "/images/nowlocation_ch.svg";
 
+import { getRandomCoordinateForDong } from "@utils/coordinateUtils";
+
 
 const backgroundIcons = {
   "실시간 Q&A": "/images/marker_qna.svg",
@@ -136,11 +138,36 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
             // 외부 위치 데이터 마커 추가
             if (Array.isArray(locations)) {
               locations.forEach((location) => {
-                const [lat, lng, dongAddress] = location.locations;
-                const markerPosition = new naver.maps.LatLng(parseFloat(lat), parseFloat(lng));
-                const backgroundUrl = backgroundIcons[location.mode === "실시간 Q&A" ? (location.urgent ? "Urgent" : "실시간 Q&A") : "실시간 기록"];
+                if (!Array.isArray(location.locations)) {
+                  console.error("Invalid locations array:", location);
+                  return;
+                }
 
-                const displaying = location.mode === "실시간 Q&A" || (location.mode === "실시간 기록" && dongAddress === currentAddress)
+                let [lat, lng, dongAddress] = location.locations;
+
+                if (location.mode === "생태 지도") {
+                  if (!location.randomCoordinate) {
+                    const randomCoordinate = getRandomCoordinateForDong(dongAddress);
+                    
+                    // 반환된 좌표가 유효한 경우만 randomCoordinate에 저장
+                    if (randomCoordinate) {
+                      location.randomCoordinate = randomCoordinate;
+                      console.log("생태 지도 랜덤 좌표 적용됨:", location.randomCoordinate);
+                    } else {
+                      console.warn(`동네 좌표를 찾을 수 없음: ${dongAddress}`);
+                      return; // 좌표가 없는 경우 마커 생성 중단
+                    }
+                  }
+            
+                  // randomCoordinate 사용
+                  [lat, lng, dongAddress] = location.randomCoordinate;
+                }
+
+                const markerPosition = new naver.maps.LatLng(parseFloat(lat), parseFloat(lng));
+                console.log("최종 마커 위치 적용:", markerPosition);
+                const backgroundUrl = backgroundIcons[location.mode === "생태 지도" ? "생태 지도" : (location.mode === "실시간 Q&A" ? (location.urgent ? "Urgent" : "실시간 Q&A") : "실시간 기록")];
+
+                const displaying = location.mode === "실시간 Q&A" || (location.mode === "실시간 기록" && dongAddress === currentAddress) || location.mode === "생태 지도";
 
                 if (displaying) {
                   const marker = new naver.maps.Marker({
@@ -250,8 +277,15 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
         </S.Nowlocation>
       )}
       
+
       {selectedLocation && (
-        <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
+        selectedLocation.mode === "생태 지도" ? (
+          <>
+            <MapModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
+          </>
+        ) : (
+          <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
+        )
       )}
     </S.MapSize>
     

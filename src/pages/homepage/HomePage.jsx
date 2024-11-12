@@ -3,7 +3,7 @@ import * as S from "./styled";
 import { Navermap } from "@components/specific/maps/Navermap";
 import useNavermaps from "@hooks/useNavermaps";
 import { useAuthContext } from "@contexts/AuthContext";
-import { mockLocations } from "@constants/mockLocations";
+import { mockLocations, mockLocation } from "@constants/mockLocations";
 import { QnaMarkerModal } from "@components/common/modals/QnaMarkerModal";
 import { useNavigate } from "react-router-dom";
 import adding_pencil from "/images/adding_pencil.svg";
@@ -16,6 +16,7 @@ import RightLowHome_ch from "/images/RightLowHome_ch.svg";
 import { MapSelector } from "@components/specific/maps/MapSelector";
 import { WarningLoginModal } from "@components/common/modals/WarningLoginModal";
 import { MapModal } from "@components/common/modals/MapModal";
+import { CommunityMap } from "@components/specific/maps/CommunityMap";
 
 export const HomePage = () => {
   const { nickname } = useAuthContext();
@@ -203,6 +204,7 @@ export const HomePage = () => {
       {LoginModalOpen && (
         <WarningLoginModal onClose={() => setLoginModalOpen(false)}/>
       )}
+      
     </div>
   );
 }
