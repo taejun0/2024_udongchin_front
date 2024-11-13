@@ -8,7 +8,7 @@ export const onSubmitHandler = async (memberId, password, navigate, setErrorMess
     };
 
     try {
-        const response = await instance.post("/api/signIn", requestBody);
+        const response = await instance.post("https://43.203.40.221.nip.io/api/signIn", requestBody);
 
         if (response.data.success) {
             alert("로그인 성공!");

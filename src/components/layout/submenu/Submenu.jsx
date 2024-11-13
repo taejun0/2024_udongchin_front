@@ -39,7 +39,10 @@ export const Submenu = ({onClose}) => {
           </S.InfoSection>
         </S.ProfileSection>
         <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
-        내 우동친 기록
+        내 활동 기록
+        </S.Box>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
+          about 우동친
         </S.Box>
         <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
           로그아웃
@@ -53,6 +56,9 @@ export const Submenu = ({onClose}) => {
         </S.Box>
         <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
           회원가입
+        </S.Box>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
+          about 우동친
         </S.Box>
         </>
       )}

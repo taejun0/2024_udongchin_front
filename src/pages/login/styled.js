@@ -173,3 +173,26 @@ export const ErrorMessage = styled.p`
   font-size: 10px;
   margin-top: 5px;
 `;
+
+// 체크박스 컨테이너 (약관 동의)
+export const CheckBoxContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #575757;
+
+    input {
+        display: flex;
+        width: 13.5px;
+        height: 13.5px;
+        padding: 3px;
+        align-items: center;
+        gap: 15px;
+        border-radius: 30px;
+    }
+
+    label {
+        cursor: pointer;
+    }
+`;

@@ -54,7 +54,7 @@ function PostViewPage(props) {
                 <S.TitleText>
                     <S.TextTitle>제목</S.TextTitle>
                     <S.SubTitle>
-                        <S.DateText>2024-10-25</S.DateText>
+                        <S.DateText>2024-10-25 작성</S.DateText>
                         <S.ButtonGroup>
                             <S.CategoryButton>실시간</S.CategoryButton>
                             <S.MapButton><img src={now} style={{ cursor: "pointer", marginRight: "3px" }} />지도에서 위치보기</S.MapButton>
