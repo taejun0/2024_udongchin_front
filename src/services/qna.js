@@ -4,8 +4,8 @@ export const QnaMarkerData = async (markerData) => {
   const formData = new FormData();
   formData.append("title", markerData.title);
   formData.append("content", markerData.content);
-  formData.append("photo", markerData.photo);
-  formData.append("type", markerData.type);
+  formData.append("image", markerData.photo);
+  formData.append("mode", markerData.type);
   formData.append("locations", JSON.stringify(markerData.locations));
 
   try {
