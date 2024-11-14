@@ -491,6 +491,7 @@ export const TextType3 = styled.div`
   font-size: 12px;
   font-style: normal;
   font-weight: 800;
+  `;
   
 export const Name = styled.div`
   color: ${({theme}) => theme.colors.black};
