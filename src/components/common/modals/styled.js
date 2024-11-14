@@ -15,6 +15,20 @@ export const ModalOverlay = styled.div`
   z-index: 20;
 `;
 
+export const ModalOverlay2 = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 44px);
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 20;
+`;
+
 export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,6 +37,8 @@ export const ModalContent = styled.div`
   padding: 20px;
   border-radius: 10px;
   width: 80%;
+
+  position: relative;
   
   box-shadow : ${({ $Urgent }) => $Urgent ? "0px 0px 15px 5px #FFA9AB" : "none"};
 `;
@@ -49,6 +65,15 @@ export const InformationHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+export const InformationHeader2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+  gap: 5px;
 `;
 
 export const User = styled.div`
@@ -219,7 +244,7 @@ export const SubTextType = styled.div`
 
 
 export const SubText = styled.div`
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   color: ${({theme}) => theme.colors.darkgray};
   font-size: 8px;
   font-style: normal;
@@ -303,9 +328,48 @@ export const CommentText2 = styled.div`
   font-weight: 700;
 `;
 
+export const Radios = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+`;
 
+export const RadioLabel2 = styled.label`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: ${({ theme }) => (theme.colors.black)};
 
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 700;
+`;
 
+export const RadioInput = styled.input`
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid ${({ theme }) => theme.colors.yellow};
+  border-radius: 50%;
+  margin-right: 4px;
+  position: relative;
+  cursor: pointer;
+
+  &:checked::before {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    background-color: ${({ theme }) => theme.colors.yellow};
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
 
 export const RadioLabel = styled.label`
 display: flex;
@@ -382,7 +446,7 @@ export const RModalSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  item-align: flex-start;
+  align-items: flex-start;
   gap: 16px;
 `;
 
@@ -407,7 +471,6 @@ export const RSubText = styled.div`
   font-weight: 700;
 `;
 
-
 export const ModalContent3 = styled.div`
   display: flex;
   flex-direction: column;
@@ -428,4 +491,109 @@ export const TextType3 = styled.div`
   font-size: 12px;
   font-style: normal;
   font-weight: 800;
+  
+export const Name = styled.div`
+  color: ${({theme}) => theme.colors.black};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFEB["font-family"]};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+`;
+
+export const NameDetail = styled.div`
+  color: ${({theme}) => theme.colors.darkgray};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const InformationBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 40px;
+  gap: 8px;
+  border-radius: 2px;
+  background-color: ${({theme}) => theme.colors.lightgray};
+`;
+
+export const InformationBoxHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 20px;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+`;
+
+export const InformationItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  padding: 3px 7px;
+  top: -20px;
+  left: 0;
+  border-radius: 2px;
+  background: ${({theme}) => theme.colors.yellow_btn};
+
+  color: ${({theme}) => theme.colors.white};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+`;
+
+export const InformationItem2 = styled.div`
+  display: flex;
+
+  color: ${({theme}) => theme.colors.darkgray};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+
+  gap: 6px;
+`;
+
+export const Infos = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  gap: 8px;
+`;
+
+export const Infocontents = styled.div`
+  color: ${({theme}) => theme.colors.black};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  
+  min-width: 40px;
+`;
+
+export const VertiLINE = styled.div`
+  width: 2px;
+  height: 7px;
+  background: ${({theme}) => theme.colors.Dyellow};
+`;
+
+export const BottomImageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const BottomImage = styled.img`
+  position: absolute;
+  display: flex;
+  bottom: 0px;
+  width: calc(113.5%);
+  transform: translateY(40%);
 `;

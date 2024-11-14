@@ -9,6 +9,8 @@ export const MapSize = styled.div`
 
 export const Nowlocation = styled.div`
   position: absolute;
+  flex-direction: column;
+  display: flex;
   top: 20px;
   z-index: 10;
 `;
@@ -38,7 +40,7 @@ export const Notice = styled.div`
   position: absolute;
   top: 10px;
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   color: ${({theme}) => theme.colors.black};
   font-size: 12px;
   font-style: normal;
@@ -64,8 +66,12 @@ export const Location = styled.div`
 
 export const FixButton = styled.button`
   display: flex;
+  background-color: ${({theme}) => theme.colors.yellow_btn};
+  padding: 5px 9px;
+  border-radius: 3px;
+
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
-  color: ${({theme}) => theme.colors.black};
+  color: ${({theme}) => theme.colors.white};
   font-size: 12px;
   font-style: normal;
   font-weight: 800;

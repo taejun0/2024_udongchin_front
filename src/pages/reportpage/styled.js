@@ -29,7 +29,7 @@ export const MainText1 = styled.div`
   gap: 5px;
   color: ${({theme}) => theme.colors.black};
 
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
   font-size: 10px;
   font-style: normal;
   font-weight: 700;

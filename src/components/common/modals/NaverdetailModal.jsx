@@ -13,9 +13,10 @@ import FilledHeart from "/images/FilledHeart.svg";
 import rightArrow from "/images/rightArrow.svg";
 
 export const NaverDetailModal = ({ location, onClose }) => {
-  const { isLiked, likesCount, toggleLike } = useLike(location.postId, location.likesCount);
-  const { Urgent, isLoading } = useUrgent(location.postId);
+  const { isLiked, likesCount, toggleLike } = useLike(location.id, location.likesCount);
+  const { Urgent, isLoading } = useUrgent(location.id);
   const [modalOpen, setModalOpen] = useState(false);
+  const dateOnly = location.createdAt.substring(0, 10);
 
   const navigate = useNavigate();
 
@@ -32,11 +33,11 @@ export const NaverDetailModal = ({ location, onClose }) => {
             <img src={location.imageUrl} style={{width: "34px", height: "34px", borderRadius: "50%"}} />
             <S.UserInfo>
               <S.UserName>{location.nickname}</S.UserName>
-              <S.UserCreated>{location.createdAt}</S.UserCreated>
+              <S.UserCreated>{dateOnly} 작성</S.UserCreated>
             </S.UserInfo>
           </S.User>
           <S.Buttons>
-          {location.type === "Q&A" ? (location.urgent === false ? (<button onClick={() => setModalOpen(true)}><img src={Warning} style={{ width: "14px", height: "14px", cursor: "pointer" }} /></button>) : (<img src={Warning_now} style={{ width: "50px"}}/>)) : null}
+          {location.mode === "실시간 Q&A" ? (location.urgent === false ? (<button onClick={() => setModalOpen(true)}><img src={Warning} style={{ width: "14px", height: "14px", cursor: "pointer" }} /></button>) : (<img src={Warning_now} style={{ width: "50px"}}/>)) : null}
             <button onClick={onClose}><img src={X} style={{width: "12px", height: "12px", cursor: "pointer", transform:"translateY(3px)"}} /></button>
           </S.Buttons>
         </S.InformationHeader>
@@ -57,7 +58,14 @@ export const NaverDetailModal = ({ location, onClose }) => {
         <S.LinePad />
         <S.CommentText>전체 답변 {location.commentCount}건</S.CommentText>
         <S.RowBetween>
-          <S.CommentText2 onClick={() => navigate()}>답변 작성하러 가기</S.CommentText2>
+          <S.CommentText2 onClick={() => {
+            if (location.type === "자유게시판") {
+              navigate(`/freeboard/${location.id}`)
+            } else if (location.type === "홍보게시판") {
+              navigate(`/prboard/${location.id}`)
+            }
+            navigate()
+          }}>답변 작성하러 가기</S.CommentText2>
           <img src={rightArrow} />
         </S.RowBetween>
       </S.ModalContent>

@@ -1,17 +1,28 @@
 import * as S from "./styled";
 import { useEffect, useState, useRef } from "react";
-import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { useLocation } from "@contexts/LocationContext";
+
+import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
+import { MapModal } from "@components/common/modals/MapModal";
+import { WarningLoginModal } from "@components/common/modals/WarningLoginModal";
+
+import Toast1 from "@components/common/Toasts/Toast1";
+import Toast2 from "@components/common/Toasts/Toast2";
+
 import nowimageDefault from "/images/nowlocation.svg";
 import nowimageChanged from "/images/nowlocation_ch.svg";
 
+import { getRandomCoordinateForDong } from "@utils/coordinateUtils";
+
+
 const backgroundIcons = {
-  "Q&A": "/images/marker_qna.svg",
-  "Community": "/images/marker_real.svg",
+  "실시간 Q&A": "/images/marker_qna.svg",
+  "실시간 기록": "/images/marker_real.svg",
+  "생태 지도": "/images/marker_sengtae.svg",
   "Urgent": "/images/marker_urgent.svg",
 };
 
-export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) => {
+export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, viewtype }) => {
   const NAVER_MAP_KEY = import.meta.env.VITE_NAVER_MAP_KEY;
 
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -22,6 +33,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
   const [nowimage, setNowImage] = useState(nowimageDefault);
   
   const circleRef = useRef(null); // 원을 useRef로 관리
+  const currentMarkerRef = useRef(null);
 
   // 지도 초기화 및 마커 설정
   useEffect(() => {
@@ -31,6 +43,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
         zoom: 15,
       });
       setMap(mapInstance);
+      
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -46,7 +59,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
 
             // 현재 위치 주소 설정
             naver.maps.Service.reverseGeocode(
-              { coords: coord, orders: ["addr"] },
+              { coords: coord, orders: "addr" },
               (status, response) => {
                 if (status === naver.maps.Service.Status.OK) {
                   const result = response.v2.address;
@@ -61,12 +74,9 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             );
 
             if (onMapReady && typeof onMapReady === "function") {
-              onMapReady(() => {
-                mapInstance.setCenter(coord);
-                updateAddressByCenter();
-              });
+              onMapReady(mapInstance, coord);  // coord는 현재 위치로 설정된 LatLng 객체입니다.
             }
-
+            
             const currentMarker = new naver.maps.Marker({
               position: coord,
               map: mapInstance,
@@ -76,6 +86,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
                 anchor: new naver.maps.Point(28, 28),
               },
             });
+            currentMarkerRef.current = currentMarker;
 
             const userCircle = new naver.maps.Circle({
               map: mapInstance,
@@ -92,7 +103,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             const updateAddressByCenter = () => {
               const center = mapInstance.getCenter();
               naver.maps.Service.reverseGeocode(
-                { coords: center, orders: ["addr"] },
+                { coords: center, orders: "addr" },
                 (status, response) => {
                   if (status === naver.maps.Service.Status.OK) {
                     const result = response.v2.address;
@@ -127,42 +138,71 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
             // 외부 위치 데이터 마커 추가
             if (Array.isArray(locations)) {
               locations.forEach((location) => {
-                const markerPosition = new naver.maps.LatLng(location.lat, location.lng);
-                const backgroundUrl = backgroundIcons[location.type === "Q&A" ? (location.urgent ? "Urgent" : "Q&A") : "Community"];
+                if (!Array.isArray(location.locations)) {
+                  console.error("Invalid locations array:", location);
+                  return;
+                }
 
-                const marker = new naver.maps.Marker({
-                  position: markerPosition,
-                  map: mapInstance,
-                  icon: {
-                    content: `
-                      <div style="
-                        position: relative; 
-                        width: 40px; 
-                        height: 50px; 
-                        background-image: url('${backgroundUrl}');
-                        background-size: cover;
-                        transform: translateY(-31px);
-                        ${backgroundUrl === backgroundIcons["Urgent"] ? "filter: drop-shadow(0px 0px 10px #FF8B8D);" : ""}
-                      ">
-                        <img src="${location.imageUrl}" alt="marker" style="
-                          display: flex;
-                          position: absolute;
-                          left: 6px;
-                          top: 6px;
-                          width: 28px; 
-                          height: 28px; 
-                          border-radius: 50%;
-                        " />
-                      </div>
-                    `,
-                    size: new naver.maps.Size(40, 40),
-                    anchor: new naver.maps.Point(20, 20),
-                  },
-                });
+                let [lat, lng, dongAddress] = location.locations;
 
-                naver.maps.Event.addListener(marker, "click", () => {
-                  setSelectedLocation(location);
-                });
+                if (location.mode === "생태 지도") {
+                  if (!location.randomCoordinate) {
+                    const randomCoordinate = getRandomCoordinateForDong(dongAddress);
+                    
+                    // 반환된 좌표가 유효한 경우만 randomCoordinate에 저장
+                    if (randomCoordinate) {
+                      location.randomCoordinate = randomCoordinate;
+                      console.log("생태 지도 랜덤 좌표 적용됨:", location.randomCoordinate);
+                    } else {
+                      console.warn(`동네 좌표를 찾을 수 없음: ${dongAddress}`);
+                      return; // 좌표가 없는 경우 마커 생성 중단
+                    }
+                  }
+            
+                  // randomCoordinate 사용
+                  [lat, lng, dongAddress] = location.randomCoordinate;
+                }
+
+                const markerPosition = new naver.maps.LatLng(parseFloat(lat), parseFloat(lng));
+                console.log("최종 마커 위치 적용:", markerPosition);
+                const backgroundUrl = backgroundIcons[location.mode === "생태 지도" ? "생태 지도" : (location.mode === "실시간 Q&A" ? (location.urgent ? "Urgent" : "실시간 Q&A") : "실시간 기록")];
+
+                const displaying = location.mode === "실시간 Q&A" || (location.mode === "실시간 기록" && dongAddress === currentAddress) || location.mode === "생태 지도";
+
+                if (displaying) {
+                  const marker = new naver.maps.Marker({
+                    position: markerPosition,
+                    map: mapInstance,
+                    icon: {
+                      content: `
+                        <div style="
+                          position: relative; 
+                          width: 40px; 
+                          height: 50px; 
+                          background-image: url('${backgroundUrl}');
+                          background-size: cover;
+                          transform: translateY(-31px);
+                          ${backgroundUrl === backgroundIcons["Urgent"] ? "filter: drop-shadow(0px 0px 10px #FF8B8D);" : ""}
+                        ">
+                          <img src="${location.imageUrl}" alt="marker" style="
+                            display: flex;
+                            position: absolute;
+                            left: 6px;
+                            top: 6px;
+                            width: 28px; 
+                            height: 28px; 
+                            border-radius: 50%;
+                          " />
+                        </div>
+                      `,
+                      size: new naver.maps.Size(40, 40),
+                      anchor: new naver.maps.Point(20, 20),
+                    },
+                  });
+                  naver.maps.Event.addListener(marker, "click", () => {
+                    setSelectedLocation(location);
+                  });
+                }
               });
             }
           }
@@ -195,7 +235,10 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
           setLocation(coord);
           map.panTo(coord);
 
-          // 사용자의 새로운 위치로 원(center)을 업데이트
+          if (currentMarkerRef.current) {
+            currentMarkerRef.current.setPosition(coord);
+          }
+
           if (circleRef.current) {
             circleRef.current.setCenter(coord);
           }
@@ -216,12 +259,35 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser }) =
 
   return (
     <S.MapSize id="map">
-      <S.Nowlocation>
-        <S.Address><S.Image src={nowimage} />{address}</S.Address>
-      </S.Nowlocation>
+      { viewtype === "전체" ? (
+         address === currentAddress ? (
+          <S.Nowlocation>
+            <S.Address><S.Image src={nowimage} />{address}</S.Address>
+            <Toast1 />
+          </S.Nowlocation>
+        ) : (
+          <S.Nowlocation>
+            <S.Address><S.Image src={nowimageDefault} />{address}</S.Address>
+            <Toast2 />
+          </S.Nowlocation>
+        )
+      ) : (
+        <S.Nowlocation>
+          <S.Address><S.Image src={nowimageDefault} />내 우동친 지도</S.Address>
+        </S.Nowlocation>
+      )}
+      
+
       {selectedLocation && (
-        <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
+        selectedLocation.mode === "생태 지도" ? (
+          <>
+            <MapModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
+          </>
+        ) : (
+          <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
+        )
       )}
     </S.MapSize>
+    
   );
 };
