@@ -72,7 +72,7 @@ export const Box = styled.div`
 
   color: #000;
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -135,7 +135,7 @@ export const Myprofile = styled.div`
 
 export const UserName = styled.div`
   color: #000;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;

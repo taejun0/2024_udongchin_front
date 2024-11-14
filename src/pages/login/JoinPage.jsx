@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import Button from "../../components/common/buttons/PostButton";
 import { onSubmitHandler } from "../../services/signUp";
 import backward from "/images/Backward.svg";
-
 const JoinPage = () => {
     const [step, setStep] = useState(1); // Track current step
     const [nickname, setNickname] = useState('');
@@ -12,6 +11,7 @@ const JoinPage = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [isAgreeChecked, setIsAgreeChecked] = useState(false); // Track agreement checkbox
+    const [idCheckMessage, setIdCheckMessage] = useState(null); // 중복 확인 메시지
     const navigate = useNavigate();
 
     const idRegex = /^[a-zA-Z0-9]{8,}$/;

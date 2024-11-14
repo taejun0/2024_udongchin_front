@@ -165,3 +165,23 @@ export const CommentContainer = styled.div`
     padding: 8px;
     border-radius: 8px;
 `;
+
+export const EditButton = styled.button`
+    background-color: #E1AC57;
+    color: white;
+    font-size: 12px;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+`;
+
+export const DelButton = styled.button`
+    background-color: #FF8B8D;
+    color: white;
+    font-size: 12px;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+`;

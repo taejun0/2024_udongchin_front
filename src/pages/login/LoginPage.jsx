@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from "./styled";
 import { onSubmitHandler } from "../../services/login";
 import backward from "/images/Backward.svg"
+import logo from "/images/logo.png"
 
 function LoginPage() {
   const [memberId, setMemberId] = useState("");
@@ -37,7 +38,7 @@ function LoginPage() {
         <S.Title>로그인</S.Title>
       </S.Header>
       <S.Main>
-        <S.LoginTitle>로고</S.LoginTitle>
+        <S.LoginTitle><img src={logo} style={{ width: "121.44px", height: "41.52px"}}/></S.LoginTitle>
 
         <S.Label>
           아이디 입력

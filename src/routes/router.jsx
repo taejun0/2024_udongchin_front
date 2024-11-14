@@ -15,6 +15,7 @@ import {FreeBoard} from "@pages/community/FreeBoard";
 import { ReportPage } from "@pages/reportpage/ReportPage";
 import { MyudchistoryPage } from "@pages/myudchistorypage/MyudchistoryPage";
 import { UdcmanualPage } from "@pages/udcmanualpage/UdcmanualPage";
+import { MyPostPage} from "@pages/community/MyPostPage";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTE_PATHS.POST_VIEW,
         element: <PostViewPage />
+      },
+      {
+        path: ROUTE_PATHS.MYPOST,
+        element: <MyPostPage />
       },
     ],
     errorElement: <NotFoundLayout />,

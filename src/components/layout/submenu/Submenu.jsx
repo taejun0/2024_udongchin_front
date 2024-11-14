@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./styled";
 import X from "/images/Vector.svg";
 import ThreeLine from "/images/ThreeLine.svg"; 
@@ -7,6 +7,20 @@ import { useNavigate } from "react-router-dom";
 export const Submenu = ({onClose}) => {
   const navigation = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
+
+  // 프로필 이미지 URL 배열
+  const profileImages = [
+      "/profile/rabit_profile.png",
+      "/profile/raccoon_profile.png",
+      "/profile/squirrel_profile.png"
+  ];
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * profileImages.length);
+    setProfileImage(profileImages[randomIndex]);
+    }, []);
+
 
   // 로그인 함수 예제
   const handleLogin = () => {
@@ -30,11 +44,13 @@ export const Submenu = ({onClose}) => {
         <>
         <S.ProfileSection>
           <S.ImgSection>
-            <S.ProfileImage src="/path/to/profile-image.jpg" alt="프로필 이미지" />
+            <S.ProfileImage src={profileImage} alt="프로필 이미지" />
           </S.ImgSection>
           <S.InfoSection>
             <S.Myprofile>내 프로필</S.Myprofile>
-            <S.UserName>춤추는 토끼</S.UserName>
+            <S.UserName>
+              춤추는 토끼
+              </S.UserName>
             <S.UserId>아이디 odc123</S.UserId>
           </S.InfoSection>
         </S.ProfileSection>

@@ -11,10 +11,10 @@ export const onSubmitHandler = async (memberId, password, navigate, setErrorMess
         const response = await instance.post("https://43.203.40.221.nip.io/api/signIn", requestBody);
 
         if (response.data.success) {
-            alert("로그인 성공!");
-            navigate("/"); 
-        } else {
             alert("로그인 실패: " + response.data.message);
+        } else {
+            alert("로그인 성공!");
+            navigate("/");             
         }
     } catch (error) {
         console.error("로그인 요청 오류:", error);
