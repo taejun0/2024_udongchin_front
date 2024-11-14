@@ -6,14 +6,17 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "@routes/router";
 
 import { LocationProvider } from "@contexts/LocationContext";
+import { AuthProvider } from "@contexts/AuthContext";
 
 export const App = () => {
   return (
-    <LocationProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </LocationProvider>
+    <AuthProvider >
+      <LocationProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </LocationProvider>
+    </AuthProvider>
   );
 };

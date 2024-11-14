@@ -152,7 +152,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
                     // 반환된 좌표가 유효한 경우만 randomCoordinate에 저장
                     if (randomCoordinate) {
                       location.randomCoordinate = randomCoordinate;
-                      console.log("생태 지도 랜덤 좌표 적용됨:", location.randomCoordinate);
                     } else {
                       console.warn(`동네 좌표를 찾을 수 없음: ${dongAddress}`);
                       return; // 좌표가 없는 경우 마커 생성 중단
@@ -164,7 +163,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
                 }
 
                 const markerPosition = new naver.maps.LatLng(parseFloat(lat), parseFloat(lng));
-                console.log("최종 마커 위치 적용:", markerPosition);
                 const backgroundUrl = backgroundIcons[location.mode === "생태 지도" ? "생태 지도" : (location.mode === "실시간 Q&A" ? (location.urgent ? "Urgent" : "실시간 Q&A") : "실시간 기록")];
 
                 const displaying = location.mode === "실시간 Q&A" || (location.mode === "실시간 기록" && dongAddress === currentAddress) || location.mode === "생태 지도";

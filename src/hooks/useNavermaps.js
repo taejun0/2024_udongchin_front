@@ -9,11 +9,17 @@ const useNavermaps = () => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await instance.get('YOUR_BACKEND_ENDPOINT/locations'); // 백엔드 API 주소
+        const response = await instance.get('/api/post/qa');
         setLocations(response.data || []); // undefined일 경우 빈 배열로 설정
-        setLoading(false);
       } catch (err) {
-        setError(err);
+        if (err.response && err.response.status === 401) {
+          console.error("Unauthorized - Please check your login status.");
+          setError("로그인이 필요합니다. 다시 로그인해주세요.");
+        } else {
+          console.error("Error fetching locations:", err);
+          setError("데이터를 가져오는 중 오류가 발생했습니다.");
+        }
+      } finally {
         setLoading(false);
       }
     };

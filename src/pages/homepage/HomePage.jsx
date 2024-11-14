@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import * as S from "./styled";
+
+import { fetchAllLocations, fetchMyLocations } from "@services/locationService";
 import { Navermap } from "@components/specific/maps/Navermap";
 import useNavermaps from "@hooks/useNavermaps";
 import { useAuthContext } from "@contexts/AuthContext";
@@ -13,14 +15,15 @@ import adding_chat from "/images/adding_chat.svg";
 import sidebar_his from "/images/sidebar_his.svg";
 import RightLowHome from "/images/RightLowHome.svg";
 import RightLowHome_ch from "/images/RightLowHome_ch.svg";
-import { MapSelector } from "@components/specific/maps/MapSelector";
 import { WarningLoginModal } from "@components/common/modals/WarningLoginModal";
+
+import { MapSelector } from "@components/specific/maps/MapSelector";
 import { MapModal } from "@components/common/modals/MapModal";
 import { CommunityMap } from "@components/specific/maps/CommunityMap";
 
 export const HomePage = () => {
-  const { nickname } = useAuthContext();
-  const {locations, loading, error} = useNavermaps();
+  const { userId } = useAuthContext();
+  const [locations, setLocations] = useState([]);
   const [QnaModalOpen, setQnaModalOpen] = useState(false);
   const [LoginModalOpen, setLoginModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -34,6 +37,19 @@ export const HomePage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = viewtype === "전체" ? await fetchAllLocations() : await fetchMyLocations();
+        setLocations(data);
+      } catch (err) {
+        console.error("Error fetching locations:", err);
+        setError("데이터를 가져오는 중 오류가 발생했습니다.");
+      }
+    };
+    fetchData();
+  }, [viewtype]);
+
   const toggleVeiwtype = (type) => {
     setViewtype(type);
   }
@@ -46,19 +62,19 @@ export const HomePage = () => {
     setSelectmy((prev) => (prev=== "my" ? "mymy" : "my"));
   };
 
-  const LocationFiltering = isExpand2 ? locations.filter((location) => location.nickname === nickname) : locations;
-
   const handleRestrictedAction = () => {
-    if (!nickname) {
+    if (!userId) {
       setLoginModalOpen(true);
+      console.log(userId);
       return false;
     }
+    console.log(userId);
     return true;
   };
 
   const handleExpand = useCallback(() => {
     if (!isExpand && mapRef && currentPosition) {
-      mapRef.panTo(currentPosition); // 현재 위치로 지도 이동
+      mapRef.panTo(currentPosition);
     }
     setExpand((prev) => !prev);
   }, [isExpand, mapRef, currentPosition]);
@@ -69,12 +85,10 @@ export const HomePage = () => {
   }, []);
 
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div style={{position: "relative"}}>
-      {!LoginModalOpen && (
+      {!LoginModalOpen && !QnaModalOpen && (
         <S.SelectBox>
           <S.SelectL
             onClick={() => toggleVeiwtype("전체")}
@@ -91,7 +105,7 @@ export const HomePage = () => {
         </S.SelectBox>
       )}
       <Navermap 
-        locations={mockLocations} // LocationFiltering 넣기
+        locations={locations}
         followUser={followUser}
         setFollowUser={setFollowUser}
         onMapReady={onMapReady}
