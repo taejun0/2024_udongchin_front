@@ -71,8 +71,8 @@ export const Box = styled.div`
   align-items: center;
 
   color: #000;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
-  font-size: 16px;
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -92,7 +92,7 @@ export const ProfileSection = styled.div`
   align-items: flex-start;
   gap: 20px;
   flex-shrink: 0;
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
   border-bottom: 1px solid ${({theme}) => theme.colors.gray};
 `;
 
@@ -126,7 +126,7 @@ export const Myprofile = styled.div`
   border: 0.866px solid var(--Yellow, #E3B05F);
   background: var(--yellow, #FFFED3);
   color: var(--black, #232323);
-  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
   font-size: 10.396px;
   font-style: normal;
   font-weight: 500;
@@ -135,7 +135,7 @@ export const Myprofile = styled.div`
 
 export const UserName = styled.div`
   color: #000;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;

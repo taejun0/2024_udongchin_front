@@ -14,4 +14,5 @@ export const ROUTE_PATHS = {
   COMMUNITY: "/community",
   PRBOARD: "/prboard",
   FREEBOARD:"/freeboard",
+  MYPOST:"/mypost",
 };

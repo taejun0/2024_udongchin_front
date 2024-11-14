@@ -471,6 +471,28 @@ export const RSubText = styled.div`
   font-weight: 700;
 `;
 
+export const ModalContent3 = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--light-yellow, #FFFFE5);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+`;
+
+export const TextType3 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+  color: ${({theme}) => theme.colors.black};
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  `;
+  
 export const Name = styled.div`
   color: ${({theme}) => theme.colors.black};
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFEB["font-family"]};

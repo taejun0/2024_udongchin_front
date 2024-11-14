@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./styled";
 
-export const DeleteModal = ({ onConfirm, onCancel }) => {
+export const DeleteComment = ({ onConfirm, onCancel }) => {
   return (
     <S.ModalOverlay>
       <S.ModalContent2>

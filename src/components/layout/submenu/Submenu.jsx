@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./styled";
 import X from "/images/Vector.svg";
 import ThreeLine from "/images/ThreeLine.svg"; 
@@ -7,6 +7,20 @@ import { useNavigate } from "react-router-dom";
 export const Submenu = ({onClose}) => {
   const navigation = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
+
+  // 프로필 이미지 URL 배열
+  const profileImages = [
+      "/profile/rabit_profile.png",
+      "/profile/raccoon_profile.png",
+      "/profile/squirrel_profile.png"
+  ];
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * profileImages.length);
+    setProfileImage(profileImages[randomIndex]);
+    }, []);
+
 
   // 로그인 함수 예제
   const handleLogin = () => {
@@ -28,32 +42,40 @@ export const Submenu = ({onClose}) => {
       {isLoggedIn ? (
         // 로그인 후 화면
         <>
-          <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/login")}>
+        <S.ProfileSection>
+          <S.ImgSection>
+            <S.ProfileImage src={profileImage} alt="프로필 이미지" />
+          </S.ImgSection>
+          <S.InfoSection>
+            <S.Myprofile>내 프로필</S.Myprofile>
+            <S.UserName>
+              춤추는 토끼
+              </S.UserName>
+            <S.UserId>아이디 odc123</S.UserId>
+          </S.InfoSection>
+        </S.ProfileSection>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
+        내 활동 기록
+        </S.Box>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
+          about 우동친
+        </S.Box>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
+          로그아웃
+        </S.Box>
+        </>
+      ) : (
+        // 로그인 전 화면
+        <>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/login")}>
         로그인
         </S.Box>
         <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
           회원가입
         </S.Box>
-        </>
-      ) : (
-        // 로그인 전 화면
-          <>
-          <S.ProfileSection>
-            <S.ImgSection>
-              <S.ProfileImage src="/path/to/profile-image.jpg" alt="프로필 이미지" />
-            </S.ImgSection>
-            <S.InfoSection>
-              <S.Myprofile>내 프로필</S.Myprofile>
-              <S.UserName>춤추는 토끼</S.UserName>
-              <S.UserId>아이디 odc123</S.UserId>
-            </S.InfoSection>
-          </S.ProfileSection>
-          <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
-          내 우동친 기록
-          </S.Box>
-          <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/")}>
-            로그아웃
-          </S.Box>
+        <S.Box style={{cursor: "pointer"}} onClick={() => navigation("/join")}>
+          about 우동친
+        </S.Box>
         </>
       )}
     </S.Wrapper>

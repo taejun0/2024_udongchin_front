@@ -45,9 +45,8 @@
     `;
 
     export const LoginTitle = styled.h2`
-    font-size: 24px;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 40px 0;
     `;
 
     export const Label = styled.label`
@@ -82,7 +81,7 @@
     font-weight: 400;
     color: #fff;
     background-color: #5b3200;
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -98,7 +97,7 @@
     color: #232323;
     background-color: #ffffe5;
     border: 1.5px solid #e3b05f;
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
     border-radius: 5px;
     cursor: pointer;
     `;
@@ -120,6 +119,7 @@ export const SignupContainer = styled.div`
 export const FormGroup = styled.div`
     margin-bottom: 30px;
     width: 100%;
+    font-size: 14px
 `;
 
 export const InputField = styled.input`
@@ -167,3 +167,54 @@ export const SubmitButton = styled.button`
     cursor: pointer;
 `;
 
+
+export const ErrorMessage = styled.p`
+  color: var(--RED2, #FF8B8D);
+  font-size: 10px;
+  margin-top: 5px;
+`;
+
+// styled.js
+
+export const CheckBoxContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #575757;
+
+    input[type="checkbox"] {
+        appearance: none; /* 기본 체크박스 스타일 제거 */
+        width: 13.5px;
+        height: 13.5px;
+        border-radius: 30px;
+        border: 1.5px solid #E1AC57; /* 외곽선 색상 */
+        background-color: #FFF;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.3s ease;
+
+        &:checked {
+            background-color: #FFF; /* 체크 상태에서 배경색 유지 */
+        }
+
+        &:checked::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 7.5px;
+            height: 7.5px;
+            background-color: #E1AC57; /* 내부 원 색상 */
+            border-radius: 30px;
+        }
+    }
+
+    label {
+        cursor: pointer;
+        margin-right:15px;
+    }
+`;

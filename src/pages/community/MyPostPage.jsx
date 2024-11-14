@@ -4,11 +4,10 @@ import * as S from "./styled";
 import CommentList from "../../components/common/list/CommentList";
 import TextInput from "../../components/common/inputs/TextInput";
 import Button from "../../components/common/buttons/MoveButton";
-import ReportModal from "../../components/common/modals/ReportModal";
+import DelModal from "../../components/common/modals/DeletePost";
 import backward from "/images/Backward.svg";
-import now from "/images/write_location.svg";
 
-function PostViewPage(props) {
+function MyPostPage(props) {
     const navigate = useNavigate();
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]); // 댓글 목록을 위한 상태 추가
@@ -56,9 +55,8 @@ function PostViewPage(props) {
                     <S.SubTitle>
                         <S.DateText>2024-10-25 작성</S.DateText>
                         <S.ButtonGroup>
-                            <S.CategoryButton>실시간</S.CategoryButton>
-                            <S.MapButton><img src={now} style={{ cursor: "pointer", marginRight: "3px" }} />지도에서 위치보기</S.MapButton>
-                            <S.ReportButton onClick={openModal}>신고하기</S.ReportButton>
+                            <S.EditButton onClick={openModal}>수정하기</S.EditButton>
+                            <S.DelButton onClick={openModal}>삭제하기</S.DelButton>
                         </S.ButtonGroup> 
                     </S.SubTitle>
                 </S.TitleText>
@@ -80,9 +78,9 @@ function PostViewPage(props) {
                 <CommentList comments={comments} />
             </S.Main>
 
-            {isModalOpen && <ReportModal onConfirm={closeModal} onCancel={closeModal} />}
+            {isModalOpen && <DelModal onConfirm={closeModal} onCancel={closeModal} />}
         </S.Container>
     );
 }
 
-export { PostViewPage };
+export { MyPostPage };

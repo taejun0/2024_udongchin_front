@@ -18,7 +18,7 @@ const StyledButton = styled.button`
     `}
     background-color: ${(props) => props.$backgroundColor || "transparent"};
     color: ${(props) => props.color || "black"};
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
 `;
 
 // PostButton 컴포넌트에서 $backgroundColor와 color를 props로 받아
