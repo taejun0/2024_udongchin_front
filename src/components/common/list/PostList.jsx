@@ -1,4 +1,3 @@
-// PostList.js
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +18,10 @@ const Wrapper = styled.div`
 function PostList({ posts = [] }) {
     const navigate = useNavigate();
 
-    const handlePostClick = (postId) => {
-        navigate(`/postview/${postId}`); // 클릭한 게시글의 ID를 포함하여 이동
+    const handlePostClick = (postId, postType) => {
+        // 게시글 유형에 따라 경로를 결정
+        const basePath = postType === "홍보게시판" ? "/prview" : "/postview";
+        navigate(`${basePath}/${postId}`); // 클릭한 게시글의 ID를 포함하여 이동
     };
 
     return (
@@ -36,7 +37,7 @@ function PostList({ posts = [] }) {
                         comments: post.commentCount,
                         imageUrl: post.imageUrl,
                     }}
-                    onClick={() => handlePostClick(post.id)} // 클릭 시 이동 처리
+                    onClick={() => handlePostClick(post.id, post.type)} // 클릭 시 이동 처리
                 />
             ))}
         </Wrapper>

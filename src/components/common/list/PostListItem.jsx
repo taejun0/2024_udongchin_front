@@ -1,5 +1,3 @@
-// PostListItem.js
-
 import React from "react";
 import styled from "styled-components";
 
@@ -67,7 +65,8 @@ function PostListItem({ post, onClick }) {
                     <span>댓글 {post.comments}개</span>
                 </InfoText>
             </ContentWrapper>
-            <Thumbnail imageurl={post.imageUrl} /> {/* imageUrl을 소문자로 변경 */}
+            {/* imageUrl이 있을 때만 Thumbnail 렌더링 */}
+            {post.imageUrl && <Thumbnail imageurl={post.imageUrl} />}
         </Wrapper>
     );
 }

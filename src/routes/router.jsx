@@ -9,13 +9,15 @@ import {JoinPage} from "@pages/login/JoinPage"
 import { NotFoundLayout } from "@layouts/NotFoundLayout";
 import {MainPage} from "@pages/community/MainPage";
 import {PostWritePage} from "@pages/community/PostWritePage";
+import {PrWritePage} from "@pages/community/PrWritePage";
 import {PostViewPage} from "@pages/community/PostViewPage";
+import {PrViewPage} from "@pages/community/PrViewPage";
 import {PrBoard} from "@pages/community/PrBoard";
 import {FreeBoard} from "@pages/community/FreeBoard";
 import { ReportPage } from "@pages/reportpage/ReportPage";
 import { MyudchistoryPage } from "@pages/myudchistorypage/MyudchistoryPage";
 import { UdcmanualPage } from "@pages/udcmanualpage/UdcmanualPage";
-import { MyPostPage} from "@pages/community/MyPostPage";
+import { PostEditPage} from "@pages/community/PostEditPage";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +61,10 @@ export const router = createBrowserRouter([
         element: <PostWritePage />
       },
       {
+        path: ROUTE_PATHS.PR_WRITE,
+        element: <PrWritePage />
+      },
+      {
         path: ROUTE_PATHS.PRBOARD,
         element: <PrBoard />
       },
@@ -71,8 +77,12 @@ export const router = createBrowserRouter([
         element: <PostViewPage />
       },
       {
-        path: ROUTE_PATHS.MYPOST,
-        element: <MyPostPage />
+        path: ROUTE_PATHS.PR_VIEW,
+        element: <PrViewPage />
+      },
+      {
+        path: ROUTE_PATHS.EDITPOST,
+        element: <PostEditPage />
       },
     ],
     errorElement: <NotFoundLayout />,

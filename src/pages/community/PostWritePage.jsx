@@ -161,7 +161,6 @@ function PostWritePage() {
                 />
             </Header>
             <Container>
-                <Location>서울시 중구 신당동</Location>
                 <Title>
                     <Heading>제목</Heading>
                     <TextInput
