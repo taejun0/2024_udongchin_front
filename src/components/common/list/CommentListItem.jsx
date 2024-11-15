@@ -56,21 +56,9 @@ const ContentText = styled.p`
     line-height: 15px;
 `;
 
-const LikeWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    color: #888;
-    font-size: 12px;
-    margin-left: 8px;
-    cursor: pointer;
-
-    &:hover {
-        color: #e74c3c;
-    }
-`;
-
 function CommentListItem(props) {
     const { comment } = props;
+    console.log(comment); // comment 데이터 구조 확인용
 
     return (
         <Wrapper>
@@ -78,13 +66,10 @@ function CommentListItem(props) {
             <ContentWrapper>
                 <Header>
                     <Nickname>{comment.nickname}</Nickname>
-                    <DateText>{comment.date}</DateText>
+                    <DateText>{new Date(comment.createdAt).toLocaleDateString()}</DateText>
                 </Header>
                 <ContentText>{comment.content}</ContentText>
             </ContentWrapper>
-            <LikeWrapper>
-                <span style={{ marginLeft: "4px" }}>{comment.likes}개</span>
-            </LikeWrapper>
         </Wrapper>
     );
 }

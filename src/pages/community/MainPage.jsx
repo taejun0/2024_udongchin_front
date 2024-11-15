@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./MainStyle";
 import PostListItem from "../../components/common/list/PostListItem";
+import { instance } from "../../services/instance"; // Axios instance 불러오기
 import frontward from "/images/Frontward.svg"
 import nowimage from "/images/nowlocation.svg";
 import backward from "/images/Backward.svg"
@@ -9,7 +10,23 @@ import backward from "/images/Backward.svg"
 function MainPage() {
     const navigate = useNavigate();
     const [currentAddress, setCurrentAddress] = useState("위치 정보를 불러오는 중...");
+    const [freeBoardPosts, setFreeBoardPosts] = useState([]); // 자유게시판 게시글 상태
 
+        // 자유게시판 게시글 불러오기
+        useEffect(() => {
+            const fetchFreeBoardPosts = async () => {
+                try {
+                    const response = await instance.get("/api/post/community"); // 자유게시판 게시글 API 호출
+                    if (response.status === 200) {
+                        setFreeBoardPosts(response.data.posts.slice(0, 3)); // 최신 3개의 게시글만 저장
+                    }
+                } catch (error) {
+                    console.error("자유게시판 데이터를 불러오는 중 오류 발생:", error);
+                }
+            };
+    
+            fetchFreeBoardPosts();
+        }, []);
 
     useEffect(() => {
         // 네이버 지도 스크립트를 동적으로 로드합니다.
@@ -93,9 +110,18 @@ function MainPage() {
                     <S.Description>지도에 표기된 실시간 우동친이 함께 게시물 형식으로 업로드됩니다.</S.Description>
                 </S.SectionContainer>
                 <S.Content>
-                    <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
-                    <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
-                    <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
+                    {freeBoardPosts.map((post) => (
+                        <PostListItem
+                            key={post.id}
+                            post={{
+                                title: post.title,
+                                content: post.content,
+                                date: post.date,
+                                likes: post.likes,
+                                comments: post.comments,
+                            }}
+                        />
+                    ))}
                 </S.Content>
                 {/* 자유게시판 Section */}
                 <S.SectionContainer>

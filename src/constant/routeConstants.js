@@ -10,7 +10,7 @@ export const ROUTE_PATHS = {
   LOGIN: "/login",
   JOIN: "/join",
   POST_WRITE: "/postwrite",
-  POST_VIEW: "/postview",
+  POST_VIEW: "/postview/:id",
   COMMUNITY: "/community",
   PRBOARD: "/prboard",
   FREEBOARD:"/freeboard",

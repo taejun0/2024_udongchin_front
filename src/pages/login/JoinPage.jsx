@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Button from "../../components/common/buttons/PostButton";
 import { onSubmitHandler } from "../../services/signUp";
 import backward from "/images/Backward.svg";
+import logo2 from "/images/logo_2.svg"
+
+
 const JoinPage = () => {
     const [step, setStep] = useState(1); // Track current step
     const [nickname, setNickname] = useState('');
@@ -41,7 +44,16 @@ const JoinPage = () => {
                 </S.BackButton>
                 <S.Title>회원가입</S.Title>
             </S.Header>
-            <S.Main>
+            <S.Main
+            style={{
+                background: step === 2
+                    ? "linear-gradient(180deg, #2B6FCC 0%, #0E2543 45.5%, #000 100%)"
+                    : step === 3
+                    ? "#2FD450"
+                    : "#fff",
+                color: step === 2 || step === 3 ? "#000" : "#333",
+            }}
+            >
                 {step === 1 && (
                     <>
                         {/* Initial Form Page */}
@@ -110,9 +122,34 @@ const JoinPage = () => {
                 {step === 2 && (
                     <>
                         {/* Terms Agreement Page 1 */}
-                        <S.FormGroup>
-                            <label>통합회원가입 약관 동의</label>
-                        </S.FormGroup>
+                        <S.FormGroup2>
+                            <S.Label1>현재 지구에 서식 중인 동식물은</S.Label1>
+                            <S.Label2>인간 외에도 무려 150만 종이나 있어요</S.Label2>
+                            <S.Divider>···</S.Divider>
+                        </S.FormGroup2>
+
+                        <S.FormGroup2>
+                            <S.Label3>그 중 상당수는 우리 곁에도 살고 있죠</S.Label3>
+                            <S.Label4>
+                                | 서울에 서식하는 동식물만 5,515종 |<br />
+                                포유류 30종, 조류 235종, 양서류 16종, 파충류 22종, 무척수 동물종 388종,<br />
+                                곤충류 2,278종, 식물종 2,156종, 균류 390종
+                            </S.Label4>
+                        </S.FormGroup2>
+
+                        <S.FormGroup2>
+                            <S.Label5>그런데 우리는,<br />우리와 함께 살고 있는 친구들을 잘 알고 있나요?</S.Label5>
+                        </S.FormGroup2>
+                            <S.Divider2>.</S.Divider2>
+                            <S.AppLogo><img src={logo2} style={{ width: "40%"}}/></S.AppLogo>
+                            <S.Label6>
+                                이에 우동친은 인간과 동물의 공생을 위해
+                            </S.Label6>
+                            <S.AppDescription>
+                                우리 동네에 서식할 수 있는 야생 동식물을 알려주고,<br />
+                                동네 친구들을 알아가는 지식을 마련하고자 하는
+                            </S.AppDescription>
+                            <S.AppTagline>동네 중심 생태 지도 및 커뮤니티 서비스입니다.</S.AppTagline>
                     </>
                 )}
 

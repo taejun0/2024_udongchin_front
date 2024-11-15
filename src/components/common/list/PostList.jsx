@@ -1,6 +1,7 @@
+// PostList.js
 import React from "react";
 import styled from "styled-components";
-//앞에서 만든 PostListItem 컴포넌트를 사용하기 위해 import했음
+import { useNavigate } from "react-router-dom";
 import PostListItem from "./PostListItem";
 
 const Wrapper = styled.div`
@@ -10,44 +11,36 @@ const Wrapper = styled.div`
     justify-content: center;
     & > * {
         :not(:last-child) {
-            margin-bottom: 16px;
+            margin-bottom: 1px;
         }
     }
 `;
 
-//postList 컴포넌트의 프롭스로 받은 posts라는 배열에는 post객체들이 들어있습니다. 
-//이 post 배열의 map 함수를 이용하여 각 post객체에 대해 postlist컴포넌트를 만들어서 렌더링하게 된다.
-/*function PostList(props) {
-  const { posts, onClickItem } = props;
+function PostList({ posts = [] }) {
+    const navigate = useNavigate();
 
-  return (
-    <Wrapper>
-      {posts.map((post, index) => {
-        return (
-          <PostListItem
-            key={post.id}
-            post={post}
-            onClick={() => {
-              onClickItem(post);
-            }}
-          />
-        );
-      })}
-    </Wrapper>
-  );
-}*/
+    const handlePostClick = (postId) => {
+        navigate(`/postview/${postId}`); // 클릭한 게시글의 ID를 포함하여 이동
+    };
 
-function PostList({ posts = [] }) { // posts의 기본값을 빈 배열로 설정
-  return (
-      <div>
-          {posts.map((post, index) => (
-              <div key={index}>
-                  <h4>{post.title}</h4>
-                  <p>{post.content}</p>
-              </div>
-          ))}
-      </div>
-  );
+    return (
+        <Wrapper>
+            {posts.map((post) => (
+                <PostListItem
+                    key={post.id}
+                    post={{
+                        title: post.title,
+                        content: post.content,
+                        date: new Date(post.createdAt).toLocaleDateString(),
+                        likes: post.likesCount,
+                        comments: post.commentCount,
+                        imageUrl: post.imageUrl,
+                    }}
+                    onClick={() => handlePostClick(post.id)} // 클릭 시 이동 처리
+                />
+            ))}
+        </Wrapper>
+    );
 }
 
 export default PostList;
