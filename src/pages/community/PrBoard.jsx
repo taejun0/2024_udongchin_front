@@ -1,22 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./Boardstyled";
-import PostListItem from "../../components/common/list/PostListItem";
-import backward from "/images/Backward.svg"
-import write from "/images/adding_write.svg"
-import now from "/images/write_location.svg"
-import arrowIcon from "/images/arrow.svg"
+import PostList from "../../components/common/list/PostList";
+import backward from "/images/Backward.svg";
+import write from "/images/adding_write.svg";
+import now from "/images/write_location.svg";
+import arrowIcon from "/images/arrow.svg";
+import { instance } from "../../services/instance";
 
 function PrBoard() {
     const navigate = useNavigate();
     const [activeSort, setActiveSort] = useState("최신순"); // 초기 정렬 상태
-
-    const handleSortClick = (sortType) => {
-        setActiveSort(sortType); // 클릭한 정렬 버튼 활성화 상태로 변경
-    };
-
     const [currentAddress, setCurrentAddress] = useState("위치 정보를 불러오는 중...");
+    const [posts, setPosts] = useState([]);
+// 정렬 적용 함수
+const sortPosts = (sortType, posts) => {
+    let sortedPosts = [...posts];
+    if (sortType === "좋아요순") {
+        sortedPosts.sort((a, b) => b.likesCount - a.likesCount); // 좋아요순 내림차순
+    } else if (sortType === "댓글순") {
+        sortedPosts.sort((a, b) => b.commentCount - a.commentCount); // 댓글순 내림차순
+    } else {
+        sortedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // 최신순
+    }
+    return sortedPosts;
+};
 
+const handleSortClick = (sortType) => {
+    setActiveSort(sortType);
+    setPosts(prevPosts => sortPosts(sortType, prevPosts)); // 선택된 정렬 방식으로 정렬
+};
+
+useEffect(() => {
+    const fetchPosts = async () => {
+        try {
+            const response = await instance.get("/api/post/community/ad");
+            if (response.status === 200) {
+                setPosts(sortPosts(activeSort, response.data.data)); // 초기 정렬 설정
+            }
+        } catch (error) {
+            console.error("홍보게시판 데이터를 불러오는 중 오류 발생:", error);
+        }
+    };
+    fetchPosts();
+}, [activeSort]);
 
     useEffect(() => {
         // 네이버 지도 스크립트를 동적으로 로드합니다.
@@ -93,38 +120,38 @@ function PrBoard() {
             <S.Bar>
                 <S.Sortlist>
                     <S.SortButton 
-                    active={activeSort === "최신순"} 
-                    onClick={() => handleSortClick("최신순")}
+                        active={activeSort === "최신순" ? "true" : "false"}
+                        onClick={() => handleSortClick("최신순")}
                     >
                         <img src={arrowIcon} alt="정렬 아이콘" />
                         <span>최신순</span>
                     </S.SortButton>
                     <S.SortButton 
-                        active={activeSort === "좋아요순"} 
+                        active={activeSort === "좋아요순" ? "true" : "false"} 
                         onClick={() => handleSortClick("좋아요순")}
                     >
                         <img src={arrowIcon} alt="정렬 아이콘" />
                         <span>좋아요순</span>
                     </S.SortButton>
                     <S.SortButton 
-                        active={activeSort === "댓글순"} 
+                        active={activeSort === "댓글순" ? "true" : "false"} 
                         onClick={() => handleSortClick("댓글순")}
                     >
                         <img src={arrowIcon} alt="정렬 아이콘" />
                         <span>댓글순</span>
                     </S.SortButton>
                 </S.Sortlist>
-                <S.WriteButton onClick={() => navigate("/postwrite")}>
+                <S.WriteButton onClick={() => navigate("/prwrite")}>
                     <S.WriteText>글쓰기</S.WriteText>
                     <img src={write} style={{ cursor: "pointer", padding: "0"}}/>
                 </S.WriteButton>
             </S.Bar>
             <S.Main>
-            <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
-            <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
-            <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
-            <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
-            <PostListItem post={{ title: "제목 1", content: "내용 1", date: "2024-10-25", likes: 5, comments: 2 }} />
+                {posts.length > 0 ? (
+                    <PostList posts={posts} />
+                ) : (
+                    <S.EmptyMessage>첫 게시글을 올려주세요!</S.EmptyMessage>
+                )}
             </S.Main>
         </S.Container>
     );

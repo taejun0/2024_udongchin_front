@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TextInput from "../../components/common/inputs/TextInput";
 import X from "/images/Vector.svg";
 import Button from "../../components/common/buttons/PostButton";
 import ImageUploaderWithCrop from "@components/specific/imageuploader/ImageUploader";
-import { instance } from "../../services/instance"; // Axios instance
+import { instance } from "../../services/instance";
+
 
 const Wrapper = styled.div`
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
     width: 100%;
     padding: 20px;
-    font-family: ${({ theme }) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
 `;
 
 const Header = styled.div`
@@ -29,7 +29,7 @@ const Header = styled.div`
     border-bottom: 1px solid var(--Yellow, #E3B05F);
     background: var(--light-yellow, #FFFFE5);
     color: var(--black, #232323);
-    font-family: ${({ theme }) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -73,6 +73,7 @@ const Heading = styled.h2`
     line-height: normal;
 `;
 
+
 const RightImage = styled.img`
     position: absolute;
     cursor: pointer;
@@ -81,36 +82,16 @@ const RightImage = styled.img`
     height: 16px;
 `;
 
-function PostEditPage(props) {
+function PrWritePage() {
     const navigate = useNavigate();
-    const { id: postId } = useParams();
-    console.log("Fetched postId:", postId); // postId 값을 콘솔에 출력
-
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [uploadedImage, setUploadedImage] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    // 게시물 데이터 로드
-    useEffect(() => {
-        const fetchPostData = async () => {
-            try {
-                const response = await instance.get(`/api/post/community/free/${postId}`);
-                if (response.status === 200) {
-                    const { title, content, imageUrl } = response.data.data;
-                    setTitle(title); // 제목 설정
-                    setContent(content); // 내용 설정
-                    setUploadedImage(imageUrl); // 기존 이미지 설정
-                } else {
-                    console.error("게시물 데이터를 불러오는 데 실패했습니다:", response);
-                }
-            } catch (error) {
-                console.error("게시물 데이터를 불러오는 중 오류 발생:", error);
-            }
-        };
+    const isSubmitEnabled = title && content && !loading; // 제목과 내용만 필요한 경우
 
-        fetchPostData();
-    }, [postId]);
 
     const handleImageUpload = (file) => {
         setUploadedImage(file);
@@ -118,32 +99,56 @@ function PostEditPage(props) {
     };
 
     const handleSubmit = async () => {
+        if (!isSubmitEnabled) return;
+    
         const formData = new FormData();
-        formData.append("title", title); // 제목 추가
-        formData.append("content", content); // 내용 추가
-        if (uploadedImage instanceof File) {
-            formData.append("image", uploadedImage); // 새로운 이미지 파일 추가
-        }
-
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("image", uploadedImage);
+    
         try {
-            const response = await instance.update(`/api/post/community/free/${postId}`, formData, {
+            setLoading(true);
+            const response = await instance.post("/api/post/community/ad", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
-
+    
             if (response.status === 200) {
-                alert("게시물이 성공적으로 수정되었습니다.");
-                navigate("/"); // 수정 성공 후 메인 페이지로 이동
+                console.log("게시물 등록 성공:", response.data);
+                const token = response.data.token; // 서버에서 받은 토큰
+                if (token) {
+                    localStorage.setItem("accessToken", token); // 토큰 저장
+                    console.log("받은 토큰 및 저장된 토큰:", token);
+                }
+                navigate("/prboard"); // 성공 시 메인 페이지로 이동
             } else {
-                console.error("게시물 수정 실패:", response);
-                alert("게시물 수정에 실패했습니다.");
+                console.error("게시물 등록 실패:", response.data);
             }
         } catch (error) {
-            console.error("게시물 수정 중 오류 발생:", error);
-            alert("게시물 수정 중 오류가 발생했습니다.");
+            if (error.response) {
+                // 서버가 응답했지만 status가 2xx가 아닌 경우
+                console.error("서버 응답 에러:", error.response.status);
+                console.error("에러 메시지:", error.response.data);
+                
+                // 실패 응답 내 토큰 확인
+                const token = error.response.data?.token;
+                if (token) {
+                    localStorage.setItem("accessToken", token); // 토큰 저장
+                    console.log("에러 발생 시 받은 토큰 및 저장된 토큰:", token);
+                }
+            } else if (error.request) {
+                console.error("요청 후 응답 없음:", error.request);
+            } else {
+                console.error("요청 설정 중 오류 발생:", error.message);
+            }
+            console.error("전체 에러 정보:", error.config);
+        } finally {
+            setLoading(false);
         }
     };
+    
+    
 
     return (
         <Wrapper>
@@ -156,14 +161,15 @@ function PostEditPage(props) {
                 />
             </Header>
             <Container>
-                <Location>서울시 중구 신당동</Location>
                 <Title>
                     <Heading>제목</Heading>
                     <TextInput
                         height={38}
                         placeholder="제목을 작성해주세요(공백 포함 30자 제한)"
                         value={title}
-                        onChange={(event) => setTitle(event.target.value)}
+                        onChange={(event) => {
+                            setTitle(event.target.value);
+                        }}
                     />
                 </Title>
                 <Contents>
@@ -173,7 +179,9 @@ function PostEditPage(props) {
                         height={367}
                         placeholder="내용"
                         value={content}
-                        onChange={(event) => setContent(event.target.value)}
+                        onChange={(event) => {
+                            setContent(event.target.value);
+                        }}
                     />
                 </Contents>
                 <Button
@@ -181,11 +189,12 @@ function PostEditPage(props) {
                     title="제출하기"
                     backgroundColor="#5b3200"
                     color="#fff"
-                    onClick={handleSubmit} // 제출 버튼 클릭 시 API 호출
+                    onClick={handleSubmit}
+                    disabled={!isSubmitEnabled} // 버튼 비활성화
                 />
             </Container>
         </Wrapper>
     );
 }
 
-export { PostEditPage };
+export { PrWritePage };

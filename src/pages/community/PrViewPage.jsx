@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./styled";
 import CommentList from "../../components/common/list/CommentList";
 import TextInput from "../../components/common/inputs/TextInput";
@@ -10,18 +9,21 @@ import DeletePost from "../../components/common/modals/DeletePost";
 import backward from "/images/Backward.svg";
 import now from "/images/write_location.svg";
 import { addComment } from "../../services/commentWrite";
-import { fetchPostData } from "../../services/comment";
+import { fetchPostData } from "../../services/pr";
 import { deletePost } from "../../services/deletePost";
-import { reportPost } from "../../services/reportPost";
+import { addLike, removeLike } from "../../services/LikeService"; // 좋아요 API 추가
 
-function PostViewPage(props) {
+function PrViewPage(props) {
     const navigate = useNavigate();
+    const { id } = useParams();
+
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
+    const [isLiked, setIsLiked] = useState(false); // 좋아요 상태
+    const [likesCount, setLikesCount] = useState(0); // 좋아요 개수
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 삭제 모달 상태 추가
-    const { id } = useParams();
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const currentUserId = localStorage.getItem("memberId");
 
@@ -33,7 +35,8 @@ function PostViewPage(props) {
                 if (post && comments) {
                     setPost(post);
                     setComments(comments);
-                    
+                    setIsLiked(post.isLiked || false); // 초기 좋아요 상태
+                    setLikesCount(post.likesCount || 0); // 초기 좋아요 개수
                 }
             } catch (error) {
                 console.error("게시글 데이터를 가져오는 중 오류 발생:", error);
@@ -41,6 +44,22 @@ function PostViewPage(props) {
         };
         loadPostData();
     }, [id]);
+
+    // 좋아요 토글 함수
+    const toggleLike = async () => {
+        try {
+            if (isLiked) {
+                await removeLike(id); // 좋아요 취소 API 호출
+                setLikesCount((prev) => prev - 1); // 좋아요 개수 감소
+            } else {
+                await addLike(id); // 좋아요 추가 API 호출
+                setLikesCount((prev) => prev + 1); // 좋아요 개수 증가
+            }
+            setIsLiked(!isLiked); // 좋아요 상태 토글
+        } catch (error) {
+            console.error("좋아요 처리 중 오류 발생:", error);
+        }
+    };
 
     // 댓글 작성 함수
     const handleCommentSubmit = async () => {
@@ -77,19 +96,6 @@ function PostViewPage(props) {
         }
     };
 
-    // 게시글 신고 핸들러
-    const handleReportPost = async (reason, customReason) => {
-        try {
-            await reportPost(id, reason, customReason); // 신고 API 호출
-            alert("게시글이 신고되었습니다.");
-            setIsModalOpen(false); // 모달 닫기
-        } catch (error) {
-            console.error("게시글 신고 중 오류 발생:", error);
-            alert("게시글 신고에 실패했습니다.");
-        }
-    };
-    
-
     return (
         <S.Container>
             <S.Header>
@@ -99,7 +105,7 @@ function PostViewPage(props) {
                 <S.Title>우동친</S.Title>
             </S.Header>
             <S.Nav>
-                <S.BoardButton onClick={() => navigate("/postview")}>자유게시판</S.BoardButton>
+                <S.BoardButton onClick={() => navigate("/prview")}>홍보게시판</S.BoardButton>
             </S.Nav>
             {post && (
                 <S.Main>
@@ -133,10 +139,13 @@ function PostViewPage(props) {
                 {/* 이미지가 존재할 경우에만 렌더링 */}
                 {post.imageUrl && <S.Thumbnail src={post.imageUrl} alt="게시글 이미지" />}
                 
-            
                 <S.ContentText>{post.content}</S.ContentText>
                 <S.BottomBar>
-                    <S.IconText>❤️ 좋아요 {post.likesCount}개</S.IconText>
+                    <S.IconText>
+                        <span onClick={toggleLike} style={{ cursor: "pointer" }}>
+                            {isLiked ? "❤️" : "🤍"} 좋아요 {likesCount}개
+                        </span>
+                    </S.IconText>
                     <S.IconText>💬 댓글 {comments.length}개</S.IconText>
                 </S.BottomBar>
                 <S.CommentContainer>
@@ -150,16 +159,10 @@ function PostViewPage(props) {
                 </S.CommentContainer>
                 <CommentList comments={comments} />
             </S.Main>
-            
             )}
 
             {/* 신고 모달 */}
-            {isModalOpen && 
-            <ReportModal
-            onConfirm={(reason, customReason) => handleReportPost(reason, customReason)} // 신고 데이터 전달
-            onCancel={closeModal}
-        />
-        }
+            {isModalOpen && <ReportModal onConfirm={closeModal} onCancel={closeModal} />}
 
             {/* 삭제 모달 */}
             {isDeleteModalOpen && (
@@ -172,4 +175,4 @@ function PostViewPage(props) {
     );
 }
 
-export { PostViewPage };
+export { PrViewPage };

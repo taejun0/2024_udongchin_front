@@ -3,12 +3,12 @@ import styled from "styled-components";
 import CommentListItem from "./CommentListItem";
 
 const Wrapper = styled.div`
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 14px;
-    margin-top: 14px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
 `;
 
 //commentList라는 이름의 함수 컴포넌트를 만들고 이 컴포넌트의 프롭스로는 comments라는 배열이 들어온다.
@@ -19,7 +19,12 @@ function CommentList(props) {
   return (
     <Wrapper>
       {comments.map((comment, index) => {
-        return <CommentListItem key={comment.id} comment={comment} />;
+        return (
+          <CommentListItem
+          key={comment.commentId || index}
+          comment={comment}
+          />
+        );
       })}
     </Wrapper>
   );
