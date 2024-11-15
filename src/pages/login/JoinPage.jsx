@@ -45,15 +45,18 @@ const JoinPage = () => {
                 <S.Title>회원가입</S.Title>
             </S.Header>
             <S.Main
-            style={{
-                background: step === 2
-                    ? "linear-gradient(180deg, #2B6FCC 0%, #0E2543 45.5%, #000 100%)"
-                    : step === 3
-                    ? "#2FD450"
-                    : "#fff",
-                color: step === 2 || step === 3 ? "#000" : "#333",
-            }}
+                style={{
+                    background: step === 2
+                        ? "linear-gradient(180deg, #2B6FCC 0%, #0E2543 45.5%, #000 100%), url('/images/earth.svg')"
+                        : step === 3
+                        ? "#2FD450"
+                        : "#fff",
+                    backgroundSize: step === 2 ? "cover" : "auto", // 이미지 크기 조절
+                    backgroundPosition: "center", // 이미지 위치 설정
+                    color: step === 2 || step === 3 ? "#000" : "#333",
+                }}
             >
+
                 {step === 1 && (
                     <>
                         {/* Initial Form Page */}

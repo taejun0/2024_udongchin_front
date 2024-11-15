@@ -21,8 +21,8 @@ function CommentList(props) {
       {comments.map((comment, index) => {
         return (
           <CommentListItem
-            key={comment.id || index} // id가 없을 때 index를 key로 사용
-            comment={comment}
+          key={comment.commentId || index}
+          comment={comment}
           />
         );
       })}

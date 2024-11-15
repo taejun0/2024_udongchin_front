@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import profile from "/profile/raccoon_profile.png";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -62,10 +63,10 @@ function CommentListItem(props) {
 
     return (
         <Wrapper>
-            <ProfileImage />
+            <ProfileImage><img src={profile} style={{ width: "34px" , height: "34px", borderRadius: "50%" }} /></ProfileImage>
             <ContentWrapper>
                 <Header>
-                    <Nickname>{comment.nickname}</Nickname>
+                    <Nickname>{comment.commenter}</Nickname>
                     <DateText>{new Date(comment.createdAt).toLocaleDateString()}</DateText>
                 </Header>
                 <ContentText>{comment.content}</ContentText>
