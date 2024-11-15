@@ -8,7 +8,8 @@ export const onSubmitHandler = async ( nickname, memberId, password, navigate, a
     }
     
     try {
-        const response = await instance.post("https://43.203.40.221.nip.io/api/signUp", requestBody);
+        const response = await instance.post("/api/signUp", requestBody);
+        console.log(response);
 
         if (response.data.success) {
             alert("회원가입 실패: " + response.data.message);
