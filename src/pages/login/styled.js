@@ -180,6 +180,7 @@ export const ErrorMessage = styled.p`
 
 export const CheckBoxContainer = styled.div`
     display: flex;
+    justify-content:center;
     align-items: center;
     gap: 7px;
     margin-top: 8px;
@@ -191,7 +192,7 @@ export const CheckBoxContainer = styled.div`
         width: 13.5px;
         height: 13.5px;
         border-radius: 30px;
-        border: 1.5px solid #E1AC57; /* 외곽선 색상 */
+        border: 1.5px solid var(--dark-yellow, #5B3200);
         background-color: #FFF;
         position: relative;
         cursor: pointer;
@@ -210,7 +211,7 @@ export const CheckBoxContainer = styled.div`
             transform: translate(-50%, -50%);
             width: 7.5px;
             height: 7.5px;
-            background-color: #E1AC57; /* 내부 원 색상 */
+            background-color: #5B3200; /* 내부 원 색상 */
             border-radius: 30px;
         }
     }
@@ -349,4 +350,29 @@ export const NextButton = styled.button`
     font-size: 16px;
     margin-top: 20px;
     cursor: pointer;
+`;
+
+
+
+export const Label7 = styled.div`
+    color: var(--dark-yellow, #5B3200);
+    text-align: center;
+    -webkit-text-stroke-width: 0.10000000149011612;
+    -webkit-text-stroke-color: #000;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px; /* 83.333% */
+`;
+
+export const Label8 = styled.div`
+    color: var(--black, #232323);
+    text-align: center;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px; /* 155.556% */
+    margin:15px 0;
 `;
