@@ -9,6 +9,7 @@ export const MyudchistoryPage = () => {
   const location = useLocation();
 
   const currentStep = new URLSearchParams(location.search).get("step") || "1";
+  const selectedLocation = new URLSearchParams(location.search).get("location") || "";
 
   const handleNextStep = () => {
     navigate(`?step=${parseInt(currentStep) + 1}`);
@@ -23,7 +24,7 @@ export const MyudchistoryPage = () => {
   return (
     <S.Wrapper>
       {currentStep === "1" && <MyudchistoryStepOne onNext={handleNextStep} />}
-      {currentStep === "2" && <MyudchistoryStepTwo />}
+      {currentStep === "2" && <MyudchistoryStepTwo selectedLocation={selectedLocation} onPrev={handlePrevStep}/>}
     </S.Wrapper>
   );
 };

@@ -114,13 +114,25 @@ const ImageUploaderWithCrop = ({ onImageUpload }) => {
   const handleCropConfirm = async () => {
     try {
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
-      setImagePreview(croppedImage);
-      if (onImageUpload) {
-        onImageUpload(croppedImage);
+      
+      if (croppedImage instanceof File) {
+        const previewUrl = URL.createObjectURL(croppedImage);
+        setImagePreview(previewUrl);
+  
+        if (onImageUpload) {
+          onImageUpload(croppedImage);
+        }
+  
+        // Blob URL 해제는 필요에 따라 수행
+        // URL.revokeObjectURL(previewUrl);
+  
+      } else {
+        console.error("Cropped image is not a File object.");
       }
+  
       setShowCropModal(false);
     } catch (error) {
-      console.error('Failed to crop image:', error);
+      console.error("Failed to crop image:", error);
     }
   };
 

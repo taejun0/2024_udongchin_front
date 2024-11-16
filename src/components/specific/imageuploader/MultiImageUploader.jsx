@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import X from "/images/Vector2.svg";
 
@@ -30,8 +30,6 @@ const PreviewContainer = styled.div`
   position: relative;
   width: 100px;
   height: 100px;
-  position: relative;
-
 `;
 
 const PreviewImage = styled.img`
@@ -46,31 +44,42 @@ const XIMG = styled.img`
   right: 3px;
   width: 15px;
   height: 15px;
-
   border-radius: 4px;
   cursor: pointer;
 `;
 
-const MultiImageUploader = ({ onImagesUpload }) => {
+const MultiImageUploader = ({ onImageUpload }) => {
   const [images, setImages] = useState([]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    const newImages = files.map((file) => URL.createObjectURL(file));
-    setImages((prevImages) => [...prevImages, ...newImages]);
+    const newImages = files.map((file) => ({
+      file,
+      previewUrl: URL.createObjectURL(file)
+    }));
 
-    if (onImagesUpload) {
-      onImagesUpload([...images, ...newImages]);
-    }
+    setImages((prevImages) => {
+      const updatedImages = [...prevImages, ...newImages];
+
+      if (onImageUpload) {
+        const fileArray = updatedImages.map(img => img.file);
+        onImageUpload(fileArray);
+      }
+
+      return updatedImages;
+    });
   };
 
   const handleDeleteImage = (index) => {
-    const updatedImages = images.filter((_, i) => i !== index);
-    setImages(updatedImages);
+    setImages((prevImages) => {
+      const updatedImages = prevImages.filter((_, i) => i !== index);
+      URL.revokeObjectURL(prevImages[index].previewUrl);
+      if (onImageUpload) {
+        onImageUpload(updatedImages.map(img => img.file));
+      }
 
-    if (onImagesUpload) {
-      onImagesUpload(updatedImages);
-    }
+      return updatedImages;
+    });
   };
 
   return (
@@ -88,10 +97,10 @@ const MultiImageUploader = ({ onImagesUpload }) => {
       )}
       {images.map((image, index) => (
         <PreviewContainer key={index}>
-          <PreviewImage src={image} alt={`Uploaded Preview ${index + 1}`} />
+          <PreviewImage src={image.previewUrl} alt={`Uploaded Preview ${index + 1}`} />
           <XIMG src={X} onClick={() => handleDeleteImage(index)} />
-      </PreviewContainer>
-    ))}
+        </PreviewContainer>
+      ))}
     </Container>
   );
 };

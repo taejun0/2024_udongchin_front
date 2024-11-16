@@ -11,6 +11,8 @@ export const useUrgent = (id) => {
 
     try { 
       await urgentService(id);
+      window.location.reload();
+
     } catch (err) {
       setError(err);
     } finally {

@@ -12,11 +12,12 @@ import Heart from "/images/Heart.svg";
 import FilledHeart from "/images/FilledHeart.svg";
 import rightArrow from "/images/rightArrow.svg";
 
-export const NaverDetailModal = ({ location, onClose }) => {
+export const NaverDetailModal = ({ location, markerImages, onClose }) => {
   const { isLiked, likesCount, toggleLike } = useLike(location.id, location.likesCount);
   const { Urgent, isLoading } = useUrgent(location.id);
   const [modalOpen, setModalOpen] = useState(false);
   const dateOnly = location.createdAt.substring(0, 10);
+  const imageUrl = markerImages[location.imageUrl] || "/images/default-marker.png";
 
   const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ export const NaverDetailModal = ({ location, onClose }) => {
             <button onClick={onClose}><img src={X} style={{width: "12px", height: "12px", cursor: "pointer", transform:"translateY(3px)"}} /></button>
           </S.Buttons>
         </S.InformationHeader>
-        <img src={location.imageUrl} style={{width: "100%", height: "100%"}} />
+        <img src={imageUrl} style={{width: "100%", height: "100%"}} />
         <div>
           <S.RowBetween>
             <S.InfoTitle>{location.title}</S.InfoTitle>

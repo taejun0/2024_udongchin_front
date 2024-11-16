@@ -15,10 +15,10 @@ import adding_chat from "/images/adding_chat.svg";
 import sidebar_his from "/images/sidebar_his.svg";
 import RightLowHome from "/images/RightLowHome.svg";
 import RightLowHome_ch from "/images/RightLowHome_ch.svg";
-import { WarningLoginModal } from "@components/common/modals/WarningLoginModal";
+import { WarningLoginModal } from "@components/common/modals/WarningLoginModal"; // 로그인 유도 모달
 
 import { MapSelector } from "@components/specific/maps/MapSelector";
-import { MapModal } from "@components/common/modals/MapModal";
+import { MapModal } from "@components/common/modals/MapModal"; // 커뮤용지도
 import { CommunityMap } from "@components/specific/maps/CommunityMap";
 
 export const HomePage = () => {
@@ -35,20 +35,32 @@ export const HomePage = () => {
   const [mapRef, setMapRef] = useState(null);
   const [currentPosition, setCurrentPosition] = useState(null);
 
+  const [dongAddress, setDongAddress] = useState("");
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = viewtype === "전체" ? await fetchAllLocations() : await fetchMyLocations();
-        setLocations(data);
+        const response = viewtype === "전체" ? await fetchAllLocations() : await fetchMyLocations();
+        const validData = Array.isArray(response?.data) ? response.data : [];
+        const mergedData = [...validData, ...mockLocations];
+        setLocations(mergedData);
       } catch (err) {
         console.error("Error fetching locations:", err);
-        setError("데이터를 가져오는 중 오류가 발생했습니다.");
       }
     };
     fetchData();
   }, [viewtype]);
+
+  const onDongAddress = useCallback((lat, lng, address) => {
+    setDongAddress(address); // 동 주소
+    setLatitude(lat); // 위도
+    setLongitude(lng); // 경도
+  }, []);
+
 
   const toggleVeiwtype = (type) => {
     setViewtype(type);
@@ -65,10 +77,8 @@ export const HomePage = () => {
   const handleRestrictedAction = () => {
     if (!userId) {
       setLoginModalOpen(true);
-      console.log(userId);
       return false;
     }
-    console.log(userId);
     return true;
   };
 
@@ -105,11 +115,12 @@ export const HomePage = () => {
         </S.SelectBox>
       )}
       <Navermap 
-        locations={locations}
+        locationList={locations}
         followUser={followUser}
         setFollowUser={setFollowUser}
         onMapReady={onMapReady}
         viewtype={viewtype}
+        onDongAddress={onDongAddress}
       />
       {viewtype === "전체" && 
         <S.Buttons>
@@ -125,8 +136,10 @@ export const HomePage = () => {
             $isExpand = {isExpand}
             $delay = {0.1}
             onClick={() => {
+              if (handleRestrictedAction()) {
               setModalType("기록");
               setQnaModalOpen(true);
+              }
             }} 
           >
             <img src={adding_pencil} />
@@ -145,7 +158,11 @@ export const HomePage = () => {
           <S.ExpandableButton2
             $isExpand = {isExpand}
             $delay = {0.2}
-            onClick={()=> navigate("/report")}
+            
+            onClick={()=> {
+              if (handleRestrictedAction()) {
+              navigate("/report")}
+            }}
           >
             <img src={adding_exclamation} />
             동물 제보
@@ -156,8 +173,10 @@ export const HomePage = () => {
         <S.Buttons>
           <S.Button
             onClick={() => {
+              if (handleRestrictedAction()) {
               setModalType("기록");
               setQnaModalOpen(true);
+              }
             }} 
           >
             <img src={adding_pencil} style={{width: "44px", height:"44px"}}/>
@@ -212,6 +231,9 @@ export const HomePage = () => {
       {QnaModalOpen && (
         <QnaMarkerModal 
           type={modalType}
+          dongAddress={dongAddress}
+          latitude={latitude}
+          longitude={longitude}
           onClose={() => setQnaModalOpen(false)} 
         />
       )}

@@ -83,6 +83,7 @@ html {
 
 body {
 	width: 100%;
+    max-width: 100%;
 	overflow-x: hidden;
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.default};

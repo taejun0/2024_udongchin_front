@@ -1,6 +1,7 @@
 import * as S from "./styled";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "@contexts/LocationContext";
+import { fetchImageUrls } from "@services/locationImageService";
 
 import { NaverDetailModal } from "@components/common/modals/NaverdetailModal";
 import { MapModal } from "@components/common/modals/MapModal";
@@ -22,7 +23,7 @@ const backgroundIcons = {
   "Urgent": "/images/marker_urgent.svg",
 };
 
-export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, viewtype }) => {
+export const Navermap = ({ locationList, onMapReady, followUser, setFollowUser, viewtype, onDongAddress }) => {
   const NAVER_MAP_KEY = import.meta.env.VITE_NAVER_MAP_KEY;
 
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -31,11 +32,30 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
   const { setLocation, address, setAddress } = useLocation();
   const [currentAddress, setCurrentAddress] = useState(null);
   const [nowimage, setNowImage] = useState(nowimageDefault);
+  const [markerImages, setMarkerImages] = useState({});
   
   const circleRef = useRef(null); // 원을 useRef로 관리
   const currentMarkerRef = useRef(null);
 
-  // 지도 초기화 및 마커 설정
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const imageMap = await fetchImageUrls(locationList);
+        setMarkerImages(imageMap);
+      } catch (error) {
+        console.error("Error loading images:", error);
+      }
+    };
+  
+    loadImages();
+
+    return () => {
+      Object.values(markerImages).forEach((url) => {
+        URL.revokeObjectURL(url);
+      });
+    };
+  }, [locationList]);
+
   useEffect(() => {
     const loadMap = () => {
       const mapInstance = new naver.maps.Map("map", {
@@ -43,7 +63,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
         zoom: 15,
       });
       setMap(mapInstance);
-      
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -57,7 +76,6 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
             mapInstance.setCenter(coord);
             mapInstance.setZoom(18);
 
-            // 현재 위치 주소 설정
             naver.maps.Service.reverseGeocode(
               { coords: coord, orders: "addr" },
               (status, response) => {
@@ -67,16 +85,17 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
                   const addressParts = fullAddress.split(" ");
                   const dongAddress = addressParts.slice(0, 3).join(" ");
                   setCurrentAddress(dongAddress);
+                  onDongAddress(lat, lng, dongAddress);
                 } else {
-                  console.error("주소 발행 실패 :", status);
+                  console.error("Reverse geocode failed:", status);
                 }
               }
             );
 
             if (onMapReady && typeof onMapReady === "function") {
-              onMapReady(mapInstance, coord);  // coord는 현재 위치로 설정된 LatLng 객체입니다.
+              onMapReady(mapInstance, coord);
             }
-            
+
             const currentMarker = new naver.maps.Marker({
               position: coord,
               map: mapInstance,
@@ -114,7 +133,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
 
                     setNowImage(dongAddress === currentAddress ? nowimageChanged : nowimageDefault);
                   } else {
-                    console.error("주소변환 실패 :", status);
+                    console.error("Reverse geocode failed:", status);
                   }
                 }
               );
@@ -124,8 +143,8 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
             naver.maps.Event.addListener(mapInstance, "dragend", updateAddressByCenter);
             naver.maps.Event.addListener(mapInstance, "zoom_changed", updateAddressByCenter);
 
-            naver.maps.Event.addListener(mapInstance, "dragstart", () => {setFollowUser(false);});
-            naver.maps.Event.addListener(mapInstance, "zoom_changed", () => {setFollowUser(false);});
+            naver.maps.Event.addListener(mapInstance, "dragstart", () => setFollowUser(false));
+            naver.maps.Event.addListener(mapInstance, "zoom_changed", () => setFollowUser(false));
 
             const syncCircleWithMarker = () => {
               if (circleRef.current) {
@@ -135,39 +154,53 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
             naver.maps.Event.addListener(mapInstance, "zoom_changed", syncCircleWithMarker);
             naver.maps.Event.addListener(mapInstance, "dragend", syncCircleWithMarker);
 
-            // 외부 위치 데이터 마커 추가
-            if (Array.isArray(locations)) {
-              locations.forEach((location) => {
-                if (!Array.isArray(location.locations)) {
-                  console.error("Invalid locations array:", location);
+            // data 필드로 마커 생성
+            if (locationList && Array.isArray(locationList)) {
+              locationList.forEach((location, index) => {
+                const { location: coords, mode, imageUrl, urgent } = location;
+                if (!Array.isArray(coords)) {
+                  console.error(`Invalid location data at index ${index}:`, location);
                   return;
                 }
 
-                let [lat, lng, dongAddress] = location.locations;
+                let [lat, lng, dongAddress] = coords;
 
-                if (location.mode === "생태 지도") {
+                if (mode === "생태 지도") {
                   if (!location.randomCoordinate) {
                     const randomCoordinate = getRandomCoordinateForDong(dongAddress);
-                    
-                    // 반환된 좌표가 유효한 경우만 randomCoordinate에 저장
                     if (randomCoordinate) {
                       location.randomCoordinate = randomCoordinate;
                     } else {
-                      console.warn(`동네 좌표를 찾을 수 없음: ${dongAddress}`);
-                      return; // 좌표가 없는 경우 마커 생성 중단
+                      console.warn(`Random coordinate not found for dongAddress: ${dongAddress}`);
+                      return;
                     }
                   }
-            
-                  // randomCoordinate 사용
+
                   [lat, lng, dongAddress] = location.randomCoordinate;
                 }
 
                 const markerPosition = new naver.maps.LatLng(parseFloat(lat), parseFloat(lng));
-                const backgroundUrl = backgroundIcons[location.mode === "생태 지도" ? "생태 지도" : (location.mode === "실시간 Q&A" ? (location.urgent ? "Urgent" : "실시간 Q&A") : "실시간 기록")];
+                const backgroundUrl =
+                  backgroundIcons[
+                    mode === "생태 지도"
+                      ? "생태 지도"
+                      : mode === "실시간 Q&A"
+                      ? urgent
+                        ? "Urgent"
+                        : "실시간 Q&A"
+                      : "실시간 기록"
+                  ];
 
-                const displaying = location.mode === "실시간 Q&A" || (location.mode === "실시간 기록" && dongAddress === currentAddress) || location.mode === "생태 지도";
+                const displaying =
+                  mode === "실시간 Q&A" ||
+                  (mode === "실시간 기록" && dongAddress === currentAddress) ||
+                  mode === "생태 지도";
 
                 if (displaying) {
+                  const imageUrl = location.imageUrl;
+                  
+                  const markerImageUrl = location.mode === "생태 지도" ? imageUrl : markerImages[imageUrl] || "/images/default-marker.png";
+
                   const marker = new naver.maps.Marker({
                     position: markerPosition,
                     map: mapInstance,
@@ -182,7 +215,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
                           transform: translateY(-31px);
                           ${backgroundUrl === backgroundIcons["Urgent"] ? "filter: drop-shadow(0px 0px 10px #FF8B8D);" : ""}
                         ">
-                          <img src="${location.imageUrl}" alt="marker" style="
+                          <img src="${markerImageUrl}" alt="marker" style="
                             display: flex;
                             position: absolute;
                             left: 6px;
@@ -197,11 +230,13 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
                       anchor: new naver.maps.Point(20, 20),
                     },
                   });
-                  naver.maps.Event.addListener(marker, "click", () => {
+                    naver.maps.Event.addListener(marker, "click", () => {
                     setSelectedLocation(location);
                   });
                 }
               });
+            } else {
+              console.warn("locationList data is not an array or is empty."); // 데이터가 비어있음
             }
           }
         );
@@ -217,7 +252,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
     return () => {
       document.head.removeChild(script);
     };
-  }, [locations, onMapReady, currentAddress]);
+  }, [locationList, markerImages, onMapReady, currentAddress]);
 
   // 실시간 위치 추적
   useEffect(() => {
@@ -282,7 +317,7 @@ export const Navermap = ({ locations, onMapReady, followUser, setFollowUser, vie
             <MapModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
           </>
         ) : (
-          <NaverDetailModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />
+          <NaverDetailModal location={selectedLocation} markerImages={markerImages} onClose={() => setSelectedLocation(null)} />
         )
       )}
     </S.MapSize>
