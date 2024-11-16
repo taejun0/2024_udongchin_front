@@ -42,6 +42,8 @@
     align-items: center;
     width: 100%;
     padding: 48px;
+    height: calc(100vh - 60px); /* 헤더 높이를 제외한 화면 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤 활성화 */
     `;
 
     export const LoginTitle = styled.h2`
@@ -178,6 +180,7 @@ export const ErrorMessage = styled.p`
 
 export const CheckBoxContainer = styled.div`
     display: flex;
+    justify-content:center;
     align-items: center;
     gap: 7px;
     margin-top: 8px;
@@ -189,7 +192,7 @@ export const CheckBoxContainer = styled.div`
         width: 13.5px;
         height: 13.5px;
         border-radius: 30px;
-        border: 1.5px solid #E1AC57; /* 외곽선 색상 */
+        border: 1.5px solid var(--dark-yellow, #5B3200);
         background-color: #FFF;
         position: relative;
         cursor: pointer;
@@ -208,7 +211,7 @@ export const CheckBoxContainer = styled.div`
             transform: translate(-50%, -50%);
             width: 7.5px;
             height: 7.5px;
-            background-color: #E1AC57; /* 내부 원 색상 */
+            background-color: #5B3200; /* 내부 원 색상 */
             border-radius: 30px;
         }
     }
@@ -217,4 +220,159 @@ export const CheckBoxContainer = styled.div`
         cursor: pointer;
         margin-right:15px;
     }
+`;
+
+
+
+export const FormGroup2 = styled.div`
+    text-align: center;
+    margin: 10px 0;
+    color: var(--white, #FFF);
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+`;
+
+export const Label1 = styled.div`
+    font-size: 11.063px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px; 
+`;
+
+export const Label2 = styled.div`
+    font-size: 15.488px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 25px;
+`;
+
+export const Divider = styled.div`
+    font-size: 25px;
+    margin: 18px 0;
+    background: linear-gradient(90deg, #565656 0%, #CCC 64%, #FFF 100%); /* 90도 회전된 그라데이션 */
+    -webkit-background-clip: text;
+    color: transparent;
+    transform: rotate(90deg); /* 텍스트 자체를 90도 회전 */
+    display: inline-block; 
+`;
+
+
+export const Label3 = styled.div`
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 29.5px; /* 245.837% */
+    margin-bottom : 5px;
+`;
+
+export const Label4 = styled.div`
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 13px;
+`;
+
+export const Label5 = styled.div`
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 25px; /* 156.25% */
+    margin-top: 50px;
+`;
+
+export const Divider2 = styled.div`
+    width: 35%;         
+    height: 1px;         
+    background-color: #ccc; 
+    color : transparent;
+    margin: 80px 0;       
+`;
+
+
+export const EarthContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+`;
+
+export const EarthImage = styled.img`
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+`;
+
+export const AppLogo = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content:center;
+    margin-bottom: 40px
+`;
+
+
+export const Label6 = styled.div`
+    color: var(--white, #FFF);
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18.849px; /* 188.493% */
+    letter-spacing: 0.5px;
+`;
+
+export const AppDescription = styled.div`
+    color: var(--white, #FFF);
+    text-align: center;
+    font-size: 10.995px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 23px; /* 209.178% */
+    letter-spacing: 0.55px;
+`;
+
+export const AppTagline = styled.div`
+    color: var(--white, #FFF);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 23px;
+    letter-spacing: 0.65px;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    margin:20px 0;
+`;
+
+export const NextButton = styled.button`
+    background-color: #5b3200;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+`;
+
+
+
+export const Label7 = styled.div`
+    color: var(--dark-yellow, #5B3200);
+    text-align: center;
+    -webkit-text-stroke-width: 0.10000000149011612;
+    -webkit-text-stroke-color: #000;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px; /* 83.333% */
+`;
+
+export const Label8 = styled.div`
+    color: var(--black, #232323);
+    text-align: center;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px; /* 155.556% */
+    margin:15px 0;
 `;

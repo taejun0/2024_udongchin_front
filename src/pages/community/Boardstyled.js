@@ -132,3 +132,21 @@ export const SortButton = styled.div`
         filter: ${props => (props.active ? "none" : "grayscale(1)")};
     }
 `;
+
+export const Message = styled.p`
+    width: 100%;
+    text-align: center;
+    color: #575757;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 20px 0;
+`;
+
+
+// Boardstyled.js 파일에서
+export const EmptyMessage = styled.div`
+    font-size: 1.2em;
+    color: #999;
+    text-align: center;
+    padding: 20px;
+`;

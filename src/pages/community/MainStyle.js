@@ -6,7 +6,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    font-family: sans-serif;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     background-color: #fff;
 `;
 
@@ -39,18 +39,20 @@ export const Title = styled.h1`
 `;
 
 export const Location = styled.div`
-    font-size: 18px;
-    font-weight: 600;
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
 `;
 
 export const Subtitle = styled.h3`
     color: var(--dark-gray, #575757);
     font-size: 12px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     line-height: 18px; /* 150% */
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
 `;
 
 export const MainContent = styled.main`
@@ -78,9 +80,12 @@ export const SectionHeader = styled.div`
 
 export const HelpSection = styled.div`
     width: 90%;
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
     text-align: flex-start;
     font-size: 14px;
-    font-weight: 600;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 `;
 
 export const Nav = styled.div`
@@ -109,7 +114,7 @@ export const SectionContainer = styled.div`
 
 export const TitleBoard = styled.h4`
     color: var(--black, #232323);
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -151,15 +156,16 @@ export const HelpContainer = styled.div`
 
 export const HelpText = styled.p`
     color: var(--black, #232323);
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFB["font-family"]};
     font-size: 12px;
     font-style: normal;
-    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
-    font-weight: 500;
+    font-weight: 700;
     line-height: 18px; /* 150% */
 `;
 
 export const Description2 = styled.p`
     color: var(--black, #232323);
+    font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     font-size: 8px;
     font-style: normal;
     font-weight: 400;

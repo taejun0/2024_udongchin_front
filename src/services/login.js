@@ -1,4 +1,3 @@
-// login.js
 import { instance } from "./instance";
 
 export const onSubmitHandler = async (memberId, password, navigate, setErrorMessage) => {
@@ -17,6 +16,7 @@ export const onSubmitHandler = async (memberId, password, navigate, setErrorMess
 
             // 토큰을 로컬 스토리지에 저장
             localStorage.setItem("token", token);
+            localStorage.setItem("memberId", memberId);
 
             // Axios 기본 헤더에 Authorization 설정
             instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
