@@ -10,7 +10,10 @@ export const StepTwo = ({ onNext, updateData }) => {
   const [showDescription, setShowDescription] = useState(true);
 
   const handleNext = () => {
-    updateData("location", { latitude: latitude, longitude: longitude, location_description });
+    updateData({
+      location: latitude && longitude ? [latitude, longitude] : [],
+      location_description: location_description,
+    });
     onNext();
   };
 

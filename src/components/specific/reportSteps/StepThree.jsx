@@ -6,7 +6,10 @@ export const StepThree = ({ onNext, updateData }) => {
   const [selectedOption, setSelectedOption] = useState("think");
 
   const handleNext = () => {
-    updateData("animal_type", { animal_type });
+    updateData({
+      animal: selectedOption === "think" ? animal_type : "",
+      no_animal: selectedOption === "none",
+    });
     onNext();
   };
 

@@ -1,75 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "@contexts/LocationContext";
 import { useQnaMarkerPost } from "@hooks/useQnaMarkerPost";
 import * as S from "./styled";
 import Vector from "/images/Vector.svg";
 import ImageUploaderWithCrop from "@components/specific/imageuploader/ImageUploader";
 
-export const QnaMarkerModal = ({ type, onClose }) => {
-  const { location } = useLocation();
+export const QnaMarkerModal = ({ type, onClose, latitude, longitude, dongAddress }) => {
   const { submitMarkerData, loading, error } = useQnaMarkerPost();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [selectedType, setSelectedType] = useState("기록");
-  const [dongAddress, setDongAddress] = useState("");
+  const [selectedType, setSelectedType] = useState("실시간 기록");
 
   const isSubmitEnabled = title && content && uploadedImage && selectedType && !loading; // 모든 필드가 채워진 경우
 
-  const fetchDongAddress = async (lat, lng) => {
-    try {
-      const result = await naver.maps.Service.reverseGeocode({
-        coords: new naver.maps.LatLng(lat, lng),
-        orders: "addr",
-      });
-      const fullAddress = result?.v2?.address?.jibunAddress || "주소를 찾을 수 없습니다.";
-      const addressParts = fullAddress.split(" ");
-      return addressParts.slice(0, 3).join(" ");
-    } catch (err) {
-      console.error("Failed to fetch address:", err);
-      return "";
-    }
-  };
-
   const handlePost = async () => {
-    if (!location) {
-      alert("위치 정보를 가져오지 못했습니다.");
+    if (!dongAddress) {
+      alert("주소를 가져오는 데 실패했습니다.");
       return;
     }
-
-    const lat = location.lat();
-    const lng = location.lng();
-
-    const calcAddress = await fetchDongAddress(lat, lng);
-
+  
     const markerData = {
       title,
       content,
-      photo,
+      photo: uploadedImage,
       type: selectedType,
-      locations: [
-        lat,
-        lng,
-        calcAddress,
-      ]
+      locations: [latitude, longitude, dongAddress],
     };
-
-    await submitMarkerData(markerData); // 데이터 제출
-
-    if (!error) onClose(); // 에러가 없으면 모달 닫기
+  
+    await submitMarkerData(markerData);
+  
+    if (!error) onClose();
   };
 
   const handleImageUpload = (file) => {
     setUploadedImage(file);
-    console.log('업로드된 파일:', file);
+    setPhoto(file);
   };
 
   return (
     <S.ModalOverlay>
       <S.ModalContent>
         <S.ModalSection>
-          <S.TextType>{type === "기록" ? "실시간 우동친 작성" : "우동친 제보"}<img src={Vector} onClick={onClose} style={{width: "12px", height: "12px", cursor:"pointer"}}/></S.TextType>
+          <S.TextType>{type === "실시간 기록" ? "실시간 우동친 작성" : "우동친 제보"}<img src={Vector} onClick={onClose} style={{width: "12px", height: "12px", cursor:"pointer"}}/></S.TextType>
           <S.LINE></S.LINE>
           <S.SubText>해당 기록은 [작성 당시의 현재 위치] 기준으로 7일동안 지도에 공유되며,<br />동네 커뮤니티에 자동으로 글이 업로드됩니다.</S.SubText>
         </S.ModalSection>
@@ -96,25 +70,25 @@ export const QnaMarkerModal = ({ type, onClose }) => {
         <S.ModalSection3>
         <S.Radios>
             <S.RadioLabel2
-              onClick={() => setSelectedType("기록")}
-              $isSelected={selectedType === "기록"} // 선택 여부에 따라 스타일 적용
+              onClick={() => setSelectedType("실시간 기록")}
+              $isSelected={selectedType === "실시간 기록"} // 선택 여부에 따라 스타일 적용
             >
               <S.RadioInput
                 type="radio"
-                value="기록"
-                checked={selectedType === "기록"}
+                value="실시간 기록"
+                checked={selectedType === "실시간 기록"}
                 readOnly
               />
               실시간 기록
             </S.RadioLabel2>
             <S.RadioLabel2
-              onClick={() => setSelectedType("Q&A")}
-              $isSelected={selectedType === "Q&A"}
+              onClick={() => setSelectedType("실시간 Q&A")}
+              $isSelected={selectedType === "실시간 Q&A"}
             >
               <S.RadioInput
                 type="radio"
-                value="Q&A"
-                checked={selectedType === "Q&A"}
+                value="실시간 Q&A"
+                checked={selectedType === "실시간 Q&A"}
                 readOnly
               />
               실시간 Q&A

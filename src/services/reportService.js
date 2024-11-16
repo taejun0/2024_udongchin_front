@@ -1,10 +1,10 @@
 import { instance } from "./instance";
 
-export const reportService = async (reportData) => {
+export const reportService = async (formData) => {
   try {
-    const response = await instance.post("/api/post/report", reportData, {
+    const response = await instance.post("/api/post/report", formData, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     });
 

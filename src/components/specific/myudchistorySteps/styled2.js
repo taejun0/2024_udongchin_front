@@ -32,6 +32,7 @@ export const Filter = styled.div`
 
 export const FilterItem = styled.div`
   display: flex;
+  cursor: pointer;
 
   width: 52px;
   height: 35px;
@@ -70,11 +71,12 @@ export const Filter2 = styled.div`
 `;
 
 export const FilterItem2 = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   gap: 4px;
 
-  color: ${({theme}) => theme.colors.black};
+  color: ${({$isSelected, theme}) => $isSelected ? theme.colors.black : theme.colors.separate};
 
   font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFL["font-family"]};
   font-size: 10px;

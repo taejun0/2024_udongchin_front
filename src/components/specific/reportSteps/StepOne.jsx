@@ -8,15 +8,21 @@ export const StepOne = ({ onNext, updateData }) => {
   const [selectedOption, setSelectedOption] = useState("image");
 
   const handleNext = () => {
-    if (selectedOption !== "image") {
-      setImages([]);
-    }
-    updateData("images", images);
+    console.log("Data sent to updateData (StepOne):", { imageUrl: images, no_image: selectedOption === "none" });
+    updateData({
+      imageUrl: images,
+      no_image: selectedOption === "none",
+    });
     onNext();
   };
 
   const handleImageUpload = (newImages) => {
-    setImages(newPhotos);
+    console.log("Uploaded images in StepOne (File Objects):", newImages);
+    if (newImages && newImages.length > 0 && newImages[0] instanceof File) {
+      setImages(newImages);
+    } else {
+      console.error("Uploaded images are not valid File objects.");
+    }
   };
 
   return (

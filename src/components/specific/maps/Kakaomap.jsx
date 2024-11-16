@@ -7,7 +7,6 @@ const [address, setAddress] = useState("");
 const [selectedLocation, setSelectedLocation] = useState(null); // 선택된 위치 데이터
 
 useEffect(() => {
-  console.log("Script loading...");
   const script = document.createElement("script");
   script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=b667c0b8c83ee09a5b042c68e042f1c5&autoload=false&libraries=services`; // 실제 API 키로 변경
   script.async = true;
@@ -62,7 +61,6 @@ useEffect(() => {
               }
             });
 
-            console.log("Locations data:", locations);
             // locations 배열의 각 위치에 마커 추가
             if (Array.isArray(locations)) {
               locations.forEach((location) => {
