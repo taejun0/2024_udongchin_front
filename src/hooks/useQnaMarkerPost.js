@@ -12,6 +12,7 @@ export const useQnaMarkerPost = () => {
     try {
       await QnaMarkerData(markerData); // API 요청
       alert("실시간 기록이 성공적으로 완료되었습니다!");
+      window.location.reload();
     } catch (err) {
       console.error("QnA 제보 실패:", err.message);
       setError(err.message);
