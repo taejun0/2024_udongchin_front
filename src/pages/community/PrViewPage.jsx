@@ -12,6 +12,8 @@ import { addComment } from "../../services/commentWrite";
 import { fetchPostData } from "../../services/pr";
 import { deletePost } from "../../services/deletePost";
 import { addLike, removeLike } from "../../services/LikeService"; // 좋아요 API 추가
+import heart from "/images/Heart.svg"
+import filledheart from "/images/FilledHeart.svg"
 
 function PrViewPage(props) {
     const navigate = useNavigate();
@@ -66,6 +68,7 @@ function PrViewPage(props) {
         if (comment.trim() !== "") {
             try {
                 const addedComment = await addComment(post.id, comment);
+                console.log("Added Comment:", addedComment);
                 if (addedComment) {
                     setComments([...comments, addedComment]);
                     setComment(""); // 입력란 초기화
@@ -143,10 +146,10 @@ function PrViewPage(props) {
                 <S.BottomBar>
                     <S.IconText>
                         <span onClick={toggleLike} style={{ cursor: "pointer" }}>
-                            {isLiked ? "❤️" : "🤍"} 좋아요 {likesCount}개
+                            {isLiked ? <img src={filledheart} style={{ width: "16px"}}/> : <img src={heart} style={{ width: "16px"}}/>} 좋아요 {likesCount}개
                         </span>
                     </S.IconText>
-                    <S.IconText>💬 댓글 {comments.length}개</S.IconText>
+                    <S.IconText>댓글 {comments.length}개</S.IconText>
                 </S.BottomBar>
                 <S.CommentContainer>
                     <TextInput

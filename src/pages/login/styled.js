@@ -112,7 +112,7 @@ export const SignupContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 668px;
+    height: 100hv;
     width: 100%;
     font-family: ${({theme}) => theme.fonts.NanumSquareRoundOTFR["font-family"]};
     background-color: #fff;
