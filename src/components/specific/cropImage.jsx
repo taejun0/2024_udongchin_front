@@ -20,15 +20,19 @@ export const getCroppedImg = (imageSrc, pixelCrop) => {
         pixelCrop.height
       );
 
-      canvas.toBlob((blob) => {
-        if (!blob) {
-          console.error('Canvas is empty');
-          return;
-        }
-        blob.name = 'cropped.jpg';
-        window.URL.revokeObjectURL(blob);
-        resolve(URL.createObjectURL(blob));
-      }, 'image/jpeg');
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Failed to create Blob."));
+            return;
+          }
+          // Blob을 File로 변환
+          const file = new File([blob], "croppedImage.jpg", { type: "image/jpeg" });
+          console.log("Generated File:", { name: file.name, type: file.type, size: file.size });
+          resolve(file);
+        },
+        "image/jpeg"
+      );
     };
     image.onerror = (error) => reject(error);
   });

@@ -9,7 +9,6 @@ export const instance = axios.create({
   timeout: 10000, // 10초 타임아웃 설정
 });
 
-// 요청 인터셉터
 
 instance.interceptors.request.use(
   (config) => {
@@ -22,7 +21,7 @@ instance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 응답 인터셉터
+// 응답 인터셉터 추가
 instance.interceptors.response.use(
   (response) => response,
   (error) => {

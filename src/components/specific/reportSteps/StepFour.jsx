@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./styled";
 
 export const StepFour = ({ onNext, updateData }) => {
   const [animal_description, setAnimal_description] = useState("");
 
   const handleNext = () => {
-    updateData("animal_description", { animal_description });
+    updateData({
+      animal_description,
+    });
     onNext();
   };
+
+  useEffect(() => {
+    updateData({ animal_description });
+  }, [animal_description]);
 
   return (
     <S.Wrapper>
