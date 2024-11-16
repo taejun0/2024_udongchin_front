@@ -13,7 +13,7 @@ import { fetchPostData } from "../../services/comment";
 import { deletePost } from "../../services/deletePost";
 import { reportPost } from "../../services/reportPost";
 import heart from "/images/Heart.svg";
-import { fetchImageUrl } from "../../services/freeImages"; // 이미지 처리 함수 추가
+import { fetchImageUrl } from "../../services/freeImages.js"; // 이미지 처리 함수 추가
 
 function PostViewPage(props) {
     const navigate = useNavigate();
@@ -26,36 +26,29 @@ function PostViewPage(props) {
 
     const currentUserId = localStorage.getItem("memberId");
 
- // 게시글 및 댓글 데이터 가져오기
- useEffect(() => {
-    const loadPostData = async () => {
-        try {
-            console.log("Fetching post data for id:", id);
-            const { post, comments } = await fetchPostData(id);
 
-            if (post && comments) {
-                // Blob URL로 이미지 처리
-                const updatedPost = await fetchImageUrl(post); // 단일 post 변환
-                setPost(updatedPost);
-                setComments(comments);
-
-                console.log("Updated post with image URL:", updatedPost);
+    useEffect(() => {
+        const loadPostData = async () => {
+            try {
+                console.log("Fetching post data for id:", id);
+                const { post, comments } = await fetchPostData(id);
+    
+                if (post && comments) {
+                    // Blob URL로 이미지 처리
+                    const updatedPost = await fetchImageUrl(post); // 단일 post 변환
+                    setPost(updatedPost);
+                    setComments(comments);
+    
+                    console.log("Updated post with image URL:", updatedPost);
+                }
+            } catch (error) {
+                console.error("게시글 데이터를 가져오는 중 오류 발생:", error);
             }
-        } catch (error) {
-            console.error("게시글 데이터를 가져오는 중 오류 발생:", error);
-        }
-    };
-
-    loadPostData();
-}, [id]);
-
-useEffect(() => {
-    return () => {
-        if (post?.imageUrl && post.imageUrl.startsWith("blob:")) {
-            URL.revokeObjectURL(post.imageUrl);
-        }
-    };
-}, [post]);
+        };
+    
+        loadPostData();
+    }, [id]);
+    
 
 
     // 댓글 작성 함수
@@ -145,10 +138,14 @@ useEffect(() => {
                         </S.SubTitle>
                     </S.TitleText>
 
-                    {/* Blob URL이 적용된 이미지를 렌더링 */}
-                    {post.imageUrl && <S.Thumbnail src={post.imageUrl} alt="게시글 이미지" />}
-
-                    <S.ContentText>{post.content}</S.ContentText>
+                    <S.ContentText>{/* Blob URL이 적용된 이미지를 렌더링 */}
+                        <S.Thumbnail>{post.imageUrl ? (
+                            <img src={post.imageUrl} alt="thumbnail" />
+                        ) : (
+                            <span>이미지가 없습니다</span>
+                        )}</S.Thumbnail>
+                        {post.content}
+                    </S.ContentText>
                     <S.BottomBar>
                         <S.IconText><img src={heart} style={{ width: "16px" }} /> 좋아요 {post.likesCount}개</S.IconText>
                         <S.IconText>댓글 {comments.length}개</S.IconText>

@@ -125,8 +125,7 @@ export const ReportButton = styled.button`
 
 export const Thumbnail = styled.div`
     width: 100%;
-    height: 200px;
-    background-color: #d9d9d9;
+    height: 100hv
     border-radius: 8px;
     margin-bottom: 16px;
 `;

@@ -11,11 +11,11 @@ export const fetchImageUrl = async (post) => {
 
     try {
         console.log(`Fetching image for filename: ${filename}`);
-        const response = await instance.get(apiUrl, { responseType: "blob" });
+        const response = await instance.get(apiUrl, { responseType: 'blob' });
 
         if (response.status === 200 && response.data instanceof Blob) {
             const blobUrl = URL.createObjectURL(response.data);
-            return { ...post, imageUrl: blobUrl }; // Blob URL로 대체
+            return { ...post, imageUrl: blobUrl }; // Blob URL로 대체된 객체 반환
         } else {
             console.warn(`Failed to fetch image for ${post.imageUrl}, using default.`);
             return { ...post, imageUrl: "/images/default-image.png" }; // 기본 이미지
