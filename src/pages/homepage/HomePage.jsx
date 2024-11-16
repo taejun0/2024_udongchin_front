@@ -136,10 +136,9 @@ export const HomePage = () => {
             $isExpand = {isExpand}
             $delay = {0.1}
             onClick={() => {
-              if (handleRestrictedAction()) {
               setModalType("기록");
               setQnaModalOpen(true);
-              }
+              
             }} 
           >
             <img src={adding_pencil} />
@@ -173,10 +172,9 @@ export const HomePage = () => {
         <S.Buttons>
           <S.Button
             onClick={() => {
-              if (handleRestrictedAction()) {
               setModalType("기록");
               setQnaModalOpen(true);
-              }
+              
             }} 
           >
             <img src={adding_pencil} style={{width: "44px", height:"44px"}}/>
