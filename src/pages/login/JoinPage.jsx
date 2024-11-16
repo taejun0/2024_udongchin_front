@@ -6,6 +6,7 @@ import { onSubmitHandler } from "../../services/signUp";
 import backward from "/images/Backward.svg";
 import logo2 from "/images/logo_2.svg"
 import uselogo from "/images/use_logo.svg"
+import useImg from "/images/useImg.svg"
 
 
 const JoinPage = () => {
@@ -79,7 +80,6 @@ const JoinPage = () => {
                         <S.FormGroup>
                             <S.InputWithCheck>
                                 <label htmlFor="username">아이디 입력</label>
-                                <S.CheckButton>중복확인</S.CheckButton>
                             </S.InputWithCheck>
                             <S.InputField
                                 type="text"
@@ -163,7 +163,7 @@ const JoinPage = () => {
                         <S.FormGroup>
                         <S.AppLogo><img src={uselogo} style={{ width: "50%"}}/></S.AppLogo>
                         <S.FormGroup2>
-                        <S.AppLogo><img src={uselogo} style={{ width: "50%"}}/></S.AppLogo>
+                        <S.AppLogo><img src={useImg} style={{ width: "90%"}}/></S.AppLogo>
                             <S.Label7>| 주의사항 |</S.Label7>
                             <S.Label8>우동친은 오로지 공익적인 목적으로 운영되며, 서비스 내에서 공유된 동물 정보를<br />기반으로 악의적인 행동을 일으키거나 서비스 의도에 부적합한 방향으로 이용할 경우<br />영구 정지될 수 있습니다.  이에 동의하십니까?</S.Label8>
                             <S.CheckBoxContainer>
