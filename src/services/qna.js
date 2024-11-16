@@ -10,8 +10,8 @@ export const QnaMarkerData = async (markerData) => {
   formData.append("mode", markerData.type);
   
   const formattedLocation = [
-    String(37.5640), // 위도를 문자열로 변환
-    String(126.9990), // 경도를 문자열로 변환
+    String(markerData.locations[0]), // 위도를 문자열로 변환
+    String(markerData.locations[1]), // 경도를 문자열로 변환
     markerData.locations[2],         // 주소 (이미 문자열)
   ];
   
