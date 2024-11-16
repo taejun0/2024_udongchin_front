@@ -8,6 +8,8 @@ import Frontward from "/images/Frontward.svg";
 import Backward from "/images/Backward.svg";
 import mapmodal_bottom from "/images/mapmodal_bottom.svg";
 
+import logo from "/images/logo.png";
+
 export const MapModal = ({ location, onClose }) => {
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -21,7 +23,7 @@ export const MapModal = ({ location, onClose }) => {
     <S.ModalOverlay >
       <S.ModalContent>
         <S.InformationHeader>
-          <button onClick={onClose}><img src={X} style={{width: "12px", height: "12px", cursor: "pointer", transform:"translateY(3px)"}} /></button>
+          <img src={logo} style={{width: "46px", height: "14px", cursor: "pointer", transform:"translateY(3px)"}} />
           <S.Buttons>
             <button onClick={onClose}><img src={X} style={{width: "12px", height: "12px", cursor: "pointer", transform:"translateY(3px)"}} /></button>
           </S.Buttons>

@@ -44,9 +44,10 @@ export const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = viewtype === "전체" ? await fetchAllLocations() : await fetchMyLocations();
-        setLocations(data);
-        console.log(data);
+        const response = viewtype === "전체" ? await fetchAllLocations() : await fetchMyLocations();
+        const validData = Array.isArray(response?.data) ? response.data : [];
+        const mergedData = [...validData, ...mockLocations];
+        setLocations(mergedData);
       } catch (err) {
         console.error("Error fetching locations:", err);
       }

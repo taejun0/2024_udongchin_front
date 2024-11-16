@@ -114,6 +114,7 @@ function PostEditPage(props) {
 
     const handleImageUpload = (file) => {
         setUploadedImage(file);
+        // console.log('업로드된 파일:', file);
         console.log("업로드된 파일:", file);
     };
 

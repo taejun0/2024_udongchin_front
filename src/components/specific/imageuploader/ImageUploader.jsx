@@ -116,12 +116,6 @@ const ImageUploaderWithCrop = ({ onImageUpload }) => {
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
       
       if (croppedImage instanceof File) {
-        console.log("Cropped Image:");
-        console.log("Name:", croppedImage.name);
-        console.log("Type:", croppedImage.type);
-        console.log("Size:", croppedImage.size);
-  
-        // Blob URL 생성
         const previewUrl = URL.createObjectURL(croppedImage);
         setImagePreview(previewUrl);
   

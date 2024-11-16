@@ -40,17 +40,15 @@ export const Navermap = ({ locationList, onMapReady, followUser, setFollowUser, 
   useEffect(() => {
     const loadImages = async () => {
       try {
-        const imageMap = await fetchImageUrls(locationList?.data);
+        const imageMap = await fetchImageUrls(locationList);
         setMarkerImages(imageMap);
       } catch (error) {
-        console.error("Error loading images:", error); // 이미지 로드 중 오류 확인
+        console.error("Error loading images:", error);
       }
     };
   
     loadImages();
 
-  
-    // Cleanup: Blob URL 해제
     return () => {
       Object.values(markerImages).forEach((url) => {
         URL.revokeObjectURL(url);
@@ -58,7 +56,6 @@ export const Navermap = ({ locationList, onMapReady, followUser, setFollowUser, 
     };
   }, [locationList]);
 
-  // 지도 초기화 및 마커 설정
   useEffect(() => {
     const loadMap = () => {
       const mapInstance = new naver.maps.Map("map", {
@@ -158,8 +155,8 @@ export const Navermap = ({ locationList, onMapReady, followUser, setFollowUser, 
             naver.maps.Event.addListener(mapInstance, "dragend", syncCircleWithMarker);
 
             // data 필드로 마커 생성
-            if (locationList && Array.isArray(locationList.data)) {
-              locationList.data.forEach((location, index) => {
+            if (locationList && Array.isArray(locationList)) {
+              locationList.forEach((location, index) => {
                 const { location: coords, mode, imageUrl, urgent } = location;
                 if (!Array.isArray(coords)) {
                   console.error(`Invalid location data at index ${index}:`, location);
@@ -201,7 +198,8 @@ export const Navermap = ({ locationList, onMapReady, followUser, setFollowUser, 
 
                 if (displaying) {
                   const imageUrl = location.imageUrl;
-                  const markerImageUrl = markerImages[imageUrl] || "/images/default-marker.png";
+                  
+                  const markerImageUrl = location.mode === "생태 지도" ? imageUrl : markerImages[imageUrl] || "/images/default-marker.png";
 
                   const marker = new naver.maps.Marker({
                     position: markerPosition,
