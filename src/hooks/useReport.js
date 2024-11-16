@@ -17,7 +17,6 @@ export const useReport = () => {
   const [error, setError] = useState(null);
 
   const updateStepData = (data) => {
-    console.log("Updating report data with:", data);
     setReportData((prevData) => ({ ...prevData, ...data }));
   };
 
@@ -41,14 +40,13 @@ export const useReport = () => {
     formData.append("animal_description", reportData.animal_description);
   
     // FormData의 최종 상태를 출력
-    console.log("Final FormData to be submitted:");
-    formData.forEach((value, key) => {
-      console.log(`${key}:`, value);
-    });
+    // console.log("Final FormData to be submitted:");
+    // formData.forEach((value, key) => {
+    //   console.log(`${key}:`, value);
+    // });
   
     try {
       const response = await reportService(formData);
-      console.log("Report submitted successfully:", response);
       alert("제보가 성공적으로 완료되었습니다!");
       navigate("/");
       return response.data;

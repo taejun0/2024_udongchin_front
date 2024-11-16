@@ -58,16 +58,11 @@ const MultiImageUploader = ({ onImageUpload }) => {
       previewUrl: URL.createObjectURL(file)
     }));
 
-    console.log("Newly selected images (File Objects):", files);
-    console.log("Newly selected images (with previewUrl):", newImages);
-
     setImages((prevImages) => {
       const updatedImages = [...prevImages, ...newImages];
-      console.log("Updated images state in MultiImageUploader:", updatedImages);
 
       if (onImageUpload) {
         const fileArray = updatedImages.map(img => img.file);
-        console.log("Files passed to onImagesUpload:", fileArray);
         onImageUpload(fileArray);
       }
 
@@ -79,8 +74,6 @@ const MultiImageUploader = ({ onImageUpload }) => {
     setImages((prevImages) => {
       const updatedImages = prevImages.filter((_, i) => i !== index);
       URL.revokeObjectURL(prevImages[index].previewUrl);
-      console.log("Updated images state after deletion:", updatedImages);
-
       if (onImageUpload) {
         onImageUpload(updatedImages.map(img => img.file));
       }

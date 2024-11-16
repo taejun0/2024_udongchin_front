@@ -8,7 +8,6 @@ export const StepOne = ({ onNext, updateData }) => {
   const [selectedOption, setSelectedOption] = useState("image");
 
   const handleNext = () => {
-    console.log("Data sent to updateData (StepOne):", { imageUrl: images, no_image: selectedOption === "none" });
     updateData({
       imageUrl: images,
       no_image: selectedOption === "none",
@@ -17,7 +16,6 @@ export const StepOne = ({ onNext, updateData }) => {
   };
 
   const handleImageUpload = (newImages) => {
-    console.log("Uploaded images in StepOne (File Objects):", newImages);
     if (newImages && newImages.length > 0 && newImages[0] instanceof File) {
       setImages(newImages);
     } else {

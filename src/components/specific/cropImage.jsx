@@ -28,7 +28,6 @@ export const getCroppedImg = (imageSrc, pixelCrop) => {
           }
           // Blob을 File로 변환
           const file = new File([blob], "croppedImage.jpg", { type: "image/jpeg" });
-          console.log("Generated File:", { name: file.name, type: file.type, size: file.size });
           resolve(file);
         },
         "image/jpeg"

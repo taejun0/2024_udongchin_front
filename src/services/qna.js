@@ -17,16 +17,16 @@ export const QnaMarkerData = async (markerData) => {
   
   formData.append("location", formattedLocation);
 
-  console.log("Form Data - Title:", markerData.title);
-  console.log("Form Data - Content:", markerData.content);
-  console.log("Form Data - Mode:", markerData.type);
-  console.log("Form Data - Location:", formattedLocation);
+  // console.log("Form Data - Title:", markerData.title);
+  // console.log("Form Data - Content:", markerData.content);
+  // console.log("Form Data - Mode:", markerData.type);
+  // console.log("Form Data - Location:", formattedLocation);
 
   if (markerData.photo) {
-    console.log("Form Data - Photo:");
-    console.log("Name:", markerData.photo.name);
-    console.log("Type:", markerData.photo.type);
-    console.log("Size:", markerData.photo.size);
+    // console.log("Form Data - Photo:");
+    // console.log("Name:", markerData.photo.name);
+    // console.log("Type:", markerData.photo.type);
+    // console.log("Size:", markerData.photo.size);
   } else {
     console.error("No photo provided.");
   }

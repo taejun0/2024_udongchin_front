@@ -41,7 +41,6 @@ export const MyudchistoryStepTwo = ({ selectedLocation }) => {
   };
 
   const { data, isLoading, error } = getFilteredData();
-  console.log(data);
 
   const filteredPosts =
   filter1 === "pen"
@@ -58,7 +57,6 @@ export const MyudchistoryStepTwo = ({ selectedLocation }) => {
       })
     : [];
 
-console.log("필터링된 데이터:", filteredPosts);
 
   const handleNavigaePost = (id) => {
     navigate(`/community/${id}`);
